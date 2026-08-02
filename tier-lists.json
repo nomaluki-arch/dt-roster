@@ -1,0 +1,1893 @@
+[
+ {
+  "name": "Global",
+  "author": "Litee",
+  "content_type": "All",
+  "description": "Take it with a grain of salt.",
+  "tiers": [
+   {
+    "name": "S+",
+    "note": "High return on investment."
+   },
+   {
+    "name": "S",
+    "note": "Very strong given their use case."
+   },
+   {
+    "name": "A",
+    "note": "Generally useable and somewhat flexible."
+   },
+   {
+    "name": "B",
+    "note": "Niche usage."
+   },
+   {
+    "name": "C",
+    "note": "..."
+   },
+   {
+    "name": "D",
+    "note": "Fodder."
+   }
+  ],
+  "entries": [
+   {
+    "character_slug": "artemis_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "loki_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "poseidon_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "azure_dragon_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "vivienne_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "xuanwu_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "atanith_ssr",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "apollo_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "ares_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "athena_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "thor_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "venus_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "asmodeus_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "gabriele_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "jing_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "medusa_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "mimir_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "morgana_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "pompey_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "scheherazade_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "spimo_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "talos_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "vermilion_bird_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "chiron_ssr",
+    "tier": "S"
+   },
+   {
+    "character_slug": "fenrir_ssr",
+    "tier": "S"
+   },
+   {
+    "character_slug": "oberonnie_ssr",
+    "tier": "S"
+   },
+   {
+    "character_slug": "goblin_war_drummer_r",
+    "tier": "S"
+   },
+   {
+    "character_slug": "hades_ssr_ex",
+    "tier": "A"
+   },
+   {
+    "character_slug": "andvari_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "anubis_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "asteros_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "caesar_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "cleopatra_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "dvalin_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "faust_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "gullveig_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "helveil_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "huginn_muninn_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "ifrit_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "marylis_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "orion_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "siegfried_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "tyrfing_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "zagreus_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "herman_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "lorilin_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "medusa_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "nanalie_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "nemesis_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "fenrir_sr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "oberonnie_sr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "siren_sr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "brynhild_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "jormungandr_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "ophelia_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "titania_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "white_tiger_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "asteros_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "beowulf_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "caligula_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "cleopatra_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "drasill_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "goren_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "melina_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "siegfried_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "telperion_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "eurytion_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "flora_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "nessus_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "siegfried_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "arthur_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "mordred_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "pan_junbao_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "cerberus_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "gudong_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "guna_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "lancelot_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "van_helsing_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "siegfried_r",
+    "tier": "C"
+   },
+   {
+    "character_slug": "bladeheart_sr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "buck_sr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "grimnir_sr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "kleina_sr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "murphy_sr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "polyphemus_sr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "boar_knight_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "dwarf_warrior_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "dwarven_cannoneer_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "dwarven_sage_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "goblin_battering_ram_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "mummy_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "pharaoh_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "sword_dancer_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "viel_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "wood_elf_archer_r",
+    "tier": "D"
+   },
+   {
+    "character_slug": "breeze_slime_n",
+    "tier": "D"
+   },
+   {
+    "character_slug": "flame_slime_n",
+    "tier": "D"
+   },
+   {
+    "character_slug": "ice_slime_n",
+    "tier": "D"
+   },
+   {
+    "character_slug": "lightning_slime_n",
+    "tier": "D"
+   },
+   {
+    "character_slug": "rock_slime_n",
+    "tier": "D"
+   },
+   {
+    "character_slug": "shadow_slime_n",
+    "tier": "D"
+   }
+  ]
+ },
+ {
+  "name": "Apollo Cluster",
+  "author": "Meka",
+  "content_type": "All",
+  "description": "Tier list for all modes.",
+  "tiers": [
+   {
+    "name": "SS",
+    "note": "Should be rebalanced."
+   },
+   {
+    "name": "S+",
+    "note": "Top tier, must have for endgame."
+   },
+   {
+    "name": "S",
+    "note": "Less versatile than S+, very powerful."
+   },
+   {
+    "name": "A+",
+    "note": "Outscales A, usually with NP."
+   },
+   {
+    "name": "A",
+    "note": "Strong in most modes, situational."
+   },
+   {
+    "name": "B+",
+    "note": "Outscales B, usable in pvp."
+   },
+   {
+    "name": "B",
+    "note": "Niche usability, strong early game."
+   },
+   {
+    "name": "C",
+    "note": "Usable early game, pve only."
+   },
+   {
+    "name": "D",
+    "note": "Shouldn't be used past month 1."
+   }
+  ],
+  "entries": [
+   {
+    "character_slug": "artemis_ssr_ex",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "heracles_ssr_ex",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "azure_dragon_ssr_plus",
+    "tier": "SS",
+    "note": "Div6+NP only, else S+"
+   },
+   {
+    "character_slug": "pompey_ssr_plus",
+    "tier": "SS",
+    "note": "SS at Div3+NP only"
+   },
+   {
+    "character_slug": "xuanwu_ssr_plus",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "ares_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "poseidon_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "loki_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "zeus_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "hades_ssr_ex",
+    "tier": "S+",
+    "note": "S+ with NP"
+   },
+   {
+    "character_slug": "heidrun_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "lilith_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "hela_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "salome_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "talos_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "apollo_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "venus_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "asmodeus_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "himiko_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "jing_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "hitomi_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "mimir_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "morgana_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "tamamo_no_mae_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "vermilion_bird_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "atanith_ssr",
+    "tier": "S"
+   },
+   {
+    "character_slug": "hermes_ssr_ex",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "prometheus_ssr_ex",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "thor_ssr_ex",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "caesar_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "gabriele_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "helveil_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "rin_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "spimo_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "vivienne_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "zagreus_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "athena_ssr_ex",
+    "tier": "A"
+   },
+   {
+    "character_slug": "andvari_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "yekaterina_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "crassus_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "dvalin_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "gullveig_ssr_plus",
+    "tier": "A",
+    "note": "A+ with NP"
+   },
+   {
+    "character_slug": "ifrit_ssr_plus",
+    "tier": "A",
+    "note": "A+ with NP"
+   },
+   {
+    "character_slug": "lupin_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "ningrose_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "sigurd_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "tyrfing_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "scheherazade_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "oberonnie_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "bice_ssr_plus",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "caligula_ssr_plus",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "faust_ssr_plus",
+    "tier": "B+",
+    "note": "A with NP+Div3"
+   },
+   {
+    "character_slug": "marylis_ssr_plus",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "orion_ssr_plus",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "fenrir_ssr",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "siegfried_ssr_plus",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "chiron_ssr",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "herman_ssr",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "nanalie_ssr",
+    "tier": "B+"
+   },
+   {
+    "character_slug": "asteros_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "anubis_ssr_plus",
+    "tier": "B",
+    "note": "B+ with NP"
+   },
+   {
+    "character_slug": "arthur_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "cleopatra_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "huginn_muninn_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "jormungandr_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "medusa_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "titania_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "gudong_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "lorilin_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "caligula_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "brynhild_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "mordred_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "pan_junbao_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "ophelia_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "goren_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "telperion_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "drasill_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "asteros_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "melina_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "nemesis_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "siegfried_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "white_tiger_ssr_plus",
+    "tier": "D"
+   },
+   {
+    "character_slug": "beowulf_ssr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "van_helsing_ssr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "cerberus_ssr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "guna_ssr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "lancelot_ssr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "cleopatra_ssr",
+    "tier": "D"
+   },
+   {
+    "character_slug": "medusa_ssr",
+    "tier": "D"
+   }
+  ]
+ },
+ {
+  "name": "Taiwan PvE",
+  "author": "ligong0214",
+  "content_type": "PvE",
+  "description": "Taiwan server, ~1 year ahead of global. Assumes fully built, ignores Noble Phantasms.",
+  "tiers": [
+   {
+    "name": "SS",
+    "note": "Child of the Meta. Nearly impossible to compete without them."
+   },
+   {
+    "name": "S+",
+    "note": "Faction Powerhouses. Very strong within a faction, weaker outside it."
+   },
+   {
+    "name": "S",
+    "note": "Overpowered. Core building blocks for their colour/elemental teams."
+   },
+   {
+    "name": "A+",
+    "note": "Unique Utility. Irreplaceable function or very low investment cost."
+   },
+   {
+    "name": "A",
+    "note": "Average/Decent. Usable but not essential; low usage rate."
+   },
+   {
+    "name": "B",
+    "note": "Low ROI. Barely passing; used only out of necessity."
+   },
+   {
+    "name": "C",
+    "note": "Not worth investing. Rarely used."
+   },
+   {
+    "name": "F",
+    "note": "Fodder."
+   }
+  ],
+  "entries": [
+   {
+    "character_slug": "artemis_ssr_ex",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "athena_ssr_ex",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "hela_ssr_ex",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "jing_ssr_plus",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "lilith_ssr_plus",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "mimir_ssr_plus",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "vivienne_ssr_plus",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "atanith_ssr",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "apollo_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "ares_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "heracles_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "hermes_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "loki_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "poseidon_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "zeus_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "asmodeus_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "faust_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "heidrun_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "lupin_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "morgana_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "sigurd_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "talos_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "tamamo_no_mae_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "vermilion_bird_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "xuanwu_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "zagreus_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "hades_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "prometheus_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "thor_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "venus_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "asteros_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "azure_dragon_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "caesar_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "crassus_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "dvalin_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "gabriele_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "gullveig_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "himiko_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "hitomi_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "medusa_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "ningrose_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "orion_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "pompey_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "rin_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "salome_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "scheherazade_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "spimo_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "tyrfing_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "goblin_war_drummer_r",
+    "tier": "S"
+   },
+   {
+    "character_slug": "bice_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "yekaterina_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "andvari_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "anubis_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "helveil_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "huginn_muninn_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "ifrit_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "ophelia_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "pan_junbao_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "asteros_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "chiron_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "fenrir_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "herman_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "lorilin_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "medusa_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "melina_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "nanalie_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "nemesis_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "oberonnie_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "telperion_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "eurytion_sr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "siegfried_sr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "arthur_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "brynhild_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "caligula_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "cleopatra_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "jormungandr_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "marylis_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "mordred_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "siegfried_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "titania_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "white_tiger_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "beowulf_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "caligula_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "goren_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "lancelot_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "fenrir_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "nessus_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "oberonnie_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "siren_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "siegfried_r",
+    "tier": "B"
+   },
+   {
+    "character_slug": "cerberus_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "cleopatra_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "drasill_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "gudong_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "guna_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "siegfried_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "van_helsing_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "flora_sr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "bladeheart_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "buck_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "grimnir_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "kleina_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "murphy_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "polyphemus_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "boar_knight_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "dwarf_warrior_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "dwarven_cannoneer_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "dwarven_sage_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "goblin_battering_ram_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "mummy_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "pharaoh_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "sword_dancer_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "viel_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "wood_elf_archer_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "breeze_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "flame_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "ice_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "lightning_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "rock_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "shadow_slime_n",
+    "tier": "F"
+   }
+  ]
+ },
+ {
+  "name": "Taiwan PvP",
+  "author": "ligong0214",
+  "content_type": "PvP",
+  "description": "Taiwan server, ~1 year ahead of global. Assumes fully built, ignores Noble Phantasms.",
+  "tiers": [
+   {
+    "name": "SS",
+    "note": "Child of the Meta. Nearly impossible to compete without them."
+   },
+   {
+    "name": "S+",
+    "note": "Faction Powerhouses. Very strong within a faction, weaker outside it."
+   },
+   {
+    "name": "S",
+    "note": "Overpowered. Core building blocks for their colour/elemental teams."
+   },
+   {
+    "name": "A+",
+    "note": "Unique Utility. Irreplaceable function or very low investment cost."
+   },
+   {
+    "name": "A",
+    "note": "Average/Decent. Usable but not essential; low usage rate."
+   },
+   {
+    "name": "B",
+    "note": "Low ROI. Barely passing; used only out of necessity."
+   },
+   {
+    "name": "C",
+    "note": "Not worth investing. Rarely used."
+   },
+   {
+    "name": "F",
+    "note": "Fodder."
+   }
+  ],
+  "entries": [
+   {
+    "character_slug": "artemis_ssr_ex",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "poseidon_ssr_ex",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "venus_ssr_ex",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "lilith_ssr_plus",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "vivienne_ssr_plus",
+    "tier": "SS"
+   },
+   {
+    "character_slug": "ares_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "hela_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "heracles_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "loki_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "zeus_ssr_ex",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "asmodeus_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "faust_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "morgana_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "talos_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "xuanwu_ssr_plus",
+    "tier": "S+"
+   },
+   {
+    "character_slug": "apollo_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "athena_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "hades_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "hermes_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "thor_ssr_ex",
+    "tier": "S"
+   },
+   {
+    "character_slug": "azure_dragon_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "caesar_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "crassus_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "gabriele_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "heidrun_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "himiko_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "hitomi_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "lupin_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "mimir_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "ningrose_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "pompey_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "rin_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "salome_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "sigurd_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "spimo_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "tamamo_no_mae_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "vermilion_bird_ssr_plus",
+    "tier": "S"
+   },
+   {
+    "character_slug": "atanith_ssr",
+    "tier": "S"
+   },
+   {
+    "character_slug": "prometheus_ssr_ex",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "bice_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "dvalin_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "jing_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "orion_ssr_plus",
+    "tier": "A+"
+   },
+   {
+    "character_slug": "andvari_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "anubis_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "yekaterina_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "helveil_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "huginn_muninn_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "ifrit_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "scheherazade_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "tyrfing_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "zagreus_ssr_plus",
+    "tier": "A"
+   },
+   {
+    "character_slug": "chiron_ssr",
+    "tier": "A"
+   },
+   {
+    "character_slug": "asteros_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "brynhild_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "caligula_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "cleopatra_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "gullveig_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "jormungandr_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "marylis_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "medusa_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "mordred_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "ophelia_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "siegfried_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "white_tiger_ssr_plus",
+    "tier": "B"
+   },
+   {
+    "character_slug": "beowulf_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "drasill_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "fenrir_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "herman_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "lancelot_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "lorilin_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "nanalie_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "nemesis_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "oberonnie_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "telperion_ssr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "nessus_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "siren_sr",
+    "tier": "B"
+   },
+   {
+    "character_slug": "arthur_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "pan_junbao_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "titania_ssr_plus",
+    "tier": "C"
+   },
+   {
+    "character_slug": "asteros_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "caligula_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "cerberus_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "cleopatra_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "goren_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "gudong_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "guna_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "medusa_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "melina_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "siegfried_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "van_helsing_ssr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "eurytion_sr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "fenrir_sr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "flora_sr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "oberonnie_sr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "siegfried_sr",
+    "tier": "C"
+   },
+   {
+    "character_slug": "goblin_war_drummer_r",
+    "tier": "C"
+   },
+   {
+    "character_slug": "bladeheart_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "buck_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "grimnir_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "kleina_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "murphy_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "polyphemus_sr",
+    "tier": "F"
+   },
+   {
+    "character_slug": "boar_knight_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "dwarf_warrior_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "dwarven_cannoneer_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "dwarven_sage_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "goblin_battering_ram_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "mummy_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "pharaoh_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "siegfried_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "sword_dancer_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "viel_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "wood_elf_archer_r",
+    "tier": "F"
+   },
+   {
+    "character_slug": "breeze_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "flame_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "ice_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "lightning_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "rock_slime_n",
+    "tier": "F"
+   },
+   {
+    "character_slug": "shadow_slime_n",
+    "tier": "F"
+   }
+  ]
+ }
+]
