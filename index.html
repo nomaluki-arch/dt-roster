@@ -233,6 +233,16 @@
   .combo li::before{content:counter(c); color:var(--muted-2); font-size:10px; width:12px; flex:none}
   .combo li span{color:var(--text); flex:1}
   .combo li b{color:var(--ember); font-variant-numeric:tabular-nums}
+  .pickable{cursor:pointer}
+  .combo li.pickable:hover{background:var(--panel-2); border-radius:6px}
+  .combo li.picked{background:rgba(224,163,62,.16); border-radius:6px}
+  table.matrix td.pickable:hover{filter:brightness(1.25)}
+  table.matrix td.picked{outline:2px solid #fff; outline-offset:-2px}
+  .comboHead{display:flex; align-items:center; gap:5px; flex-wrap:wrap; font-size:13.5px; color:var(--text); margin-top:16px; padding-top:14px; border-top:1px solid var(--line-soft)}
+  .comboCols{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px}
+  .comboCol h4{font-family:Fraunces,serif; font-size:13px; font-weight:600; margin:0 0 8px; color:var(--muted)}
+  .comboUnits{display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start}
+  @media (max-width:640px){ .comboCols{grid-template-columns:1fr} }
   @media (max-width:640px){ .combos{grid-template-columns:1fr} }
 
   /* teams */
@@ -831,15 +841,11 @@ function renderStats(){
 
 /* ---- faction coverage matrix ---- */
 const ABBR={sanctum_glory:"SG", wild_spirit:"WS", arcane_wisdom:"AW", otherworld_return:"OR", elemental_echo:"EE", illusion_veil:"IV"};
-const ANALYTICS={cutoff:null, ownedOnly:false};
+let selectedCombo=null;
 function coverColor(p){ return "rgba(224,163,62,"+(0.06+0.55*p/100).toFixed(3)+")"; }
 function analyze(){
-  const list=currentList();
-  const defIdx=Math.min(2, list.tierOrder.length-1);
-  const cutoffIdx=Math.min(ANALYTICS.cutoff!=null?ANALYTICS.cutoff:defIdx, list.tierOrder.length-1);
-  let hi=MODEL.units.filter(u=>{ const i=list.tierOrder.indexOf(list.tierOf[u.slug]); return i>=0 && i<=cutoffIdx; });
-  if(ANALYTICS.ownedOnly) hi=hi.filter(u=>owned.has(u.slug));
-  const H=hi.filter(u=>u.factions.length>0);
+  const pool=MODEL.units.filter(passesFilter);
+  const H=pool.filter(u=>u.factions.length>0);
   const total=H.length;
   const matrix=FACTIONS.map(a=>FACTIONS.map(b=>{
     let n=0; H.forEach(u=>{ if(u.factions.includes(a)||u.factions.includes(b)) n++; }); return n;
@@ -857,21 +863,20 @@ function analyze(){
     triples.push({facs:[a,b,c], n});
   }
   triples.sort((x,y)=>y.n-x.n);
-  return {list, cutoffIdx, total, matrix, singles, pairs, triples, hiCount:hi.length, withFacCount:H.length};
+  return {H, poolCount:pool.length, total, matrix, singles, pairs, triples};
 }
 function renderAnalytics(){
   const el=$("analytics"); const A=analyze(); const fn=titleCase;
   const pct=n=>A.total?Math.round(n/A.total*100):0;
   const dot=f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`;
   const facLabel=f=>dot(f)+fn(f);
-  let h=`<div class="ahead"><div><h2>Faction coverage matrix</h2></div>`+
-    `<div class="acontrols"><label class="asel">High tier <select id="cutoffSel"></select></label>`+
-    `<button class="toggle small" id="scopeBtn" aria-pressed="${ANALYTICS.ownedOnly}">Owned only</button></div></div>`;
+  let h=`<div class="ahead"><div><h2>Faction coverage</h2></div></div>`;
   if(A.total===0){
-    h+=`<p class="anote">No high-tier units with known faction data in scope. `+
-       (A.withFacCount<A.hiCount?`Add the full characters.json to load factions for the whole roster.`:``)+`</p>`;
-    el.innerHTML=h; wireControls(A); return;
+    h+=`<p class="anote">No units with known faction data match the filters. `+
+       (A.poolCount>0?`Faction data comes from characters.json — add it to your repo to analyze the whole roster.`:``)+`</p>`;
+    el.innerHTML=h; return;
   }
+  const key=selectedCombo?selectedCombo.join(","):"";
   h+=`<div class="matrixwrap"><table class="matrix"><thead><tr><th></th>`;
   FACTIONS.forEach(f=>{ h+=`<th title="${fn(f)}">${dot(f)}${ABBR[f]}</th>`; });
   h+=`</tr></thead><tbody>`;
@@ -879,42 +884,44 @@ function renderAnalytics(){
     h+=`<tr><th title="${fn(a)}">${dot(a)}${ABBR[a]}</th>`;
     FACTIONS.forEach((b,j)=>{
       if(j>i){ h+=`<td class="blank"></td>`; return; }
-      const n=A.matrix[i][j], p=pct(n), diag=i===j;
-      h+=`<td class="${diag?"diag":""}" style="background:${coverColor(p)}" `+
-         `title="${diag?fn(a):fn(a)+" + "+fn(b)}: ${n} of ${A.total} high-tier units (${p}%)">${p}<span class="pcts">%</span></td>`;
+      const n=A.matrix[i][j], p=pct(n), diag=i===j; const fk=(diag?[a]:[a,b]).join(",");
+      h+=`<td class="pickable${diag?" diag":""}${fk===key?" picked":""}" data-facs="${fk}" style="background:${coverColor(p)}" `+
+         `title="${diag?fn(a):fn(a)+" + "+fn(b)}: ${n} of ${A.total} (${p}%)">${p}<span class="pcts">%</span></td>`;
     });
     h+=`</tr>`;
   });
   h+=`</tbody></table></div>`;
+  const li=c=>`<li class="pickable${c.facs.join(",")===key?" picked":""}" data-facs="${c.facs.join(",")}"><span>${c.facs.map(facLabel).join(" + ")}</span><b>${pct(c.n)}%</b></li>`;
   h+=`<div class="combos">`+
-     `<div class="combo"><h3>Single factions</h3><ol>`+
-       A.singles.map(s=>`<li><span>${facLabel(s.facs[0])}</span><b>${pct(s.n)}%</b></li>`).join("")+
-     `</ol></div>`+
-     `<div class="combo"><h3>All pairs (${A.pairs.length})</h3><ol>`+
-       A.pairs.map(p=>`<li><span>${p.facs.map(facLabel).join(" + ")}</span><b>${pct(p.n)}%</b></li>`).join("")+
-     `</ol></div>`+
-     `<div class="combo"><h3>All trios (${A.triples.length})</h3><ol>`+
-       A.triples.map(t=>`<li><span>${t.facs.map(facLabel).join(" + ")}</span><b>${pct(t.n)}%</b></li>`).join("")+
-     `</ol></div>`+
-     `</div>`;
-  if(A.withFacCount<A.hiCount)
-    h+=`<p class="anote">Faction data is in the snapshot for only ${A.withFacCount} of ${A.hiCount} high-tier units in scope — the full characters.json fills in the rest.</p>`;
-  el.innerHTML=h; wireControls(A);
+     `<div class="combo"><h3>Single factions</h3><ol>`+A.singles.map(li).join("")+`</ol></div>`+
+     `<div class="combo"><h3>All pairs (${A.pairs.length})</h3><ol>`+A.pairs.map(li).join("")+`</ol></div>`+
+     `<div class="combo"><h3>All trios (${A.triples.length})</h3><ol>`+A.triples.map(li).join("")+`</ol></div>`+
+     `</div><div id="comboResult"></div>`;
+  el.innerHTML=h;
+  el.querySelectorAll(".pickable").forEach(node=>{
+    node.onclick=()=>{ const k=node.dataset.facs; selectedCombo=(key===k)?null:k.split(","); renderAnalytics(); };
+  });
+  renderComboResult(A);
 }
-function wireControls(A){
-  const sel=$("cutoffSel");
-  if(sel){ sel.innerHTML="";
-    if(!A.list.tierOrder.includes("SS")){
-      const o=document.createElement("option");
-      o.textContent="\u2265 SS \u2014 not ranked in this list"; o.disabled=true;
-      sel.appendChild(o);
-    }
-    A.list.tierOrder.forEach((t,idx)=>{ const o=document.createElement("option");
-      o.value=idx; o.textContent="\u2265 "+t; if(idx===A.cutoffIdx) o.selected=true; sel.appendChild(o); });
-    sel.onchange=()=>{ ANALYTICS.cutoff=+sel.value; renderAnalytics(); };
-  }
-  const sb=$("scopeBtn");
-  if(sb) sb.onclick=()=>{ ANALYTICS.ownedOnly=!ANALYTICS.ownedOnly; renderAnalytics(); };
+function renderComboResult(A){
+  const box=$("comboResult"); if(!box) return; box.innerHTML="";
+  if(!selectedCombo||!selectedCombo.length) return;
+  const fn=titleCase;
+  const has=u=>u.factions.some(f=>selectedCombo.includes(f));
+  const head=document.createElement("div"); head.className="comboHead";
+  head.innerHTML=`Building around ${selectedCombo.map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`+fn(f)).join(" + ")}`;
+  box.appendChild(head);
+  const cols=document.createElement("div"); cols.className="comboCols";
+  [["Fits these factions", A.H.filter(has)],["Outside — won't fit", A.H.filter(u=>!has(u))]].forEach(([label,arr])=>{
+    arr.sort(byRarityName);
+    const col=document.createElement("div"); col.className="comboCol";
+    const hd=document.createElement("h4"); hd.textContent=`${label} (${arr.length})`; col.appendChild(hd);
+    const wrap=document.createElement("div"); wrap.className="comboUnits";
+    if(!arr.length){ wrap.innerHTML=`<div class="empty">None.</div>`; }
+    else arr.forEach(u=>wrap.appendChild(unitEl(u)));
+    col.appendChild(wrap); cols.appendChild(col);
+  });
+  box.appendChild(cols);
 }
 
 /* ---- tooltip ---- */
@@ -990,15 +997,14 @@ function showDataError(e){
 }
 
 function applyViewVisibility(){
-  const roster = view!=="matrix";
-  $("bands").style.display = roster?"":"none";
+  $("bands").style.display = view==="matrix"?"none":"";
   $("analytics").classList.toggle("show", view==="matrix");
   $("listnote").style.display = view==="tiers"?"":"none";
-  $("searchbox").style.display = roster?"":"none";
-  $("ownedOnly").style.display = roster?"":"none";
-  $("investOnly").style.display = roster?"":"none";
-  $("filtergroups").style.display = roster?"":"none";
-  $("listseg").style.display = (view==="tiers"||view==="matrix")?"":"none";
+  $("searchbox").style.display = "";
+  $("ownedOnly").style.display = "";
+  $("investOnly").style.display = "";
+  $("filtergroups").style.display = "";
+  $("listseg").style.display = view==="tiers"?"":"none";
   document.querySelectorAll(".vtab").forEach(t=>t.setAttribute("aria-pressed", t.dataset.view===view));
 }
 function renderAll(){
