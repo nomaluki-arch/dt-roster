@@ -516,9 +516,11 @@ function poolChip(u){
     `<span class="nm">${u.name}</span>`+
     (u.rarity?`<span class="rar">${u.rarity}</span>`:"")+
     (invest.has(u.slug)?`<span class="iflag">${FLAG_SVG}</span>`:"");
-  b.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; dragSrc=null; dropOK=false; dragCls=u.cls||""; markDrag(); };
+  b.ondragstart=e=>{ hideTip(); e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; dragSrc=null; dropOK=false; dragCls=u.cls||""; markDrag(); };
   b.ondragend=endDrag;
   b.onclick=()=>{ selectedPoolSlug=(selectedPoolSlug===u.slug)?null:u.slug; renderTeams(); };
+  b.onmouseenter=e=>showTip(e,u); b.onmousemove=moveTip; b.onmouseleave=hideTip;
+  b.onfocus=e=>showTip(e,u); b.onblur=hideTip;
   return b;
 }
 function saveCurrentTeam(){
@@ -598,12 +600,12 @@ function cellEl(f,i){
     if(owned.has(slug)) cell.classList.add("owned");
     if(invest.has(slug)) cell.classList.add("invest");
     cell.draggable=true;
-    cell.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; dragSrc={f,i}; dropOK=false; dragCls=(u&&u.cls)||""; markDrag(); const el=cell; setTimeout(()=>{ if(dragSrc) el.classList.add("picking"); },0); };
+    cell.ondragstart=e=>{ hideTip(); e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; dragSrc={f,i}; dropOK=false; dragCls=(u&&u.cls)||""; markDrag(); const el=cell; setTimeout(()=>{ if(dragSrc) el.classList.add("picking"); },0); };
     cell.ondragend=endDrag;
     cell.innerHTML=classIcon(u)+
       `<span class="cu">${u?u.name:parseSlug(slug).name}</span>`+
       (invest.has(slug)?`<span class="cflag">${FLAG_SVG}</span>`:"");
-    cell.title=(u?u.name:slug); }
+    if(u){ cell.onmouseenter=e=>showTip(e,u); cell.onmousemove=moveTip; cell.onmouseleave=hideTip; } }
   return cell;
 }
 function boardEl(f){
@@ -813,10 +815,11 @@ function wireControls(A){
 /* ---- tooltip ---- */
 const tip=$("tip");
 function showTip(e,u){
-  const facs=u.factions.map(f=>titleCase(f)).join(" · ");
+  if(!u) return;
+  const facs=(u.factions||[]).map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`+titleCase(f)).join(" &nbsp; ");
   tip.innerHTML=`<h4>${u.name}</h4><div class="sub">${u.rarity}${u.cls?" · "+titleCase(u.cls):""}</div>`+
     (facs?`<div class="fac">${facs}</div>`:"")+
-    (u.summary?`<div class="sum">${u.summary}</div>`:`<div class="sum none">No detail in snapshot — refresh from live to pull it in.</div>`);
+    (u.summary?`<div class="sum">${u.summary}</div>`:`<div class="sum none">No details loaded for this unit yet.</div>`);
   tip.classList.add("show"); moveTip(e);
 }
 function moveTip(e){
