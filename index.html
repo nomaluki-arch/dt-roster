@@ -283,6 +283,36 @@
   @media (max-width:900px){ .boards{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:560px){ .boards{grid-template-columns:1fr} }
 
+  /* info button + character modal */
+  .info{margin-left:1px; width:19px; height:19px; border-radius:6px; border:1px solid var(--line); background:transparent; color:var(--muted-2); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex:none}
+  .info:hover{border-color:var(--ember); color:var(--ember)}
+  .info:focus-visible{outline:2px solid var(--ember); outline-offset:1px}
+  .cmodal{position:fixed; inset:0; z-index:100; background:rgba(6,6,10,.72); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:20px}
+  .cmodal[hidden]{display:none}
+  .cmodal-card{position:relative; background:var(--ink-2); border:1px solid var(--line); border-radius:14px; max-width:660px; width:100%; max-height:88vh; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 30px 80px -20px #000}
+  .cmodal-x{position:absolute; top:10px; right:10px; z-index:2; width:32px; height:32px; border-radius:8px; border:none; background:rgba(6,6,10,.55); color:#fff; font-size:20px; line-height:1; cursor:pointer}
+  .cmodal-x:hover{background:rgba(6,6,10,.85)}
+  .cscene{position:relative; height:250px; background:var(--panel-2); flex:none}
+  .cscene-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center}
+  .cscene-head{position:absolute; left:0; right:0; bottom:0; padding:16px 18px; background:linear-gradient(transparent, rgba(8,8,12,.92))}
+  .cscene-head h2{margin:0; font-family:Fraunces,serif; font-size:24px; font-weight:900; color:#fff}
+  .cscene-head .ctitle{color:var(--ember); font-size:12.5px; margin-top:1px}
+  .cscene-head .cmeta{display:flex; align-items:center; gap:8px; margin-top:7px; font-size:12px; color:#d8d8de; flex-wrap:wrap}
+  .cbody{overflow-y:auto; padding:16px 18px 22px}
+  .ctiers{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+  .ctier{display:inline-flex; align-items:center; gap:6px; font-size:11px; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:3px 4px 3px 9px; color:var(--muted)}
+  .ctier .ctv{font-weight:700; color:#0e0e15; border-radius:5px; padding:1px 7px}
+  .csummary{color:var(--muted); font-size:13px; line-height:1.55; margin:0 0 14px}
+  .csec{margin-top:14px}
+  .csec h3{font-family:Fraunces,serif; font-size:15px; font-weight:600; margin:0 0 8px; border-bottom:1px solid var(--line-soft); padding-bottom:5px}
+  .skill,.dnode,.gearset,.tl{margin-bottom:9px; font-size:12.5px; color:var(--muted)}
+  .skill-h{display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:2px}
+  .skill-h b,.dchoice b{color:var(--text)}
+  .skill-d,.dchoice{line-height:1.5}
+  .dchoice{margin:3px 0 3px 4px; padding-left:8px; border-left:2px solid var(--line)}
+  .badge{font-size:9.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--muted); background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:1px 6px; white-space:nowrap}
+  .cbadges{display:flex; gap:6px; flex-wrap:wrap}
+
   @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
 </head>
@@ -352,6 +382,7 @@
 </main>
 
 <div class="tip" id="tip" role="tooltip"></div>
+<div class="cmodal" id="cmodal" hidden><div class="cmodal-card" id="cmodalCard"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -386,6 +417,61 @@ function saveTeams(){ saveJSON("dt_teams", teams); }
 const FLAG_SVG='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
 const classIcon=u=>(u&&u.cls&&CLASS_ICON[u.cls])?`<img class="cicon" src="${CLASS_ICON[u.cls]}" alt="${u.cls}" title="${titleCase(u.cls)}">`:"";
 const R2="https://pub-1b97167ae6734e6989a0f73c79ef819b.r2.dev/";
+const INFO_SVG='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.6" fill="currentColor" stroke="none"/></svg>';
+function csec(title, inner){ return inner ? `<section class="csec"><h3>${title}</h3>${inner}</section>` : ""; }
+function badges(arr){ return arr.filter(x=>x!=null&&x!=="").map(x=>`<span class="badge">${x}</span>`).join(" "); }
+function skillsHTML(c){
+  const sk=c.skills; if(!Array.isArray(sk)||!sk.length) return "";
+  return csec("Skills", sk.map(s=>`<div class="skill"><div class="skill-h"><b>${s.name||""}</b>`+
+    badges([s.type, s.cooldown!=null?"CD "+s.cooldown:"", s.cost!=null?"Cost "+s.cost:""])+
+    `</div><div class="skill-d">${s.description||""}</div></div>`).join(""));
+}
+function talentHTML(c){
+  const t=c.talent; if(!t) return "";
+  const lv=Array.isArray(t.talent_levels)?t.talent_levels:[];
+  const body=lv.length ? lv.map(l=>`<div class="tl"><span class="badge">Lv ${l.level}</span> ${l.effect||""}</div>`).join("") : (t.description||"");
+  return csec("Talent"+(t.name?" \u2014 "+t.name:""), body);
+}
+function divinityHTML(c){
+  const d=c.divinity; if(!Array.isArray(d)||!d.length) return "";
+  return csec("Divinity", d.map(n=>`<div class="dnode"><span class="badge">Lv ${n.level}</span>`+
+    (Array.isArray(n.choices)?n.choices.map(ch=>`<div class="dchoice"><b>${ch.name||""}</b> ${ch.description||""}</div>`).join(""):"")+
+    `</div>`).join(""));
+}
+function gearHTML(c){
+  const g=c.recommended_gear; if(!Array.isArray(g)||!g.length) return "";
+  return csec("Recommended gear", g.map(gr=>{
+    const s=gr.slots||{}; const items=badges(Object.keys(s).map(k=>s[k]).filter(Boolean).map(v=>titleCase(String(v))));
+    return `<div class="gearset"><b>${gr.label||"Set"}</b> ${items}</div>`;
+  }).join(""));
+}
+function openCharacter(u){
+  hideTip();
+  const c=u.raw||{}; const fn=titleCase;
+  const scene=`${R2}character/${u.slug}/skins/default/scene.png`;
+  const facs=u.factions.map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>${fn(f)}`).join("&nbsp;&nbsp;");
+  const tiers=MODEL.lists.map(l=>{ const t=l.tierOf[u.slug]; if(!t) return "";
+    const base=String(t).split(" ")[0]; const col=TIER_VAR[base]?`var(${TIER_VAR[base]})`:"var(--muted-2)";
+    return `<span class="ctier">${l.name}<span class="ctv" style="background:${col}">${t}</span></span>`; }).filter(Boolean).join("");
+  const facts=badges([c.origin, c.noble_phantasm?"NP: "+fn(String(c.noble_phantasm).replace(/_/g," ")):"", u.recs&&u.recs.length?("Subclass: "+u.recs.map(s=>fn(String(s).replace(/_/g," "))).join(", ")):""]);
+  const card=$("cmodalCard");
+  card.innerHTML=
+    `<button class="cmodal-x" aria-label="Close">\u00d7</button>`+
+    `<div class="cscene"><img class="cscene-img" alt="" src="${scene}">`+
+      `<div class="cscene-head"><h2>${u.name}</h2>`+(c.title?`<div class="ctitle">${c.title}</div>`:"")+
+      `<div class="cmeta"><b>${u.rarity}</b>${u.cls?" · "+fn(u.cls):""}${facs?" &nbsp;·&nbsp; "+facs:""}</div></div></div>`+
+    `<div class="cbody">`+
+      (tiers?`<div class="ctiers">${tiers}</div>`:"")+
+      (u.summary?`<p class="csummary">${u.summary}</p>`:"")+
+      (facts?`<div class="cbadges" style="margin-bottom:6px">${facts}</div>`:"")+
+      skillsHTML(c)+talentHTML(c)+divinityHTML(c)+gearHTML(c)+
+      (!u.raw?`<p class="csummary" style="margin-top:12px">Full kit (skills, talent, divinity, gear) loads once characters.json is in place.</p>`:"")+
+    `</div>`;
+  const img=card.querySelector(".cscene-img"); if(img) img.onerror=()=>img.remove();
+  card.querySelector(".cmodal-x").onclick=closeCharacter;
+  $("cmodal").hidden=false;
+}
+function closeCharacter(){ $("cmodal").hidden=true; $("cmodalCard").innerHTML=""; }
 const FACTIONS=["elemental_echo","wild_spirit","arcane_wisdom","sanctum_glory","otherworld_return","illusion_veil"];
 const FACTION_COLOR={elemental_echo:"#d64b3f", wild_spirit:"#1f7a45", arcane_wisdom:"#2f97d4", sanctum_glory:"#d9a441", otherworld_return:"#74c98a", illusion_veil:"#14141a"};
 const CLASSES=["guardian","priest","assassin","warrior","archer","mage"];
@@ -408,7 +494,7 @@ function buildModel(tierLists, characters){
     const c=charBySlug[slug]; const p=parseSlug(slug);
     return { slug, name:(c&&c.name)||p.name, rarity:(c&&c.quality)||p.rarity,
       cls:(c&&c.character_class)||"", factions:(c&&c.factions)||[],
-      recs:(c&&c.recommended_subclasses)||[], summary:(c&&c.summary)||"" };
+      recs:(c&&c.recommended_subclasses)||[], summary:(c&&c.summary)||"", raw:c||null };
   });
   return {lists, units, bySlug:Object.fromEntries(units.map(u=>[u.slug,u]))};
 }
@@ -491,6 +577,7 @@ function unitEl(u){
   const b=document.createElement("button");
   b.className="unit"+(owned.has(u.slug)?" owned":"")+(invest.has(u.slug)?" invest":"");
   b.innerHTML=`<span class="dot"></span>`+classIcon(u)+`<span class="nm"></span>`+(u.rarity?`<span class="rar"></span>`:"")+
+    `<span class="info" role="button" tabindex="0" title="Details" aria-label="${u.name} details">${INFO_SVG}</span>`+
     `<span class="flag" role="button" tabindex="0" title="Flag to invest" aria-label="Flag ${u.name} to invest">${FLAG_SVG}</span>`;
   b.querySelector(".nm").textContent=u.name;
   if(u.rarity) b.querySelector(".rar").textContent=u.rarity;
@@ -500,6 +587,9 @@ function unitEl(u){
     b.classList.toggle("owned"); b.setAttribute("aria-pressed", owned.has(u.slug));
     b.setAttribute("aria-label", u.name+(owned.has(u.slug)?" (owned)":""));
     saveKey("dt_owned",owned); afterChange(); };
+  const info=b.querySelector(".info");
+  info.onclick=ev=>{ ev.stopPropagation(); openCharacter(u); };
+  info.onkeydown=ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); ev.stopPropagation(); openCharacter(u); } };
   const flag=b.querySelector(".flag");
   const toggleInvest=ev=>{ ev.stopPropagation();
     invest.has(u.slug)?invest.delete(u.slug):invest.add(u.slug);
@@ -525,10 +615,14 @@ function poolChip(u){
     u.factions.map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`).join("")+
     `<span class="nm">${u.name}</span>`+
     (u.rarity?`<span class="rar">${u.rarity}</span>`:"")+
-    (invest.has(u.slug)?`<span class="iflag">${FLAG_SVG}</span>`:"");
+    (invest.has(u.slug)?`<span class="iflag">${FLAG_SVG}</span>`:"")+
+    `<span class="info" role="button" tabindex="0" title="Details">${INFO_SVG}</span>`;
   b.ondragstart=e=>{ hideTip(); e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; dragSrc=null; dropOK=false; dragCls=u.cls||""; markDrag(); };
   b.ondragend=endDrag;
   b.onclick=()=>{ selectedPoolSlug=(selectedPoolSlug===u.slug)?null:u.slug; renderTeams(); };
+  const info=b.querySelector(".info");
+  info.onclick=ev=>{ ev.stopPropagation(); openCharacter(u); };
+  info.onkeydown=ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); ev.stopPropagation(); openCharacter(u); } };
   b.onmouseenter=e=>showTip(e,u); b.onmousemove=moveTip; b.onmouseleave=hideTip;
   b.onfocus=e=>showTip(e,u); b.onblur=hideTip;
   return b;
@@ -962,6 +1056,8 @@ function importData(file){
   $("investOnly").onclick=e=>{ filters.investOnly=!filters.investOnly; e.currentTarget.setAttribute("aria-pressed",filters.investOnly); renderView(); };
   document.querySelectorAll(".vtab").forEach(tab=>{ tab.onclick=()=>{ view=tab.dataset.view; renderAll(); }; });
   $("refresh").onclick=refresh;
+  $("cmodal").onclick=e=>{ if(e.target===$("cmodal")) closeCharacter(); };
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && !$("cmodal").hidden) closeCharacter(); });
   $("exportBtn").onclick=exportData;
   $("importBtn").onclick=()=>$("importFile").click();
   $("importFile").onchange=e=>{ if(e.target.files[0]) importData(e.target.files[0]); e.target.value=""; };
