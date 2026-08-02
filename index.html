@@ -254,11 +254,17 @@
   .board3{display:grid; grid-template-columns:14px repeat(3,1fr); grid-template-rows:12px repeat(3,1fr); gap:4px}
   .board3 .cl{font-size:8.5px; color:var(--muted-2); text-align:center; letter-spacing:.06em}
   .board3 .rl{font-size:8.5px; color:var(--muted-2); display:flex; align-items:center; justify-content:center}
-  .cell{border:1px dashed var(--line); border-radius:7px; min-height:46px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:2px; padding:3px; cursor:pointer}
+  .cell{position:relative; border:1px dashed var(--line); border-radius:7px; min-height:46px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:2px; padding:3px; cursor:pointer}
   .cell.over{border-color:var(--ember); background:rgba(224,163,62,.12)}
   .cell.filled{border-style:solid; background:var(--panel-2)}
+  .cell.owned{border-style:solid; border-color:var(--ember); background:linear-gradient(180deg, rgba(224,163,62,.2), rgba(224,163,62,.06))}
+  .cell.owned .cu{color:#fbeccb}
+  .cell.invest{box-shadow:inset 3px 0 0 0 var(--invest)}
+  .cell .cflag{position:absolute; top:2px; right:3px; color:var(--invest); display:inline-flex; pointer-events:none}
+  .cell .cflag svg{width:10px; height:10px}
   .cell.ok{border-color:var(--ember); background:rgba(224,163,62,.08)}
   .cell.no{opacity:.32}
+  .cell.dno{opacity:.26}
   .cell .cu{font-size:10.5px; line-height:1.15; color:var(--text); word-break:break-word}
   .cicon{width:16px; height:16px; object-fit:contain; flex:none; pointer-events:none}
   .unit .cicon{width:15px; height:15px; margin:0 1px}
@@ -402,6 +408,7 @@ let view="tiers";
 let teams=null;
 let savedTeams=[];
 let selectedPoolSlug=null;
+let dragCls=null;
 let selectedList=null;
 const filters={search:"", rarities:new Set(RARITY_ORDER), classes:new Set(CLASSES), factions:new Set(FACTIONS), ownedOnly:false, investOnly:false};
 
@@ -504,7 +511,8 @@ function poolChip(u){
     `<span class="nm">${u.name}</span>`+
     (u.rarity?`<span class="rar">${u.rarity}</span>`:"")+
     (invest.has(u.slug)?`<span class="iflag">${FLAG_SVG}</span>`:"");
-  b.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; };
+  b.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; dragCls=u.cls||""; markDrag(); };
+  b.ondragend=clearDrag;
   b.onclick=()=>{ selectedPoolSlug=(selectedPoolSlug===u.slug)?null:u.slug; renderTeams(); };
   return b;
 }
@@ -535,6 +543,8 @@ function placementMsg(cls){
   return cls==="guardian" ? "Guardians can only go in the front row."
     : titleCase(cls)+"s go in the middle or back row, not the front.";
 }
+function markDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.toggle("dno", !cellAllowed(dragCls, +c.dataset.i))); }
+function clearDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.remove("dno")); dragCls=null; }
 function placeUnit(f,i,slug){
   if(!slug) return;
   const u=MODEL.bySlug[slug]; const cls=u?u.cls:"";
@@ -563,7 +573,7 @@ function moveOrSwap(sf,si,tf,ti){
   selectedPoolSlug=null; saveTeams(); renderTeams();
 }
 function cellEl(f,i){
-  const cell=document.createElement("div"); cell.className="cell"; const slug=teams[f][i];
+  const cell=document.createElement("div"); cell.className="cell"; cell.dataset.i=i; const slug=teams[f][i];
   if(selectedPoolSlug){
     const su=MODEL.bySlug[selectedPoolSlug]; const scls=su?su.cls:""; const board=teams[f];
     const capOk = board[i] || board.indexOf(selectedPoolSlug)>=0 || board.filter(Boolean).length<6;
@@ -577,11 +587,15 @@ function cellEl(f,i){
   cell.onclick=()=>{ if(teams[f][i]){ teams[f][i]=null; saveTeams(); renderTeams(); }
     else if(selectedPoolSlug){ placeUnit(f,i,selectedPoolSlug); } };
   if(slug){ const u=MODEL.bySlug[slug]; cell.classList.add("filled");
+    if(owned.has(slug)) cell.classList.add("owned");
+    if(invest.has(slug)) cell.classList.add("invest");
     cell.draggable=true;
-    cell.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; };
+    cell.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; dragCls=(u&&u.cls)||""; markDrag(); };
+    cell.ondragend=clearDrag;
     cell.innerHTML=(u&&u.cls&&CLASS_ICON[u.cls]?`<img class="cicon" src="${CLASS_ICON[u.cls]}" alt="">`:"")+
-      `<span class="cu">${u?u.name:parseSlug(slug).name}</span>`;
-    cell.title=(u?u.name:slug)+" — drag to move or swap, tap to remove"; }
+      `<span class="cu">${u?u.name:parseSlug(slug).name}</span>`+
+      (invest.has(slug)?`<span class="cflag">${FLAG_SVG}</span>`:"");
+    cell.title=(u?u.name:slug); }
   return cell;
 }
 function boardEl(f){
