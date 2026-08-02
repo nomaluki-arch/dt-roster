@@ -267,6 +267,8 @@
   .cell.ok{border-color:var(--ember); background:rgba(224,163,62,.08)}
   .cell.no{opacity:.32}
   .cell.dno{opacity:.26}
+  .cell.picking{background:transparent!important; border-style:dashed!important; border-color:var(--line)!important; box-shadow:none!important}
+  .cell.picking>*{opacity:0}
   .cell .cu{font-size:10.5px; line-height:1.15; color:var(--text); word-break:break-word}
   .cicon{width:16px; height:16px; object-fit:contain; flex:none; pointer-events:none}
   .unit .cicon{width:15px; height:15px; margin:0 1px}
@@ -547,7 +549,7 @@ function placementMsg(cls){
     : titleCase(cls)+"s go in the middle or back row, not the front.";
 }
 function markDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.toggle("dno", !cellAllowed(dragCls, +c.dataset.i))); }
-function clearDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.remove("dno")); dragCls=null; }
+function clearDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.remove("dno","picking")); dragCls=null; }
 function endDrag(){
   if(dragSrc && !dropOK){ teams[dragSrc.f][dragSrc.i]=null; saveTeams(); renderTeams(); }
   clearDrag(); dragSrc=null; dropOK=false;
@@ -596,7 +598,7 @@ function cellEl(f,i){
     if(owned.has(slug)) cell.classList.add("owned");
     if(invest.has(slug)) cell.classList.add("invest");
     cell.draggable=true;
-    cell.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; dragSrc={f,i}; dropOK=false; dragCls=(u&&u.cls)||""; markDrag(); };
+    cell.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; dragSrc={f,i}; dropOK=false; dragCls=(u&&u.cls)||""; markDrag(); const el=cell; setTimeout(()=>{ if(dragSrc) el.classList.add("picking"); },0); };
     cell.ondragend=endDrag;
     cell.innerHTML=classIcon(u)+
       `<span class="cu">${u?u.name:parseSlug(slug).name}</span>`+
@@ -636,7 +638,11 @@ function renderTeams(){
   });
   head.appendChild(actions); wrap.appendChild(head);
   const pool=document.createElement("div"); pool.className="teampool";
-  const shown=MODEL.units.filter(passesFilter).sort((a,b)=>rarityRank(a.rarity)-rarityRank(b.rarity)||a.name.localeCompare(b.name));
+  pool.ondragover=e=>{ e.preventDefault(); e.dataTransfer.dropEffect="move"; };
+  pool.ondrop=e=>{ e.preventDefault(); dropOK=true;
+    let d; try{ d=JSON.parse(e.dataTransfer.getData("text/plain")); }catch(_){ return; }
+    if(d.from==="cell"){ teams[d.f][d.i]=null; saveTeams(); renderTeams(); } };
+  const shown=MODEL.units.filter(passesFilter).sort(byRarityName);
   if(!shown.length){ pool.innerHTML=`<div class="empty">No units match these filters.</div>`; }
   else shown.forEach(u=>pool.appendChild(poolChip(u)));
   wrap.appendChild(pool); host.appendChild(wrap);
