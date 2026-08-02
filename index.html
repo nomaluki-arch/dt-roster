@@ -39,7 +39,9 @@
   .brand h1{font-family:Fraunces,serif; font-weight:900; font-size:26px; letter-spacing:.2px; margin:0; line-height:1}
   .brand .ember{color:var(--ember)}
   .brand p{margin:0; color:var(--muted); font-size:12.5px; letter-spacing:.3px}
-  .src{display:flex; align-items:center; gap:10px}
+  .src{display:flex; align-items:stretch; gap:14px; flex-wrap:wrap}
+  .hgroup{display:flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--line-soft); border-radius:10px; background:rgba(255,255,255,.015)}
+  .hlabel{font-size:9.5px; text-transform:uppercase; letter-spacing:.13em; color:var(--muted-2); font-weight:600; white-space:nowrap}
   .datastate{font-size:11.5px; color:var(--muted-2); text-align:right; line-height:1.3}
   .datastate b{color:var(--muted); font-weight:600}
   button.refresh{
@@ -283,11 +285,17 @@
       <p>Mark what you own · ranked across four community tier lists</p>
     </div>
     <div class="src">
-      <div class="datastate" id="datastate">Loading data&hellip;</div>
-      <button class="databtn" id="exportBtn" title="Download your roster as a backup file">Export</button>
-      <button class="databtn" id="importBtn" title="Load a roster backup file">Import</button>
-      <input type="file" id="importFile" accept=".json,.txt,application/json" style="display:none">
-      <button class="refresh" id="refresh">Refresh</button>
+      <div class="hgroup" title="Your saved roster, invest flags and teams — kept in this browser. Independent of the game data.">
+        <span class="hlabel">Your data</span>
+        <button class="databtn" id="exportBtn">Export</button>
+        <button class="databtn" id="importBtn">Import</button>
+        <input type="file" id="importFile" accept=".json,.txt,application/json" style="display:none">
+      </div>
+      <div class="hgroup" title="Reload the game data (tier lists &amp; characters) from the source files.">
+        <span class="hlabel">Game data</span>
+        <div class="datastate" id="datastate">Loading&hellip;</div>
+        <button class="refresh" id="refresh">Refresh</button>
+      </div>
     </div>
   </div>
 </header>
@@ -350,16 +358,6 @@ function parseSlug(slug){
 function rarityRank(r){ const i=RARITY_ORDER.indexOf(r); return i<0?99:i; }
 
 /* ---- storage: window.storage in Claude, localStorage standalone ---- */
-async function saveKey(key,set){
-  const data=JSON.stringify([...set]);
-  if(window.storage){ try{ await window.storage.set(key,data,false); return; }catch(e){} }
-  try{ localStorage.setItem(key,data); }catch(e){}
-}
-async function loadKey(key){
-  if(window.storage){ try{ const r=await window.storage.get(key,false); if(r&&r.value) return new Set(JSON.parse(r.value)); }catch(e){} }
-  try{ const v=localStorage.getItem(key); if(v) return new Set(JSON.parse(v)); }catch(e){}
-  return new Set();
-}
 async function saveJSON(key,val){
   const d=JSON.stringify(val);
   if(window.storage){ try{ await window.storage.set(key,d,false); return; }catch(e){} }
@@ -370,9 +368,12 @@ async function loadJSON(key,fb){
   try{ const v=localStorage.getItem(key); if(v) return JSON.parse(v); }catch(e){}
   return fb;
 }
+const saveKey=(k,s)=>saveJSON(k,[...s]);
+async function loadKey(k){ return new Set(await loadJSON(k,[])); }
 function emptyTeams(){ const t={}; FACTIONS.forEach(f=>t[f]=Array(9).fill(null)); return t; }
 function saveTeams(){ saveJSON("dt_teams", teams); }
 const FLAG_SVG='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+const classIcon=u=>(u&&u.cls&&CLASS_ICON[u.cls])?`<img class="cicon" src="${CLASS_ICON[u.cls]}" alt="${u.cls}" title="${titleCase(u.cls)}">`:"";
 const FACTIONS=["elemental_echo","wild_spirit","arcane_wisdom","sanctum_glory","otherworld_return","illusion_veil"];
 const FACTION_COLOR={elemental_echo:"#d64b3f", wild_spirit:"#1f7a45", arcane_wisdom:"#2f97d4", sanctum_glory:"#d9a441", otherworld_return:"#74c98a", illusion_veil:"#14141a"};
 const CLASSES=["guardian","priest","assassin","warrior","archer","mage"];
@@ -409,6 +410,8 @@ let teams=null;
 let savedTeams=[];
 let selectedPoolSlug=null;
 let dragCls=null;
+let dragSrc=null;
+let dropOK=false;
 let selectedList=null;
 const filters={search:"", rarities:new Set(RARITY_ORDER), classes:new Set(CLASSES), factions:new Set(FACTIONS), ownedOnly:false, investOnly:false};
 
@@ -475,7 +478,7 @@ function updateRailCounts(){
 function unitEl(u){
   const b=document.createElement("button");
   b.className="unit"+(owned.has(u.slug)?" owned":"")+(invest.has(u.slug)?" invest":"");
-  b.innerHTML=`<span class="dot"></span>`+(u.cls&&CLASS_ICON[u.cls]?`<img class="cicon" src="${CLASS_ICON[u.cls]}" alt="${u.cls}" title="${titleCase(u.cls)}">`:"")+`<span class="nm"></span>`+(u.rarity?`<span class="rar"></span>`:"")+
+  b.innerHTML=`<span class="dot"></span>`+classIcon(u)+`<span class="nm"></span>`+(u.rarity?`<span class="rar"></span>`:"")+
     `<span class="flag" role="button" tabindex="0" title="Flag to invest" aria-label="Flag ${u.name} to invest">${FLAG_SVG}</span>`;
   b.querySelector(".nm").textContent=u.name;
   if(u.rarity) b.querySelector(".rar").textContent=u.rarity;
@@ -506,13 +509,13 @@ function poolChip(u){
   const b=document.createElement("button");
   b.className="poolchip"+(selectedPoolSlug===u.slug?" sel":"")+(owned.has(u.slug)?" owned":"")+(invest.has(u.slug)?" invest":"");
   b.draggable=true;
-  b.innerHTML=(u.cls&&CLASS_ICON[u.cls]?`<img class="cicon" src="${CLASS_ICON[u.cls]}" alt="${u.cls}" title="${titleCase(u.cls)}">`:"")+
+  b.innerHTML=classIcon(u)+
     u.factions.map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`).join("")+
     `<span class="nm">${u.name}</span>`+
     (u.rarity?`<span class="rar">${u.rarity}</span>`:"")+
     (invest.has(u.slug)?`<span class="iflag">${FLAG_SVG}</span>`:"");
-  b.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; dragCls=u.cls||""; markDrag(); };
-  b.ondragend=clearDrag;
+  b.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; dragSrc=null; dropOK=false; dragCls=u.cls||""; markDrag(); };
+  b.ondragend=endDrag;
   b.onclick=()=>{ selectedPoolSlug=(selectedPoolSlug===u.slug)?null:u.slug; renderTeams(); };
   return b;
 }
@@ -545,6 +548,10 @@ function placementMsg(cls){
 }
 function markDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.toggle("dno", !cellAllowed(dragCls, +c.dataset.i))); }
 function clearDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.remove("dno")); dragCls=null; }
+function endDrag(){
+  if(dragSrc && !dropOK){ teams[dragSrc.f][dragSrc.i]=null; saveTeams(); renderTeams(); }
+  clearDrag(); dragSrc=null; dropOK=false;
+}
 function placeUnit(f,i,slug){
   if(!slug) return;
   const u=MODEL.bySlug[slug]; const cls=u?u.cls:"";
@@ -581,18 +588,17 @@ function cellEl(f,i){
   }
   cell.ondragover=e=>{ e.preventDefault(); cell.classList.add("over"); };
   cell.ondragleave=()=>cell.classList.remove("over");
-  cell.ondrop=e=>{ e.preventDefault(); cell.classList.remove("over");
+  cell.ondrop=e=>{ e.preventDefault(); cell.classList.remove("over"); dropOK=true;
     let d; try{ d=JSON.parse(e.dataTransfer.getData("text/plain")); }catch(_){ return; }
     if(d.from==="cell") moveOrSwap(d.f,d.i,f,i); else if(d.slug) placeUnit(f,i,d.slug); };
-  cell.onclick=()=>{ if(teams[f][i]){ teams[f][i]=null; saveTeams(); renderTeams(); }
-    else if(selectedPoolSlug){ placeUnit(f,i,selectedPoolSlug); } };
+  cell.onclick=()=>{ if(selectedPoolSlug) placeUnit(f,i,selectedPoolSlug); };
   if(slug){ const u=MODEL.bySlug[slug]; cell.classList.add("filled");
     if(owned.has(slug)) cell.classList.add("owned");
     if(invest.has(slug)) cell.classList.add("invest");
     cell.draggable=true;
-    cell.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; dragCls=(u&&u.cls)||""; markDrag(); };
-    cell.ondragend=clearDrag;
-    cell.innerHTML=(u&&u.cls&&CLASS_ICON[u.cls]?`<img class="cicon" src="${CLASS_ICON[u.cls]}" alt="">`:"")+
+    cell.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; dragSrc={f,i}; dropOK=false; dragCls=(u&&u.cls)||""; markDrag(); };
+    cell.ondragend=endDrag;
+    cell.innerHTML=classIcon(u)+
       `<span class="cu">${u?u.name:parseSlug(slug).name}</span>`+
       (invest.has(slug)?`<span class="cflag">${FLAG_SVG}</span>`:"");
     cell.title=(u?u.name:slug); }
@@ -638,71 +644,57 @@ function renderTeams(){
   FACTIONS.forEach(f=>boards.appendChild(boardEl(f)));
   host.appendChild(boards);
 }
+function noMatch(host){ const d=document.createElement("div"); d.className="empty"; d.textContent="No units match these filters."; host.appendChild(d); }
+function makeBand(host, labelHTML, arr, extraHTML){
+  const own=arr.filter(u=>owned.has(u.slug)).length;
+  const band=document.createElement("section"); band.className="band";
+  const rail=document.createElement("div"); rail.className="rail";
+  rail.innerHTML=labelHTML+`<span class="meta"><b>${own}</b> / ${arr.length} owned</span>`+(extraHTML||"");
+  const units=document.createElement("div"); units.className="units";
+  arr.forEach(u=>units.appendChild(unitEl(u)));
+  band.appendChild(rail); band.appendChild(units); host.appendChild(band);
+}
+const byRarityName=(a,b)=>rarityRank(a.rarity)-rarityRank(b.rarity)||a.name.localeCompare(b.name);
 function renderByClass(){
   const host=$("bands"); host.innerHTML="";
   const shown=MODEL.units.filter(passesFilter);
-  if(!shown.length){ const d=document.createElement("div"); d.className="empty";
-    d.textContent="No units match these filters."; host.appendChild(d); return; }
+  if(!shown.length){ noMatch(host); return; }
   const order=[...CLASSES,"unknown"];
   const groups={}; order.forEach(c=>groups[c]=[]);
   shown.forEach(u=>{ const c=(u.cls&&CLASSES.includes(u.cls))?u.cls:"unknown"; groups[c].push(u); });
   order.forEach(c=>{
     const arr=groups[c]; if(!arr.length) return;
-    arr.sort((a,b)=>rarityRank(a.rarity)-rarityRank(b.rarity)||a.name.localeCompare(b.name));
-    const own=arr.filter(u=>owned.has(u.slug)).length;
-    const band=document.createElement("section"); band.className="band";
-    const rail=document.createElement("div"); rail.className="rail";
-    rail.innerHTML=`<span class="classlabel">${c==="unknown"?"\u2014":titleCase(c)}</span>`+
-      `<span class="meta"><b>${own}</b> / ${arr.length} owned</span>`+
-      (c==="unknown"?`<span class="def">Class not in data yet</span>`:"");
-    const units=document.createElement("div"); units.className="units";
-    arr.forEach(u=>units.appendChild(unitEl(u)));
-    band.appendChild(rail); band.appendChild(units); host.appendChild(band);
+    arr.sort(byRarityName);
+    makeBand(host, `<span class="classlabel">${c==="unknown"?"\u2014":titleCase(c)}</span>`, arr,
+      c==="unknown"?`<span class="def">Class not in data yet</span>`:"");
   });
 }
 function renderAZ(){
   const host=$("bands"); host.innerHTML="";
   const shown=MODEL.units.filter(passesFilter).sort((a,b)=>a.name.localeCompare(b.name));
-  if(!shown.length){ const d=document.createElement("div"); d.className="empty";
-    d.textContent="No units match these filters."; host.appendChild(d); return; }
+  if(!shown.length){ noMatch(host); return; }
   const groups={};
   shown.forEach(u=>{ let c=(u.name[0]||"#").toUpperCase(); if(!/[A-Z]/.test(c)) c="#"; (groups[c]=groups[c]||[]).push(u); });
-  Object.keys(groups).sort().forEach(letter=>{
-    const arr=groups[letter];
-    const band=document.createElement("section"); band.className="band";
-    const own=arr.filter(u=>owned.has(u.slug)).length;
-    const rail=document.createElement("div"); rail.className="rail";
-    rail.innerHTML=`<span class="letter az">${letter}</span><span class="meta"><b>${own}</b> / ${arr.length} owned</span>`;
-    const units=document.createElement("div"); units.className="units";
-    arr.forEach(u=>units.appendChild(unitEl(u)));
-    band.appendChild(rail); band.appendChild(units); host.appendChild(band);
-  });
+  Object.keys(groups).sort().forEach(letter=>
+    makeBand(host, `<span class="letter az">${letter}</span>`, groups[letter]));
 }
 function renderTierBands(){
   const l=currentList(); const host=$("bands"); host.innerHTML="";
   const shown=MODEL.units.filter(passesFilter);
   const groups={}; l.tierOrder.forEach(t=>groups[t]=[]); const unranked=[];
   shown.forEach(u=>{ const t=l.tierOf[u.slug]; if(t&&groups[t]) groups[t].push(u); else unranked.push(u); });
-  const order=[...l.tierOrder]; if(unranked.length) order.push("—");
+  const order=[...l.tierOrder]; if(unranked.length) order.push("\u2014");
   let any=false;
   order.forEach(t=>{
-    const arr = t==="—"?unranked:groups[t];
+    const arr = t==="\u2014"?unranked:groups[t];
     if(!arr.length) return; any=true;
-    arr.sort((a,b)=>rarityRank(a.rarity)-rarityRank(b.rarity)||a.name.localeCompare(b.name));
-    const band=document.createElement("section"); band.className="band";
-    const col = t==="—" ? "var(--muted-2)" : `var(${TIER_VAR[t]||"--tier-D"})`;
-    const ownedInTier=arr.filter(u=>owned.has(u.slug)).length;
-    const rail=document.createElement("div"); rail.className="rail";
-    rail.innerHTML=`<span class="letter" style="background:${col}">${t==="—"?"?":t}</span>`+
-      `<span class="meta"><b>${ownedInTier}</b> / ${arr.length} owned</span>`+
-      (t!=="—"&&l.tierNote[t]?`<span class="def">${l.tierNote[t]}</span>`:
-        (t==="—"?`<span class="def">Not ranked in this list</span>`:""));
-    const units=document.createElement("div"); units.className="units";
-    arr.forEach(u=>units.appendChild(unitEl(u)));
-    band.appendChild(rail); band.appendChild(units); host.appendChild(band);
+    arr.sort(byRarityName);
+    const col = t==="\u2014" ? "var(--muted-2)" : `var(${TIER_VAR[t]||"--tier-D"})`;
+    const extra = t!=="\u2014"&&l.tierNote[t] ? `<span class="def">${l.tierNote[t]}</span>`
+      : (t==="\u2014" ? `<span class="def">Not ranked in this list</span>` : "");
+    makeBand(host, `<span class="letter" style="background:${col}">${t==="\u2014"?"?":t}</span>`, arr, extra);
   });
-  if(!any){ const d=document.createElement("div"); d.className="empty";
-    d.textContent="No units match these filters."; host.appendChild(d); }
+  if(!any) noMatch(host);
 }
 
 function renderStats(){
