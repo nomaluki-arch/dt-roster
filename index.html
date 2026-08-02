@@ -260,7 +260,7 @@
   .cell.ok{border-color:var(--ember); background:rgba(224,163,62,.08)}
   .cell.no{opacity:.32}
   .cell .cu{font-size:10.5px; line-height:1.15; color:var(--text); word-break:break-word}
-  .cicon{width:16px; height:16px; object-fit:contain; flex:none}
+  .cicon{width:16px; height:16px; object-fit:contain; flex:none; pointer-events:none}
   .unit .cicon{width:15px; height:15px; margin:0 1px}
   .cell .cicon{width:15px; height:15px}
   @media (max-width:900px){ .boards{grid-template-columns:repeat(2,1fr)} }
@@ -322,9 +322,7 @@
   <section class="analytics" id="analytics" aria-live="polite"></section>
   <div id="bands"></div>
   <footer>
-    Tap a unit to mark it <b style="color:var(--ember)">owned</b> · tap the flag to mark it <b style="color:var(--invest)">to invest</b>.
-    Sources: <a href="https://dtwiki.org/tier-list" target="_blank" rel="noopener">dtwiki.org tier lists</a>.
-    Tiers use each author's own scale and are not directly comparable across lists. Your roster and flags are saved to this browser.
+    Data from <a href="https://dtwiki.org/tier-list" target="_blank" rel="noopener">dtwiki.org</a>.
   </footer>
 </main>
 
@@ -506,7 +504,7 @@ function poolChip(u){
     `<span class="nm">${u.name}</span>`+
     (u.rarity?`<span class="rar">${u.rarity}</span>`:"")+
     (invest.has(u.slug)?`<span class="iflag">${FLAG_SVG}</span>`:"");
-  b.ondragstart=e=>{ e.dataTransfer.setData("text/plain",u.slug); e.dataTransfer.effectAllowed="copy"; };
+  b.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; };
   b.onclick=()=>{ selectedPoolSlug=(selectedPoolSlug===u.slug)?null:u.slug; renderTeams(); };
   return b;
 }
@@ -546,6 +544,24 @@ function placeUnit(f,i,slug){
   if(at>=0 && at!==i) board[at]=null;       // move within the same board
   board[i]=slug; selectedPoolSlug=null; saveTeams(); renderTeams();
 }
+function moveOrSwap(sf,si,tf,ti){
+  if(sf===tf && si===ti) return;
+  const srcSlug=teams[sf][si]; if(!srcSlug) return;
+  if(sf!==tf){ placeUnit(tf,ti,srcSlug); return; }   // dragged to a different board: place a copy
+  const board=teams[tf]; const tgtSlug=board[ti];
+  const clsOf=s=>{ const u=MODEL.bySlug[s]; return u?u.cls:""; };
+  const srcCls=clsOf(srcSlug);
+  if(tgtSlug){                                        // swap the two units
+    const tgtCls=clsOf(tgtSlug);
+    if(!cellAllowed(srcCls,ti)){ toast(placementMsg(srcCls)); return; }
+    if(!cellAllowed(tgtCls,si)){ toast(placementMsg(tgtCls)); return; }
+    board[ti]=srcSlug; board[si]=tgtSlug;
+  } else {                                            // move to an empty slot
+    if(!cellAllowed(srcCls,ti)){ toast(placementMsg(srcCls)); return; }
+    board[ti]=srcSlug; board[si]=null;
+  }
+  selectedPoolSlug=null; saveTeams(); renderTeams();
+}
 function cellEl(f,i){
   const cell=document.createElement("div"); cell.className="cell"; const slug=teams[f][i];
   if(selectedPoolSlug){
@@ -555,13 +571,17 @@ function cellEl(f,i){
   }
   cell.ondragover=e=>{ e.preventDefault(); cell.classList.add("over"); };
   cell.ondragleave=()=>cell.classList.remove("over");
-  cell.ondrop=e=>{ e.preventDefault(); cell.classList.remove("over"); placeUnit(f,i,e.dataTransfer.getData("text/plain")); };
+  cell.ondrop=e=>{ e.preventDefault(); cell.classList.remove("over");
+    let d; try{ d=JSON.parse(e.dataTransfer.getData("text/plain")); }catch(_){ return; }
+    if(d.from==="cell") moveOrSwap(d.f,d.i,f,i); else if(d.slug) placeUnit(f,i,d.slug); };
   cell.onclick=()=>{ if(teams[f][i]){ teams[f][i]=null; saveTeams(); renderTeams(); }
     else if(selectedPoolSlug){ placeUnit(f,i,selectedPoolSlug); } };
   if(slug){ const u=MODEL.bySlug[slug]; cell.classList.add("filled");
+    cell.draggable=true;
+    cell.ondragstart=e=>{ e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; };
     cell.innerHTML=(u&&u.cls&&CLASS_ICON[u.cls]?`<img class="cicon" src="${CLASS_ICON[u.cls]}" alt="">`:"")+
       `<span class="cu">${u?u.name:parseSlug(slug).name}</span>`;
-    cell.title=(u?u.name:slug)+" — tap to remove"; }
+    cell.title=(u?u.name:slug)+" — drag to move or swap, tap to remove"; }
   return cell;
 }
 function boardEl(f){
@@ -580,11 +600,6 @@ function renderTeams(){
   const host=$("bands"); host.innerHTML="";
   const wrap=document.createElement("div"); wrap.className="poolwrap";
   const head=document.createElement("div"); head.className="poolhead";
-  const help=document.createElement("span");
-  help.innerHTML=`Drag a character onto a slot &mdash; or tap a unit, then tap a slot (valid slots highlight). Tap a placed unit to remove it. Rows top&rarr;bottom are Front / Middle / Back. `+
-    `<b>Placement:</b> Guardians front only; Warriors, Archers, Mages &amp; Priests middle or back; Assassins anywhere. Max 6 per board. `+
-    `Owned units show a gold border; the flag marks ones to invest.`;
-  head.appendChild(help);
   const actions=document.createElement("div"); actions.className="teamactions";
   const clear=document.createElement("button"); clear.className="tbtn"; clear.textContent="Clear all boards";
   clear.onclick=()=>{ if(confirm("Clear every board?")){ teams=emptyTeams(); saveTeams(); renderTeams(); } };
@@ -731,8 +746,7 @@ function renderAnalytics(){
   const pct=n=>A.total?Math.round(n/A.total*100):0;
   const dot=f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`;
   const facLabel=f=>dot(f)+fn(f);
-  let h=`<div class="ahead"><div><h2>Faction coverage matrix</h2>`+
-    `<p class="lead">Of the high-tier units, the share each faction combination covers together. High = complementary factions (few shared units, more distinct coverage); low = they overlap. Based on the ${A.list.name} list.</p></div>`+
+  let h=`<div class="ahead"><div><h2>Faction coverage matrix</h2></div>`+
     `<div class="acontrols"><label class="asel">High tier <select id="cutoffSel"></select></label>`+
     `<button class="toggle small" id="scopeBtn" aria-pressed="${ANALYTICS.ownedOnly}">Owned only</button></div></div>`;
   if(A.total===0){
@@ -753,7 +767,6 @@ function renderAnalytics(){
     h+=`</tr>`;
   });
   h+=`</tbody></table></div>`;
-  h+=`<p class="anote">${FACTIONS.map(f=>dot(f)+ABBR[f]+" = "+fn(f)).join(" &nbsp; ")}. Each cell is the share of the ${A.total} high-tier units reachable with that pair; the diagonal is a faction alone.</p>`;
   h+=`<div class="combos">`+
      `<div class="combo"><h3>Single factions</h3><ol>`+
        A.singles.map(s=>`<li><span>${facLabel(s.facs[0])}</span><b>${pct(s.n)}%</b></li>`).join("")+
@@ -819,11 +832,30 @@ async function loadData(){
   if(!MODEL.lists.find(l=>l.name===selectedList)) selectedList=(MODEL.lists[0]||{}).name;
 }
 async function refresh(){
-  const btn=$("refresh"); btn.disabled=true; btn.textContent="Loading\u2026";
+  const btn=$("refresh"); btn.disabled=true; btn.textContent="Checking\u2026";
+  const hadModel=!!MODEL;
+  const before=hadModel ? new Set(MODEL.units.map(u=>u.slug)) : new Set();
   try{
-    await loadData(); renderAll();
-    $("datastate").innerHTML="Loaded from data files<br>"+new Date().toLocaleTimeString();
-  }catch(e){ showDataError(e); }
+    await loadData();
+    const added=MODEL.units.filter(u=>!before.has(u.slug));
+    renderAll();
+    const t=new Date().toLocaleTimeString();
+    if(!hadModel){
+      $("datastate").innerHTML="Loaded "+MODEL.units.length+" units<br>"+t;
+      toast("Loaded "+MODEL.units.length+" units.");
+    } else if(added.length){
+      const names=added.slice(0,4).map(u=>u.name).join(", ");
+      $("datastate").innerHTML="Updated \u2014 "+added.length+" new<br>"+t;
+      toast("Refresh complete \u2014 "+added.length+" new unit"+(added.length>1?"s":"")+": "+names+(added.length>4?"\u2026":""));
+    } else {
+      $("datastate").innerHTML="Up to date<br>"+t;
+      toast("Refresh complete \u2014 no new units ("+MODEL.units.length+" total).");
+    }
+  }catch(e){
+    if(hadModel){ $("datastate").innerHTML="<b style='color:#e05a3e'>Refresh failed</b><br>"+new Date().toLocaleTimeString();
+      toast("Refresh failed \u2014 couldn't reach the data files. Showing what was already loaded."); }
+    else showDataError(e);
+  }
   btn.disabled=false; btn.textContent="Refresh";
 }
 function showDataError(e){
@@ -906,7 +938,7 @@ function importData(file){
   $("importFile").onchange=e=>{ if(e.target.files[0]) importData(e.target.files[0]); e.target.value=""; };
   try{
     await loadData(); renderAll();
-    $("datastate").innerHTML="Loaded from data files<br>"+new Date().toLocaleTimeString();
+    $("datastate").innerHTML="Loaded "+MODEL.units.length+" units<br>"+new Date().toLocaleTimeString();
   }catch(e){ showDataError(e); }
 })();
 </script>
