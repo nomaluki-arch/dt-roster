@@ -261,7 +261,7 @@
       }
     ],
     "recommended_subclasses": [],
-    "title": "Goddess of Stolen Flame",
+    "title": "Firethief Goddess",
     "quality": "SSR EX",
     "character_class": "guardian",
     "factions": [
@@ -453,7 +453,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "Anubis",
@@ -4889,7 +4889,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "Morgana",
@@ -8625,11 +8625,11 @@
         "name": "Default"
       },
       {
-        "slug": "spring_blessing",
-        "name": "Spring Blessing"
+        "slug": "peachblossom_blessing",
+        "name": "Peachblossom Blessing"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785979272
   },
   {
     "name": "Mordred",
@@ -9116,7 +9116,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "Rin",
@@ -9388,7 +9388,7 @@
         "name": "Undercover Maid"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "White Tiger",
@@ -13439,7 +13439,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "Hitomi",
@@ -16788,11 +16788,11 @@
         "name": "Affection Gift"
       },
       {
-        "slug": "golden_lion_celebration",
-        "name": "Golden Lion Celebration"
+        "slug": "golden_lion_revelry",
+        "name": "Golden Lion Revelry"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785979272
   },
   {
     "name": "Hera",
@@ -16829,7 +16829,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "Himiko",
@@ -16906,11 +16906,11 @@
       "talent_levels": [
         {
           "level": 1,
-          "effect": "When dealing damage with basic attacks or active skills to targets in the {binding} status, additionally inflicts physical damage equal to 450-660% of Attack and applies a stack of [Magic Break Wedge] to the target, lasting for 8 seconds. Can stack up to 5 layers, with each layer reducing the target's Block by 150-210.\nWhen HP is lost, regenerates Rage. When Rage is at the limit, enters the {wild} status. While in the {wild} status, the additional damage from [Divine Oracle's Purge] is increased to 2 times."
+          "effect": "When dealing damage with basic attacks or active skills to targets afflicted with {binding}, additionally inflicts physical damage equal to 450-660% of Attack and inflicts a stack of [Magic Break Wedge] on the target, lasting for 8s. Can stack up to 5 times, with each stack reducing the target's Block by 150-210.\nWhen HP is lost, regenerates Rage. When Rage is at the limit, enters the {wild} state. While in the {wild} state, the additional damage from [Divine Oracle's Purge] is increased to 2x."
         },
         {
           "level": 2,
-          "effect": "At the start of battle, immediately applies {binding} and [Magic Break Wedge] to two enemy Luminaries."
+          "effect": "At the start of battle, immediately inflicts {binding} and [Magic Break Wedge] on two enemy Luminaries."
         },
         {
           "level": 3,
@@ -16918,11 +16918,11 @@
         },
         {
           "level": 4,
-          "effect": "[Demon-Sealing Arrow] When dealing damage to enemy units inflicted with {binding}, additionally applies {healing_down} and {seal} their Special Skill for 8 seconds."
+          "effect": "[Demon-Sealing Arrow] When dealing damage to enemies afflicted with {binding}, additionally inflicts {healing_down} and {seal}, silencing their Special Skill for 8s."
         },
         {
           "level": 7,
-          "effect": "[Demon-Sealing Arrow] Reduces [Demon-Sealing Arrow]'s cooldown by 2 seconds for each target with {binding} that it hits."
+          "effect": "[Demon-Sealing Arrow] [Demon-Sealing Arrow]'s cooldown decreases by 2s for each target afflicted with {binding} that it hits."
         }
       ]
     },
@@ -16930,7 +16930,7 @@
       {
         "name": "Fatebound Lock",
         "type": "Overdrive",
-        "description": "Throws a butterfly bow at the current target, dealing physical damage equal to 500-770% of Attack. [Bind]s the current target and a random enemy Luminary (prioritizing ranged units), and applies {binding}. When one of the [Bind]ed targets takes damage, the other target takes physical damage equal to 1300-1960% of the damage value. [Bind] lasts for 15 seconds and can simultaneously bind up to two enemy units. When either target of [Bind] dies, deals physical damage equal to 3000-4800% of Attack to the other target and removes [Bind].",
+        "description": "Throws a butterfly bow at the current target, dealing physical damage equal to 500-770% of Attack. Inflicts [Bind] on the current target and a random enemy Luminary (prioritizing ranged units), and inflicts {binding}. When one of the targets afflicted with [Bind] takes damage, the other target takes physical damage equal to 1300-1960% of the damage value. [Bind] lasts for 15 seconds and can simultaneously bind up to two enemy units. When either target of [Bind] dies, deals physical damage equal to 3000-4800% of Attack to the other target and removes [Bind].",
         "cooldown": 18,
         "cost": 2
       },
@@ -16943,7 +16943,7 @@
       {
         "name": "Spiritual Speed",
         "type": "Secret Skill",
-        "description": "For each enemy unit killed, randomly applies {binding} to one enemy unit and gains 1 stack of [Spiritual Speed]. Up to 20 stack(s) can be accumulated. Each stack of [Spiritual Speed] permanently increases Attack Speed by 15-27%.",
+        "description": "For each enemy unit killed, randomly inflicts {binding} on 1 enemy and gains 1 stack of [Spiritual Speed]. Up to 20 stack(s) can be accumulated. Each stack of [Spiritual Speed] permanently increases Attack Speed by 15-27%.",
         "cooldown": 0
       },
       {
@@ -17055,7 +17055,7 @@
         "name": "Exorcist High"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "Huginn & Muninn",
@@ -17755,11 +17755,11 @@
         "name": "Crimson Lady"
       },
       {
-        "slug": "the_wealth_god_arrives",
-        "name": "The Wealth God Arrives"
+        "slug": "fortunebringer",
+        "name": "Fortunebringer"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785979272
   },
   {
     "name": "Lupin",
@@ -17792,7 +17792,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "Medusa",
@@ -20736,7 +20736,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785978112
   },
   {
     "name": "Cleopatra",
@@ -21813,11 +21813,11 @@
         "name": "Affection Gift"
       },
       {
-        "slug": "riders_of_fragrant_street",
-        "name": "Riders of Fragrant Street"
+        "slug": "festival_cavalcade",
+        "name": "Festival Cavalcade"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1785979272
   },
   {
     "name": "Talos",
