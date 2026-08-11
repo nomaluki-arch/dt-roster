@@ -324,6 +324,55 @@
   .cbadges{display:flex; gap:6px; flex-wrap:wrap}
 
   @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+  /* effect links + popover */
+  .fx{color:var(--ember); border-bottom:1px dotted var(--ember); cursor:help}
+  .gearlink{display:inline-block; margin:2px 4px 2px 0; padding:2px 8px; font-size:11px; border:1px solid var(--line); border-radius:999px; color:var(--muted); cursor:help; background:var(--ink-2)}
+  .gearlink:hover{border-color:var(--ember); color:var(--text)}
+  .gearitems{margin-top:4px}
+  .fxpop{position:fixed; z-index:120; max-width:300px; background:#0c0c14; border:1px solid var(--line); border-radius:10px; padding:10px 12px; box-shadow:0 20px 50px -20px #000; opacity:0; pointer-events:none; transition:opacity .1s; font-size:12px; color:var(--muted)}
+  .fxpop.show{opacity:1}
+  .fxname{font-family:Fraunces,serif; font-weight:600; font-size:13.5px; color:var(--text)}
+  .fxtype{color:var(--ember); font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px}
+  .fxeffect{line-height:1.5}
+  .fxremark{margin-top:6px; padding-top:6px; border-top:1px solid var(--line-soft); color:var(--muted-2); line-height:1.5}
+  /* faction overview */
+  .fcard{border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:16px; background:var(--panel)}
+  .fhead{display:flex; align-items:center; gap:12px; border-left:4px solid var(--ember); padding-left:12px; margin-bottom:14px}
+  .fhead h2{margin:0; font-family:Fraunces,serif; font-size:20px; font-weight:700}
+  .fdot.big{width:15px; height:15px; border-radius:4px}
+  .fsig{font-size:12px; color:var(--muted); margin-top:3px}
+  .fown{margin-left:auto; font-size:12px; color:var(--muted); white-space:nowrap}
+  .fsigbox{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:12px}
+  .sigitem{flex:1 1 240px; border:1px solid var(--line-soft); border-radius:10px; padding:10px 12px; background:var(--ink-2)}
+  .signame{font-family:Fraunces,serif; font-weight:600; font-size:13.5px; color:var(--ember); margin-bottom:4px}
+  .sigtext{font-size:12px; color:var(--muted); line-height:1.5}
+  .sigremark{margin-top:6px; font-size:11.5px; color:var(--muted-2); line-height:1.5}
+  .sigk{display:inline-block; font-size:9px; text-transform:uppercase; letter-spacing:.06em; color:var(--ember); border:1px solid var(--line); border-radius:4px; padding:0 4px; margin-right:4px}
+  .provbox{margin-bottom:14px}
+  .provlabel{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted-2); margin-bottom:6px}
+  .provchips{display:flex; flex-wrap:wrap; gap:6px}
+  .provchip{font-size:12px; padding:4px 10px; border:1px solid var(--line); border-radius:999px; background:var(--ink-2); color:var(--muted); cursor:pointer}
+  .provchip:hover{border-color:var(--ember); color:var(--text)}
+  .provchip.on{background:rgba(224,163,62,.16); border-color:var(--ember); color:var(--text)}
+  .provchip .pvn{color:var(--muted-2); font-variant-numeric:tabular-nums}
+  .provresult{margin-top:10px; padding-top:10px; border-top:1px solid var(--line-soft)}
+  .provhead{font-size:12px; color:var(--muted); margin-bottom:8px}
+  .filtrow{display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:6px}
+  .filtlabel{font-size:10px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted-2); width:74px; flex:none}
+  .fchip{font-size:11px; padding:2px 9px; border:1px solid var(--line); border-radius:999px; background:var(--ink-2); color:var(--muted-2); cursor:pointer}
+  .fchip.on{background:rgba(224,163,62,.16); border-color:var(--ember); color:var(--text)}
+  .provunits{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+  .provunit{display:flex; flex-direction:column; gap:3px}
+  .provtags{display:flex; flex-wrap:wrap; gap:3px}
+  .ptag{font-size:9.5px; color:var(--muted-2); background:var(--ink-2); border:1px solid var(--line-soft); border-radius:4px; padding:0 4px; line-height:1.5}
+  .dragonline{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  .dstage{border:1px solid var(--line-soft); border-radius:10px; padding:10px; background:var(--ink-2)}
+  .dimg{width:100%; height:120px; object-fit:contain; background:var(--panel-2); border-radius:8px; margin-bottom:6px; display:block}
+  .dname{font-family:Fraunces,serif; font-weight:600; font-size:14px}
+  .dphase{font-size:10.5px; color:var(--muted-2); margin-bottom:6px}
+  .dskill{font-size:11.5px; color:var(--muted); line-height:1.5}
+  .dskill b{color:var(--ember); display:block; margin-bottom:2px; font-size:12px}
+  @media (max-width:680px){ .dragonline{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -362,7 +411,8 @@
     <button class="vtab" data-view="tiers" aria-pressed="true">Tiers</button>
     <button class="vtab" data-view="az" aria-pressed="false">A&ndash;Z</button>
     <button class="vtab" data-view="class" aria-pressed="false">By class</button>
-    <button class="vtab matrixtab" data-view="matrix" aria-pressed="false">Faction matrix
+    <button class="vtab" data-view="factions" aria-pressed="false">Factions</button>
+    <button class="vtab matrixtab" data-view="matrix" aria-pressed="false">Coverage
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     </button>
     <button class="vtab" data-view="teams" aria-pressed="false">Teams</button>
@@ -393,10 +443,12 @@
 
 <div class="tip" id="tip" role="tooltip"></div>
 <div class="cmodal" id="cmodal" hidden><div class="cmodal-card" id="cmodalCard"></div></div>
+<div class="fxpop" id="fxpop"></div>
 <div class="toast" id="toast"></div>
 
 <script>
-const DATA = { tiers:"./tier-lists.json", chars:"./characters.json" };
+const DATA = { tiers:"./tier-lists.json", chars:"./characters.json", wyrms:"./wyrms.json", effects:"./status-effects.json", gear:"./gear.json" };
+let WYRMS=[]; let EFFECTS={}; let EFFECTS_BY_NAME={}; let GEAR={}; let PROVIDERS={};
 
 const RARITY_SUFFIX = [["_ssr_ex","SSR EX"],["_ssr_plus","SSR+"],["_ssr","SSR"],["_sr","SR"],["_r","R"],["_n","N"]];
 const RARITY_ORDER = ["SSR EX","SSR+","SSR","SR","R","N"];
@@ -434,25 +486,28 @@ function skillsHTML(c){
   const sk=c.skills; if(!Array.isArray(sk)||!sk.length) return "";
   return csec("Skills", sk.map(s=>`<div class="skill"><div class="skill-h"><b>${s.name||""}</b>`+
     badges([s.type, s.cooldown!=null?"CD "+s.cooldown:"", s.cost!=null?"Cost "+s.cost:""])+
-    `</div><div class="skill-d">${s.description||""}</div></div>`).join(""));
+    `</div><div class="skill-d">${linkifyEffects(s.description)}</div></div>`).join(""));
 }
 function talentHTML(c){
   const t=c.talent; if(!t) return "";
   const lv=Array.isArray(t.talent_levels)?t.talent_levels:[];
-  const body=lv.length ? lv.map(l=>`<div class="tl"><span class="badge">Lv ${l.level}</span> ${l.effect||""}</div>`).join("") : (t.description||"");
+  const body=lv.length ? lv.map(l=>`<div class="tl"><span class="badge">Lv ${l.level}</span> ${linkifyEffects(l.effect)}</div>`).join("") : linkifyEffects(t.description);
   return csec("Talent"+(t.name?" \u2014 "+t.name:""), body);
 }
 function divinityHTML(c){
   const d=c.divinity; if(!Array.isArray(d)||!d.length) return "";
   return csec("Divinity", d.map(n=>`<div class="dnode"><span class="badge">Lv ${n.level}</span>`+
-    (Array.isArray(n.choices)?n.choices.map(ch=>`<div class="dchoice"><b>${ch.name||""}</b> ${ch.description||""}</div>`).join(""):"")+
+    (Array.isArray(n.choices)?n.choices.map(ch=>`<div class="dchoice"><b>${ch.name||""}</b> ${linkifyEffects(ch.description)}</div>`).join(""):"")+
     `</div>`).join(""));
 }
+function gearName(slug){ const g=GEAR[slug]; return g?g.name:titleCase(String(slug).replace(/_/g," ")); }
 function gearHTML(c){
   const g=c.recommended_gear; if(!Array.isArray(g)||!g.length) return "";
   return csec("Recommended gear", g.map(gr=>{
-    const s=gr.slots||{}; const items=badges(Object.keys(s).map(k=>s[k]).filter(Boolean).map(v=>titleCase(String(v))));
-    return `<div class="gearset"><b>${gr.label||"Set"}</b> ${items}</div>`;
+    const s=gr.slots||{};
+    const items=Object.keys(s).map(k=>s[k]).filter(Boolean)
+      .map(v=>`<span class="gearlink" data-gear="${v}">${gearName(v)}</span>`).join("");
+    return `<div class="gearset"><b>${gr.label||"Set"}</b><div class="gearitems">${items}</div></div>`;
   }).join(""));
 }
 function openCharacter(u){
@@ -573,6 +628,7 @@ function renderChips(boxId, values, set, labelFn, colorMap){
 function afterChange(){
   renderStats();
   if(view==="matrix"){ renderAnalytics(); return; }
+  if(view==="factions"){ renderFactions(); return; }
   if(filters.ownedOnly||filters.investOnly) renderRoster(); else updateRailCounts();
 }
 function updateRailCounts(){
@@ -613,10 +669,142 @@ function unitEl(u){
   return b;
 }
 
-function renderView(){ return view==="matrix" ? renderAnalytics() : view==="teams" ? renderTeams() : renderRoster(); }
+function renderView(){ return view==="matrix"?renderAnalytics():view==="teams"?renderTeams():view==="factions"?renderFactions():renderRoster(); }
 function renderRoster(){ return view==="az" ? renderAZ() : view==="class" ? renderByClass() : renderTierBands(); }
 
-/* ---- team builder ---- */
+/* ---- faction overview + effect providers ---- */
+const PHASE_RANK={"Juvenile Phase":0,"Growth Phase":1,"Final Phase":2};
+let selFx=null;      /* {f, slug} currently expanded provider lookup */
+let fxFilter=null;   /* {count:Set, rel:Set} active filter values */
+function factionSignature(f){
+  const label=titleCase(f); const out=[];
+  Object.values(EFFECTS).forEach(e=>{ if(((e.effect||"")+" "+(e.remark||"")).includes("["+label+"] faction")) out.push(e.slug); });
+  return out.filter(s=>{ const nm=(EFFECTS[s]||{}).name; if(!nm) return true;
+    return !out.some(o=>o!==s && (((EFFECTS[o]||{}).effect||"")+" "+((EFFECTS[o]||{}).remark||"")).includes("["+nm+"]")); });
+}
+function factionEffects(f){
+  const set=new Set(factionSignature(f));
+  [...set].forEach(s=>{ const e=EFFECTS[s]; if(!e) return; const txt=(e.effect||"")+" "+(e.remark||"");
+    (txt.match(/\[([^\]]+)\]/g)||[]).forEach(m=>{ const ee=EFFECTS_BY_NAME[m.slice(1,-1).toLowerCase()]; if(ee) set.add(ee.slug); });
+    (txt.match(/\{([a-z0-9_]+)\}/g)||[]).forEach(m=>{ if(EFFECTS[m.slice(1,-1)]) set.add(m.slice(1,-1)); });
+  });
+  return [...set].filter(s=>EFFECTS[s]);
+}
+/* records for slug within faction f (optionally matching an active filter) */
+function facRecords(f, slug, filt){
+  const P=PROVIDERS[slug]||[];
+  return P.filter(r=>{ const u=MODEL.bySlug[r.u]; if(!u||!u.factions.includes(f)) return false;
+    if(filt){ if(!filt.count.has(r.count)) return false; if(!filt.rel.has(r.rel)) return false; }
+    return true; });
+}
+function facProviderCount(f, slug){ return new Set(facRecords(f,slug).map(r=>r.u)).size; }
+function factionChips(f){
+  const sig=new Set(factionSignature(f));
+  return factionEffects(f).filter(s=> !sig.has(s) && facRecords(f,s).length>0);
+}
+function resetFxFilter(slug){
+  const counts=isDebuffEffect(slug)?COUNTS_ENEMY:COUNTS_ALLY;
+  fxFilter={ count:new Set(counts), rel:new Set(RELS) };
+}
+function buildProviderResult(f){
+  const slug=selFx.slug, debuff=isDebuffEffect(slug), clabel=debuff?CLABEL_E:CLABEL;
+  const res=document.createElement("div"); res.className="provresult";
+  const head=document.createElement("div"); head.className="provhead";
+  head.innerHTML=`Who provides <span class="fx" data-fx="${slug}">${effName(slug)}</span>`;
+  res.appendChild(head);
+  const all=facRecords(f,slug);
+  const present={count:new Set(all.map(r=>r.count)), rel:new Set(all.map(r=>r.rel))};
+  const axis=(key,order,labels,title)=>{
+    const vals=order.filter(v=>present[key].has(v)); if(vals.length<=1) return null;
+    const row=document.createElement("div"); row.className="filtrow";
+    row.innerHTML=`<span class="filtlabel">${title}</span>`;
+    vals.forEach(v=>{ const b=document.createElement("button"); b.className="fchip"+(fxFilter[key].has(v)?" on":"");
+      b.textContent=labels[v]||v;
+      b.onclick=()=>{ if(fxFilter[key].has(v)){ if(fxFilter[key].size>1) fxFilter[key].delete(v); } else fxFilter[key].add(v); renderFactions(); };
+      row.appendChild(b); });
+    return row;
+  };
+  [axis("count",debuff?COUNTS_ENEMY:COUNTS_ALLY,clabel,"Targets"),
+   axis("rel",RELS,RLABEL,"Reliability")].forEach(r=>{ if(r) res.appendChild(r); });
+  const recs=facRecords(f,slug,fxFilter); const byUnit={};
+  recs.forEach(r=>{ (byUnit[r.u]=byUnit[r.u]||[]).push(r); });
+  const units=Object.keys(byUnit).map(s=>MODEL.bySlug[s]).filter(Boolean).sort(byRarityName);
+  const wrap=document.createElement("div"); wrap.className="provunits";
+  if(!units.length){ wrap.innerHTML=`<div class="empty">No units match these filters.</div>`; }
+  else units.forEach(u=>{
+    const cell=document.createElement("div"); cell.className="provunit";
+    cell.appendChild(unitEl(u));
+    const tags=document.createElement("div"); tags.className="provtags";
+    byUnit[u.slug].forEach(r=>{ const t=document.createElement("span"); t.className="ptag";
+      t.textContent=(clabel[r.count]||r.count)+(r.rel!=="guaranteed"?" \u00b7 "+(r.rel==="often"?"\u226550%":"<50%"):"");
+      tags.appendChild(t); });
+    cell.appendChild(tags); wrap.appendChild(cell);
+  });
+  res.appendChild(wrap);
+  return res;
+}
+function renderFactions(){
+  const host=$("bands"); host.innerHTML="";
+  if(!WYRMS.length && !Object.keys(EFFECTS).length){
+    host.innerHTML=`<div class="empty">Faction overview loads from <b>wyrms.json</b> and <b>status-effects.json</b> \u2014 add them to your repo (the update Action pulls them automatically).</div>`;
+    return;
+  }
+  FACTIONS.forEach(f=>{
+    const col=FACTION_COLOR[f];
+    const card=document.createElement("section"); card.className="fcard";
+    const total=MODEL?MODEL.units.filter(u=>u.factions.includes(f)).length:0;
+    const own=MODEL?MODEL.units.filter(u=>u.factions.includes(f)&&owned.has(u.slug)).length:0;
+    card.innerHTML=`<div class="fhead" style="border-color:${col}"><span class="fdot big" style="background:${col}"></span>`+
+      `<div><h2>${titleCase(f)}</h2></div>`+(total?`<div class="fown">${own}/${total} owned</div>`:"")+`</div>`;
+
+    /* signature effect(s) with trigger conditions */
+    const sig=factionSignature(f);
+    if(sig.length){
+      const sg=document.createElement("div"); sg.className="fsigbox";
+      sg.innerHTML=sig.map(s=>{ const e=EFFECTS[s]; if(!e) return "";
+        return `<div class="sigitem"><div class="signame">${e.name}</div>`+
+          `<div class="sigtext">${linkifyEffects(trimEffectText(e.effect))}</div>`+
+          (e.remark?`<div class="sigremark"><span class="sigk">Trigger</span> ${linkifyEffects(trimEffectText(e.remark))}</div>`:"")+`</div>`;
+      }).join("");
+      card.appendChild(sg);
+    }
+
+    /* effect-provider lookup */
+    const effs=MODEL?factionChips(f):[];
+    if(effs.length){
+      const pv=document.createElement("div"); pv.className="provbox";
+      const lbl=document.createElement("div"); lbl.className="provlabel"; lbl.textContent="Who provides these effects?";
+      pv.appendChild(lbl);
+      const chips=document.createElement("div"); chips.className="provchips";
+      effs.forEach(s=>{ const n=facProviderCount(f,s);
+        const b=document.createElement("button"); b.className="provchip"+(selFx&&selFx.f===f&&selFx.slug===s?" on":"");
+        b.innerHTML=`${effName(s)} <span class="pvn">${n}</span>`;
+        b.onclick=()=>{ if(selFx&&selFx.f===f&&selFx.slug===s){ selFx=null; fxFilter=null; } else { selFx={f,slug:s}; resetFxFilter(s); } renderFactions(); };
+        chips.appendChild(b);
+      });
+      pv.appendChild(chips);
+      if(selFx&&selFx.f===f){ pv.appendChild(buildProviderResult(f)); }
+      card.appendChild(pv);
+    }
+
+    /* dragon evolution line */
+    const line=WYRMS.filter(w=>w.faction===f).sort((a,b)=>(PHASE_RANK[a.phase]??9)-(PHASE_RANK[b.phase]??9));
+    if(line.length){
+      const dl=document.createElement("div"); dl.className="dragonline";
+      line.forEach(w=>{
+        const sk=(w.skills&&w.skills[0])||{};
+        const stage=document.createElement("div"); stage.className="dstage";
+        stage.innerHTML=`<img class="dimg" alt="" src="${R2}wyrm/${w.slug}/portrait.png">`+
+          `<div class="dname">${w.name}</div><div class="dphase">${[w.phase,w.quality].filter(Boolean).join(" \u00b7 ")}</div>`+
+          (sk.name?`<div class="dskill"><b>${sk.name}</b><div>${linkifyEffects(sk.description)}</div></div>`:"");
+        const img=stage.querySelector(".dimg"); if(img) img.onerror=()=>img.remove();
+        dl.appendChild(stage);
+      });
+      card.appendChild(dl);
+    }
+    host.appendChild(card);
+  });
+}
 function poolChip(u){
   const b=document.createElement("button");
   b.className="poolchip"+(selectedPoolSlug===u.slug?" sel":"")+(owned.has(u.slug)?" owned":"")+(invest.has(u.slug)?" invest":"");
@@ -946,6 +1134,52 @@ function moveTip(e){
 }
 function hideTip(){ tip.classList.remove("show"); }
 
+/* ---- effect links + secondary popover ---- */
+function effName(slug){ const e=EFFECTS[slug]; return e?e.name:titleCase(slug.replace(/_/g," ")); }
+function linkifyEffects(text){
+  if(!text) return "";
+  let s=String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  s=s.replace(/\{([a-z0-9_]+)\}/g,(m,slug)=> EFFECTS[slug]
+      ? `<span class="fx" data-fx="${slug}">${effName(slug)}</span>` : effName(slug));
+  s=s.replace(/\[([^\]]+)\]/g,(m,name)=>{ const e=EFFECTS_BY_NAME[name.toLowerCase()];
+      return e?`<span class="fx" data-fx="${e.slug}">${name}</span>`:name; });
+  return s.replace(/\n/g,"<br>");
+}
+function plainEffects(text){
+  return String(text||"").replace(/\{([a-z0-9_]+)\}/g,(m,s)=>effName(s)).replace(/\[([^\]]+)\]/g,"$1");
+}
+/* drops paragraphs that just restate a referenced effect's own detail (available on hover) */
+function trimEffectText(text){
+  if(!text) return text;
+  return String(text).split(/\n\s*\n/).filter(p=>{
+    const m=p.match(/^\s*\[([^\]]+)\]/);
+    return !(m && EFFECTS_BY_NAME[m[1].toLowerCase()]);
+  }).join("\n");
+}
+const fxpop=$("fxpop");
+function showFx(term){
+  let html="";
+  if(term.dataset.fx){ const e=EFFECTS[term.dataset.fx]; if(!e) return;
+    html=`<div class="fxname">${e.name}</div>`+(e.type?`<div class="fxtype">${e.type}</div>`:"")+
+      `<div class="fxeffect">${plainEffects(e.effect).replace(/\n/g,"<br>")}</div>`+
+      (e.remark?`<div class="fxremark">${plainEffects(e.remark).replace(/\n/g,"<br>")}</div>`:"");
+  } else if(term.dataset.gear){ const g=GEAR[term.dataset.gear]; if(!g) return;
+    const st=g.stats?Object.entries(g.stats).map(([k,v])=>k+" "+v).join(" \u00b7 "):"";
+    html=`<div class="fxname">${g.name}</div><div class="fxtype">${[g.type,g.quality].filter(Boolean).join(" \u00b7 ")}${g.set?" \u00b7 "+titleCase(g.set)+" set":""}</div>`+
+      (st?`<div class="fxeffect">${st}</div>`:"")+(g.lore?`<div class="fxremark">${g.lore}</div>`:"");
+  } else return;
+  fxpop.innerHTML=html; fxpop.classList.add("show");
+  const r=term.getBoundingClientRect(); const pw=Math.min(300, innerWidth-20);
+  fxpop.style.width=pw+"px";
+  let left=Math.min(r.left, innerWidth-10-pw); fxpop.style.left=Math.max(10,left)+"px";
+  fxpop.style.top=(r.bottom+6)+"px";
+  const ph=fxpop.offsetHeight;
+  if(r.bottom+6+ph>innerHeight-8) fxpop.style.top=Math.max(8,r.top-ph-6)+"px";
+}
+function hideFx(){ fxpop.classList.remove("show"); }
+document.addEventListener("mouseover",e=>{ const t=e.target.closest&&e.target.closest(".fx,.gearlink"); if(t) showFx(t); });
+document.addEventListener("mouseout",e=>{ const t=e.target.closest&&e.target.closest(".fx,.gearlink"); if(t) hideFx(); });
+
 /* ---- toast ---- */
 let toastT;
 function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show");
@@ -955,12 +1189,76 @@ function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("sho
 async function loadData(){
   const tl = await fetch(DATA.tiers,{cache:"no-store"})
     .then(r=>{ if(!r.ok) throw new Error("tier-lists.json ("+r.status+")"); return r.json(); });
-  let ch=[];
-  try{ ch = await fetch(DATA.chars,{cache:"no-store"}).then(r=>{ if(!r.ok) throw 0; return r.json(); }); }
-  catch(e){ /* characters.json is optional enrichment (factions, classes); tiers still work without it */ }
-  MODEL=buildModel(tl,ch);
+  const opt=async u=>{ try{ return await fetch(u,{cache:"no-store"}).then(r=>{ if(!r.ok) throw 0; return r.json(); }); }catch(e){ return null; } };
+  const [ch,wy,fx,gr]=await Promise.all([opt(DATA.chars), opt(DATA.wyrms), opt(DATA.effects), opt(DATA.gear)]);
+  MODEL=buildModel(tl, ch||[]);
+  WYRMS = Array.isArray(wy)?wy:[];
+  EFFECTS={}; EFFECTS_BY_NAME={};
+  (Array.isArray(fx)?fx:[]).forEach(e=>{ EFFECTS[e.slug]=e; EFFECTS_BY_NAME[(e.name||"").toLowerCase()]=e; });
+  GEAR={}; (Array.isArray(gr)?gr:[]).forEach(g=>{ GEAR[g.slug]=g; });
+  PROVIDERS=buildProviders();
   if(!MODEL.lists.find(l=>l.name===selectedList)) selectedList=(MODEL.lists[0]||{}).name;
 }
+function esc(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
+function isDebuffEffect(slug){ const e=EFFECTS[slug]; return !!(e && ["Control","Stat Debuff","Damage","Elemental"].includes(e.type)); }
+/* per-unit overrides take precedence over the heuristic: SCOPE_OVERRIDES[unitSlug][effectSlug] = [{count,rel}] */
+const SCOPE_OVERRIDES={};
+function countAlly(s){ if(/all allies|all [a-z' ]*allies|all allied|allies gain|entire team|whole team|all party|all units|all [a-z' ]*luminaries|to the team/.test(s))return"all"; if(/an ally|one ally|another ally|two allies|allies (within|in|behind|of|in front)|allied (unit|luminary|wyrm)|\brandom (ally|allies|allied|luminar)|\btarget\b|chosen|lowest hp|highest attack|nearest all|\d+ (nearest|random) all/.test(s))return"few"; return null; }
+function countEnemy(s){ if(/all enemies|every enemy|all enemy luminaries/.test(s))return"all"; if(/circular area|cone[- ]?shaped|straight line|\d+ ?paths?|\bpaths?\b|random enem|enemies (it|they|within|in|along|around)|surrounding enemies|nearby enemies|area around|multiple enem/.test(s))return"few"; if(/single (target|enemy)|a single|one enemy|target enemy|highest[a-z ]*enemy|(nearest|farthest|lowest|highest) enemy|an enemy luminary\b|the enemy\b|the target\b/.test(s))return"single"; return null; }
+function classifyEffect(text, ctx, slug){
+  const debuff=isDebuffEffect(slug); const out=[]; const t=String(text),low=t.toLowerCase(),lctx=String(ctx).toLowerCase();
+  const re=new RegExp("\\{"+esc(slug)+"\\}","g"); let m;
+  while((m=re.exec(t))){
+    const ss=Math.max(low.lastIndexOf(".",m.index-1)+1, low.lastIndexOf("\n",m.index-1)+1);
+    let se=low.indexOf(".",m.index); const nl=low.indexOf("\n",m.index); if(se<0)se=low.length; if(nl>=0&&nl<se)se=nl;
+    const sentence=low.slice(ss,se); const tp=m.index-ss;
+    const preSent=sentence.slice(0,tp), pre=sentence.slice(Math.max(0,tp-28),tp), postAfter=sentence.slice(tp+m[0].length,Math.min(sentence.length,tp+m[0].length+60)), region=pre+" "+postAfter;
+    if(/\b(whenever|when|each time|upon|every time|while|after|if)\b[^,]*$/.test(preSent)) continue;   // leading trigger clause -> not a grant
+    if(/^\s*(is (gained|consumed|removed|active|applied|triggered)|stacks?\b|is at|are (active|present))/.test(postAfter)) continue;
+    const granted=/\b(grant|grants|granting|appl\w+|inflicts?|bestows?|gives?|restores?|summons?)\b/.test(pre)||/\bgains?\b|\bgaining\b/.test(pre);
+    if(/possess|multiplied by|number of|per stack|consume[sd]?|expend/.test(sentence)&&!granted) continue;
+    if(!/\b(grant|appl|inflict|bestow|gain|give|restore|summon)/.test(sentence)) continue;
+    const cm=sentence.match(/(\d+)(?:\s*-\s*(\d+))?%\s*chance/);
+    let rel="guaranteed"; if(cm){ const mx=Math.max(+cm[1],cm[2]?+cm[2]:+cm[1]); rel=mx>=50?"often":"sometimes"; }
+    let count;
+    const selfHit=/\bto self\b|\bitself\b|\bto itself\b|grants? self|gives? self|for self\b/.test(region)||(/\bgains?\b|\bgaining\b/.test(pre)&&!/all|allies|luminaries|team|\bally\b/.test(pre));
+    const selfAndAlly=/self and (the |a |an |one |\d|nearest)/.test(region);
+    if(debuff){ count=countEnemy(sentence)||countEnemy(lctx)||"few"; }
+    else if(selfHit&&!selfAndAlly){ count="self"; }
+    else { count=countAlly(sentence)||countAlly(lctx)||"few"; }
+    out.push({count,rel});
+  }
+  return out;
+}
+function buildProviders(){
+  const P={};
+  const add=(slug,rec,unit)=>{ P[slug]=P[slug]||[]; if(!P[slug].some(x=>x.u===unit&&x.count===rec.count&&x.rel===rec.rel)) P[slug].push({u:unit,count:rec.count,rel:rec.rel}); };
+  MODEL.units.forEach(u=>{ const c=u.raw; if(!c) return;
+    const ov=SCOPE_OVERRIDES[u.slug];
+    const skillMap={}; (c.skills||[]).forEach(s=>{ if(s.name) skillMap[s.name.toLowerCase()]=s.description||""; });
+    const abilities=[];
+    (c.skills||[]).forEach(s=>abilities.push(s.description));
+    if(c.talent){ (c.talent.talent_levels||[]).forEach(l=>abilities.push(l.effect)); abilities.push(c.talent.description); }
+    (c.divinity||[]).forEach(n=>(n.choices||[]).forEach(ch=>abilities.push(ch.description)));
+    const bySlug={};
+    abilities.forEach(txt=>{ if(!txt) return;
+      let ctx=txt;
+      (txt.match(/\[([^\]]+)\]/g)||[]).forEach(r=>{ const nm=r.slice(1,-1).toLowerCase(); if(skillMap[nm]) ctx+=" "+skillMap[nm]; });
+      const seen=new Set(); let m; const tok=/\{([a-z0-9_]+)\}/g; while((m=tok.exec(txt))) seen.add(m[1]);
+      seen.forEach(slug=>{ (bySlug[slug]=bySlug[slug]||[]).push(...classifyEffect(txt, ctx, slug)); });
+    });
+    Object.keys(bySlug).forEach(slug=>{
+      const recs=(ov&&ov[slug]) ? ov[slug] : bySlug[slug];   // override wins
+      recs.forEach(r=>add(slug,r,u.slug));
+    });
+  });
+  return P;
+}
+const COUNTS_ALLY=["all","few","self"], COUNTS_ENEMY=["all","few","single"];
+const RELS=["guaranteed","often","sometimes"];
+const CLABEL={all:"Whole team",few:"A few",self:"Self",single:"Single"};        // ally counts
+const CLABEL_E={all:"All enemies",few:"A few",single:"Single"};                  // enemy counts
+const RLABEL={guaranteed:"Guaranteed",often:"Often \u226550%",sometimes:"Sometimes <50%"};
 async function refresh(){
   const btn=$("refresh"); btn.disabled=true; btn.textContent="Checking\u2026";
   const hadModel=!!MODEL;
@@ -1000,10 +1298,11 @@ function applyViewVisibility(){
   $("bands").style.display = view==="matrix"?"none":"";
   $("analytics").classList.toggle("show", view==="matrix");
   $("listnote").style.display = view==="tiers"?"":"none";
-  $("searchbox").style.display = "";
-  $("ownedOnly").style.display = "";
-  $("investOnly").style.display = "";
-  $("filtergroups").style.display = "";
+  const hideFilters = view==="factions";
+  $("searchbox").style.display = hideFilters?"none":"";
+  $("ownedOnly").style.display = hideFilters?"none":"";
+  $("investOnly").style.display = hideFilters?"none":"";
+  $("filtergroups").style.display = hideFilters?"none":"";
   $("listseg").style.display = view==="tiers"?"":"none";
   document.querySelectorAll(".vtab").forEach(t=>t.setAttribute("aria-pressed", t.dataset.view===view));
 }

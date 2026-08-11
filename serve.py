@@ -20,6 +20,9 @@ os.chdir(HERE)
 SOURCES = {
     "tier-lists.json": "https://dtwiki.org/data/global/tier-lists.json",
     "characters.json": "https://dtwiki.org/data/enUS/characters.json",
+    "wyrms.json": "https://dtwiki.org/data/enUS/wyrms.json",
+    "status-effects.json": "https://dtwiki.org/data/enUS/status-effects.json",
+    "gear.json": "https://dtwiki.org/data/enUS/gear.json",
 }
 
 
