@@ -1,0 +1,1432 @@
+[
+  {
+    "name": "Arcane Hood",
+    "slug": "arcane_hood",
+    "set": "haste",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "A pointed hat worn daily by Mages, wide and comfortable but sometimes obstructs vision.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Cursed Helmet",
+    "slug": "cursed_helmet",
+    "set": "crit_resist",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "A helmet worn by evil Warlocks, their faces obscured in shadow and darkness.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Dragon Hunter Helmet",
+    "slug": "dragon_hunter_helmet",
+    "set": "attack",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "Forged from the remains of a fallen Wyrm, an eternal shame to dragons, but a badge of honor to dragonslayers.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Flamelord's Helmet",
+    "slug": "flamelords_helmet",
+    "set": "hp",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "The king's gaze from the helmet sends shivers down the enemy's spine.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Night Owl Mask",
+    "slug": "night_owl_mask",
+    "set": "attack_speed",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "The thief who dwells in the shadows abandons their true self and chooses to wear this mask.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Paladin's Helmet",
+    "slug": "paladins_helmet",
+    "set": "crit_damage",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "A helmet worn by noble White Knights, its exquisite design is like a work of art.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Pious Crown",
+    "slug": "pious_crown",
+    "set": "healing",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "A crown worn by the devoted Priests, who dedicate their lives to others.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Quenched Helmet",
+    "slug": "quenched_helmet",
+    "set": "physical_defense",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "Gold of light and blue of courage intertwine, and the Paladins see this as a symbol of honor.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Ranger's Feathered Hat",
+    "slug": "rangers_feathered_hat",
+    "set": "crit",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "It is both a tool to block the wind and his secret weapon to maintain his elegance!",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Sage's Crown",
+    "slug": "sages_crown",
+    "set": "magic_defense",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "A crown made of branches, worn by the sages of the forest to signify their friendship with the woods.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Valiant Helmet",
+    "slug": "valiant_helmet",
+    "set": "block",
+    "type": "Headgear",
+    "quality": "UR",
+    "lore": "A helmet worn by the brave Gladiator, covering the entire face.",
+    "stats": {
+      "HP": 13000,
+      "MDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Hero's Helmet",
+    "slug": "heros_helmet",
+    "set": "gear",
+    "type": "Headgear",
+    "quality": "SR",
+    "lore": "A helmet of elegant craftsmanship. It is meticulously cleaned by heroes after each and every fight.",
+    "stats": {
+      "HP": 5710,
+      "MDEF": 175
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Knight's Helmet",
+    "slug": "knights_helmet",
+    "set": "gear",
+    "type": "Headgear",
+    "quality": "R",
+    "lore": "Well-crafted helmet, protects the head without obstructing vision.",
+    "stats": {
+      "HP": 2203,
+      "MDEF": 67
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Mercenary's Hood",
+    "slug": "mercenarys_hood",
+    "set": "gear",
+    "type": "Headgear",
+    "quality": "N",
+    "lore": "Unremarkable Hat, muffles noise but offers no protection from damage.",
+    "stats": {
+      "HP": 887,
+      "MDEF": 27
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Traveler's Hat",
+    "slug": "travelers_hat",
+    "set": "gear",
+    "type": "Headgear",
+    "quality": "C",
+    "lore": "Traveler's Hat, shields from sunlight and blocks sandstorms.",
+    "stats": {
+      "HP": 325,
+      "MDEF": 10
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Arcane Robe",
+    "slug": "arcane_robe",
+    "set": "haste",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "A robe often worn by Mages, said to be imbued with many spells.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Cursed Robe",
+    "slug": "cursed_robe",
+    "set": "crit_resist",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "A robe worn by evil Warlocks are shrouded in ominous shadows.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Dragon Hunter Armor",
+    "slug": "dragon_hunter_armor",
+    "set": "attack",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "Crafted from the remains of a dead Wyrm, worn by dragonslayers who traverse the Phantasia Mountain to hunt mighty beasts.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Flamelord's Armor",
+    "slug": "flamelords_armor",
+    "set": "hp",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "The wrath of a king burns like fire, destined to consume all.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Night Owl Armor",
+    "slug": "night_owl_armor",
+    "set": "attack_speed",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "Armor worn by thieves who dwell in darkness, blending perfectly into the night.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Paladin's Armor",
+    "slug": "paladins_armor",
+    "set": "crit_damage",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "Armor worn by noble White Knights, its pure color signifies a pure soul.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Pious Robe",
+    "slug": "pious_robe",
+    "set": "healing",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "A robe worn by devoted Priests, wounded patients see it as a beacon of hope.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Quenched Armor",
+    "slug": "quenched_armor",
+    "set": "physical_defense",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "Armor crafted by dwarfs under angelic commission, tailored for holy knights.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Ranger's Leather Armor",
+    "slug": "rangers_leather_armor",
+    "set": "crit",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "A leather coat once worn by a forest ranger, believed to be hand-stitched by the wearer himself.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Sage's Robe",
+    "slug": "sages_robe",
+    "set": "magic_defense",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "Unlike other Mages, forest Sages like to decorate their robes with natural elements.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Valiant Armor",
+    "slug": "valiant_armor",
+    "set": "block",
+    "type": "Chestplate",
+    "quality": "UR",
+    "lore": "Armor worn by valiant Gladiators, overprotective designs may sacrifice visual appeal.",
+    "stats": {
+      "HP": 11000,
+      "PDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Hero's Armor",
+    "slug": "heros_armor",
+    "set": "gear",
+    "type": "Chestplate",
+    "quality": "SR",
+    "lore": "A beautifully decorated armor that balances function and aesthetics.",
+    "stats": {
+      "HP": 4831,
+      "PDEF": 351
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Knight's Armor",
+    "slug": "knights_armor",
+    "set": "gear",
+    "type": "Chestplate",
+    "quality": "R",
+    "lore": "A cherished suit of armor, often worn by knights throughout their lives.",
+    "stats": {
+      "HP": 1864,
+      "PDEF": 135
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Mercenary's Leather Armor",
+    "slug": "mercenarys_leather_armor",
+    "set": "gear",
+    "type": "Chestplate",
+    "quality": "N",
+    "lore": "A plain leather coat that keeps you unnoticed, even by thieves and bandits.",
+    "stats": {
+      "HP": 750,
+      "PDEF": 54
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Traveler's Leather Armor",
+    "slug": "travelers_leather_armor",
+    "set": "gear",
+    "type": "Chestplate",
+    "quality": "C",
+    "lore": "A soft leather coat, travelers value lightness over protection.",
+    "stats": {
+      "HP": 275,
+      "PDEF": 20
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Arcane Gauntlets",
+    "slug": "arcane_gauntlets",
+    "set": "haste",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "Mages sometimes wield their staffs in close combat, and thus wear gauntlets for protection.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Cursed Gauntlets",
+    "slug": "cursed_gauntlets",
+    "set": "crit_resist",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "Gauntlets worn by evil Warlocks, used to cast many vicious dark spells.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Dragon Hunter Gauntlets",
+    "slug": "dragon_hunter_gauntlets",
+    "set": "attack",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "Gauntlets forged in the likeness of dragon claws, the claws of Wyrms outmatch all divine weapons",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Flamelord's Gauntlets",
+    "slug": "flamelords_gauntlets",
+    "set": "hp",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "For a king, gauntlets are not for protection, but for drawing the sword.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Night Owl Gauntlets",
+    "slug": "night_owl_gauntlets",
+    "set": "attack_speed",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "A blackened gauntlet emerging from the shadows—a nightmare for many.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Paladin's Gauntlets",
+    "slug": "paladins_gauntlets",
+    "set": "crit_damage",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "White Knights once swore an oath: the sword gripped by these gauntlets shall never strike the weak.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Pious Gauntlets",
+    "slug": "pious_gauntlets",
+    "set": "healing",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "Priests wear them to touch the sick, preventing the spread of disease.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Quenched Gauntlets",
+    "slug": "quenched_gauntlets",
+    "set": "physical_defense",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "It's said that if stained with the blood of the innocent, their shine will fade.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Ranger's Gloves",
+    "slug": "rangers_gloves",
+    "set": "crit",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "Worn by forest rangers, these gloves protect the hands that draw the bowstring.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Sage's Gloves",
+    "slug": "sages_gloves",
+    "set": "magic_defense",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "Even with gloves on, forest sages still gently caress the flowers.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Valiant Vambraces",
+    "slug": "valiant_vambraces",
+    "set": "block",
+    "type": "Bracers",
+    "quality": "UR",
+    "lore": "Gauntlets worn by brave Gladiators, only removed upon victory.",
+    "stats": {
+      "ATK": 1280,
+      "PDEF": 400
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Hero's Gauntlets",
+    "slug": "heros_gauntlets",
+    "set": "gear",
+    "type": "Bracers",
+    "quality": "SR",
+    "lore": "Exquisitely crafted gauntlets that need to be handled with care, repairs don’t come cheap.",
+    "stats": {
+      "ATK": 562,
+      "PDEF": 175
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Knight's Gauntlets",
+    "slug": "knights_gauntlets",
+    "set": "gear",
+    "type": "Bracers",
+    "quality": "R",
+    "lore": "Tightly fitted gauntlets that offer solid protection for the hands.",
+    "stats": {
+      "ATK": 216,
+      "PDEF": 67
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Mercenary's Gauntlets",
+    "slug": "mercenarys_gauntlets",
+    "set": "gear",
+    "type": "Bracers",
+    "quality": "N",
+    "lore": "Non-slip gauntlets that provide a better grip on sword hilts.",
+    "stats": {
+      "ATK": 87,
+      "PDEF": 27
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Traveler's Bracers",
+    "slug": "travelers_bracers",
+    "set": "gear",
+    "type": "Bracers",
+    "quality": "C",
+    "lore": "Simply decorated bracers. Try blocking a blade with them, though they won't be much use.",
+    "stats": {
+      "ATK": 32,
+      "PDEF": 10
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Arcane Boots",
+    "slug": "arcane_boots",
+    "set": "haste",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "Mages often enchant their boots with acceleration spells, enjoying wind-like speed.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Cursed Boots",
+    "slug": "cursed_boots",
+    "set": "crit_resist",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "Boots worn by evil Warlocks, which have trampled many innocent souls.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Dragon Hunter Boots",
+    "slug": "dragon_hunter_boots",
+    "set": "attack",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "Before the Wyrm falls, a dragonslayer’s footsteps never cease.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Flamelord's Boots",
+    "slug": "flamelords_boots",
+    "set": "hp",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "Only by trampling countless enemies can one rise to the throne.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Night Owl Boots",
+    "slug": "night_owl_boots",
+    "set": "attack_speed",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "These boots move through the darkness without a sound.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Paladin's Boots",
+    "slug": "paladins_boots",
+    "set": "crit_damage",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "May you ride the wind through lands ravaged by calamity.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Pious Boots",
+    "slug": "pious_boots",
+    "set": "healing",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "Priests wear boots to tread through thorns and swamps to reach the sick.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Quenched Boots",
+    "slug": "quenched_boots",
+    "set": "physical_defense",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "Angels soar through the skies, while Paladins stand proudly upon the earth.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Ranger's Boots",
+    "slug": "rangers_boots",
+    "set": "crit",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "Boots worn by forest rangers, ornate in appearance but remarkably light.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Sage's Boots",
+    "slug": "sages_boots",
+    "set": "magic_defense",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "When the Forest Sages walk through the woods, birds follow them in song.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Valiant Boots",
+    "slug": "valiant_boots",
+    "set": "block",
+    "type": "Boots",
+    "quality": "UR",
+    "lore": "Boots worn by valiant Gladiators, gilded as a symbol of their victories.",
+    "stats": {
+      "ATK": 1080,
+      "MDEF": 800
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Hero's Boots",
+    "slug": "heros_boots",
+    "set": "gear",
+    "type": "Boots",
+    "quality": "SR",
+    "lore": "Heavy-soled boots, each step of the heroes echoes like thunder to their enemies.",
+    "stats": {
+      "ATK": 474,
+      "MDEF": 351
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Knight's Boots",
+    "slug": "knights_boots",
+    "set": "gear",
+    "type": "Boots",
+    "quality": "R",
+    "lore": "Boots crafted for knights, greatly reducing the chance of falling from horseback.",
+    "stats": {
+      "ATK": 183,
+      "MDEF": 135
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Mercenary's Boots",
+    "slug": "mercenarys_boots",
+    "set": "gear",
+    "type": "Boots",
+    "quality": "N",
+    "lore": "Lightweight boots, making long-distance running no longer a dream.",
+    "stats": {
+      "ATK": 73,
+      "MDEF": 54
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Traveler's Boots",
+    "slug": "travelers_boots",
+    "set": "gear",
+    "type": "Boots",
+    "quality": "C",
+    "lore": "Simple cloth boots that won't let you walk on water, but will get you through the desert.",
+    "stats": {
+      "ATK": 27,
+      "MDEF": 20
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Bloodseeker Sword",
+    "slug": "bloodseeker_sword",
+    "set": "bloodthirst",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "This sharp blade, thirsting for blood, will steal the enemy's HP, and its past owners often fell into bloodthirsty madness because of it.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Curseblade",
+    "slug": "curseblade",
+    "set": "demon_slayer",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "An enchanted blade inscribed with protective spells, effectively deflecting the impact of magic directed at it.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Dragon Hunter's Greatbow",
+    "slug": "dragon_hunters_greatbow",
+    "set": "attack",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "Before the first Twilight, a greatbow used by dragon hunters. It is said that its previous owner was an elderly giant who, despite losing his sight, shot down the disaster-bringing Mystic Dragon with this greatbow.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Dragonslayer Greatsword",
+    "slug": "dragonslayer_greatsword",
+    "set": "rage",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "This colossal object is less of a sword and more like a weapon carved from a massive chunk of iron, resembling a sword in shape!",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Flamelord's Sword",
+    "slug": "flamelords_sword",
+    "set": "hp",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "Strength is the mark of a king.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Gate of Truth",
+    "slug": "gate_of_truth",
+    "set": "order",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "Only those who touch the forbidden in search of truth can step through this door. The answers of the world lie within: to give despair to all beings in the right way, that is the truth.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Infinite Holy Sword",
+    "slug": "infinite_holy_sword",
+    "set": "endless",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "This holy sword grants its wielder endless courage and loyally serves its one and only master!",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Invincible Meow-Meow Fist",
+    "slug": "invincible_meow_meow_fist",
+    "set": "swift_strike",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "\"...The speed of a cat, the power of cuteness!\"",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Last Whisper",
+    "slug": "last_whisper",
+    "set": "penetration",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "A greatsword cannot pierce heart armor, but whispers in the ear strike the heart.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Mana's Tide",
+    "slug": "manas_tide",
+    "set": "energy",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "Sometimes as calm as a deep spring, other times raging like a flood. Whoever can master the tides can wield magic power deeper than the ocean.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Phantom Blade",
+    "slug": "phantom_blade",
+    "set": "frenzy",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "These deadly blades allow the wielder to launch attacks at extraordinary speed and always accurately find the enemy's weak points.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Quenched Warblade",
+    "slug": "quenched_warblade",
+    "set": "physical_defense",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "Once raised, it cannot be put down, except in death.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Requiem",
+    "slug": "requiem",
+    "set": "grievous_wound",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "An otherworldly arrowhead engraved with a scarab relief. Those chosen by it will either undergo a transformation with an undying spirit or face death, leaving the defeated to eat dust.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Sage's Staff",
+    "slug": "sages_staff",
+    "set": "magic_defense",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "A staff made from the oldest branches in the forest, cherished by forest sages.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Ship Slayer",
+    "slug": "ship_slayer",
+    "set": "impact",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "\"My great axe cuts through all!\"",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Silver Sword of Demon Hunting",
+    "slug": "silver_sword_of_demon_hunting",
+    "set": "focus",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "Some Howlkin fear steel, but there are others that can only be slain by silver blades.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Song of Plenty",
+    "slug": "song_of_plenty",
+    "set": "wild",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "No one has ever seen the strings of that harp, yet the artist claims he plays the melody of the four seasons. Before his death, he was taken to the radiant Valhalla to compose for the gods.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Sword of the Overlord",
+    "slug": "sword_of_the_overlord",
+    "set": "chaos",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "A blade used by those who defy fate to sever the entanglement of causality. This sword is the very reason to become a king.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Tome of Stars",
+    "slug": "tome_of_stars",
+    "set": "arcane",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "The moment the page turns, an unrecognizable flood of color surges toward the sky, leaving only unreadable blankness behind.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Touch of the Undying Flame",
+    "slug": "touch_of_the_undying_flame",
+    "set": "magic_power",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "This withered hand, stripped of flesh, is one of the remnants of the Lich God. The nether fire that rose when it was transformed into a lich still burns eternally within the palm.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Typhon's Wrath",
+    "slug": "typhons_wrath",
+    "set": "cleave",
+    "type": "Weapon",
+    "quality": "UR",
+    "lore": "In the Battle of Typhon, the Father of Monsters was struck down by Zeus's thunder and defeated. Holding this powerful weapon, one can personally feel Typhon's rage.",
+    "stats": {
+      "ATK": 1200,
+      "PDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Hero's Blade",
+    "slug": "heros_blade",
+    "set": "gear",
+    "type": "Weapon",
+    "quality": "SR",
+    "lore": "Taste the wrath of my Holy Slash!",
+    "stats": {
+      "ATK": 527,
+      "PDEF": 263
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Knight's Greatsword",
+    "slug": "knights_greatsword",
+    "set": "gear",
+    "type": "Weapon",
+    "quality": "R",
+    "lore": "A huge, clumsy iron sword. Wielding one in each hand looks cool, but know your limits.",
+    "stats": {
+      "ATK": 203,
+      "PDEF": 101
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Mercenary's Shortsword",
+    "slug": "mercenarys_shortsword",
+    "set": "gear",
+    "type": "Weapon",
+    "quality": "N",
+    "lore": "A small-sized sword, not suitable for large prey.",
+    "stats": {
+      "ATK": 81,
+      "PDEF": 40
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Traveler's Longsword",
+    "slug": "travelers_longsword",
+    "set": "gear",
+    "type": "Weapon",
+    "quality": "C",
+    "lore": "A plain wooden sword, useful against Slimes, but difficult against Goblins.",
+    "stats": {
+      "ATK": 30,
+      "PDEF": 15
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Ancient Dragon Scale",
+    "slug": "ancient_dragon_scale",
+    "set": "resilience",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "The secret of immortality lies hidden within these dragon scales.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Blessing of the Sacred Tree",
+    "slug": "blessing_of_the_sacred_tree",
+    "set": "evade",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "Connecting past, present, and future—the root of Yggdrasil binds the Nine Realms. Even a single strand, given freely, is enough to uphold a new world.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Bountiful Bouquet",
+    "slug": "bountiful_bouquet",
+    "set": "wild",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "With the rhythm of the wind, blossoms atop the sacred tree release their fragrance, carrying harvest blessings across the Nine Realms.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Box of Pain",
+    "slug": "box_of_pain",
+    "set": "pain",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "You can hear the box whispering softly... Even knowing that hell is hidden inside, no one can resist its allure.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Brave's Medal",
+    "slug": "braves_medal",
+    "set": "redemption",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "This medal bears the undying will of generations of heroes—like the outspread wings of the Light Eagle, like embers passing hope from flame to flame.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Dragonblood Seal",
+    "slug": "dragonblood_seal",
+    "set": "attack",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "A leaf that fell on the back of the dragon-slaying hero while bathing in dragon's blood. The leaf, stained with dragon's blood, still retains the wild power of the ancient dragon race.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Dragonslayer's Guide",
+    "slug": "dragonslayers_guide",
+    "set": "rage",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "In the ink-stained Dragonslayer's journal, a bold line stands out: \"To save the world, first slay your inner dragon.\"",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Eagle Warrior Portrait",
+    "slug": "eagle_warrior_portrait",
+    "set": "judgment",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "Through the weathered statue of the Eagle Warrior Portrait, the soaring eagle of light and the warrior battling an evil dragon slowly align. Gaze upon it to gain boundless courage.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Flamelord's Proof",
+    "slug": "flamelords_proof",
+    "set": "hp",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "A symbol of royal status, none may wear it but the king.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Magic Mirror of the Soul",
+    "slug": "magic_mirror_of_the_soul",
+    "set": "corruption",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "Legend says this magic mirror reveals the true form of all evil. A Dragonslayer once looked into it, only to see his own reflection.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Mana's Tear",
+    "slug": "manas_tear",
+    "set": "energy",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "Tears engraved the ocean’s memory. This long-lost treasure, sunken deep beneath the waves, will one day shine with undying brilliance.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Moonlight Flask",
+    "slug": "moonlight_flask",
+    "set": "purge",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "When the sun sets, the moonlight will guide your way forward.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Overlord's Proof",
+    "slug": "overlords_proof",
+    "set": "chaos",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "A wish, a bargain. The desperate mistakenly believe they have found the path to becoming an overlord, unaware that the price has long been marked by fate.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Quenched Medal",
+    "slug": "quenched_medal",
+    "set": "physical_defense",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "A Paladin once sacrificed his life to protect this medal.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Sage's Bracelet",
+    "slug": "sages_bracelet",
+    "set": "magic_defense",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "It is rumored that this bracelet can command Ancient Tree Guardians, though its truth remains unknown.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Spirit Turtle Talisman",
+    "slug": "spirit_turtle_talisman",
+    "set": "longevity",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "The impenetrable shell of the Dragon Turtle. No one has ever seen the creature itself. They say it’s...extremely shy.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Starlight Magisterium",
+    "slug": "starlight_magisterium",
+    "set": "arcane",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "An indescribable color that transcends all, twisting, flickering, shifting. Its endless magic has dyed the stardust iridescent.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Thorns of Rejection",
+    "slug": "thorns_of_rejection",
+    "set": "thorns",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "The thorn stands guard over the World Tree. None may approach, none may enter. It grows with the roots, rejecting all—yet even it cannot reject corruption.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Truth Seeker's Emblem",
+    "slug": "truth_seekers_emblem",
+    "set": "order",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "This is not only proof of qualification but also a shackle of responsibility. From the moment one decides to seek the truth, it should be understood that to gain something, one must pay an equivalent price.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Watcher's Magic Eye",
+    "slug": "watchers_magic_eye",
+    "set": "break",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "Don't move. It's watching you.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Wolf's Will",
+    "slug": "wolfs_will",
+    "set": "focus",
+    "type": "Accessory",
+    "quality": "UR",
+    "lore": "No matter how cunning, no creature escapes the gaze of the wolf. Note that the badge's detection is not always reliable.",
+    "stats": {
+      "HP": 12000,
+      "MDEF": 600
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Hero's Medal",
+    "slug": "heros_medal",
+    "set": "gear",
+    "type": "Accessory",
+    "quality": "SR",
+    "lore": "This is the glory of immortality!",
+    "stats": {
+      "HP": 5271,
+      "MDEF": 263
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Knight's Bracelet",
+    "slug": "knights_bracelet",
+    "set": "gear",
+    "type": "Accessory",
+    "quality": "R",
+    "lore": "When you need to prove your identity, present this bracelet.",
+    "stats": {
+      "HP": 2034,
+      "MDEF": 101
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Mercenary's Pocket Watch",
+    "slug": "mercenarys_pocket_watch",
+    "set": "gear",
+    "type": "Accessory",
+    "quality": "N",
+    "lore": "If you’re running late, just check this to see the time.",
+    "stats": {
+      "HP": 819,
+      "MDEF": 40
+    },
+    "last_updated": 1782026102
+  },
+  {
+    "name": "Traveler's Canteen",
+    "slug": "travelers_canteen",
+    "set": "gear",
+    "type": "Accessory",
+    "quality": "C",
+    "lore": "When you’re lost in the desert, you’ll be grateful you had this.",
+    "stats": {
+      "HP": 300,
+      "MDEF": 15
+    },
+    "last_updated": 1782026102
+  }
+]
