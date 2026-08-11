@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dragon Traveler — Roster Helper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101019; --ink-2:#15151f; --panel:#1b1c28; --panel-2:#20222f;
+    --line:#2c2e3d; --line-soft:#24262f;
+    --text:#ece7db; --muted:#8b8fa3; --muted-2:#6a6e80;
+    --ember:#e0a33e; --ember-hot:#f2b64a; --ember-glow:rgba(224,163,62,.35);
+    --tier-SS:#c0392b; --tier-Splus:#e05a3e; --tier-S:#e0803e;
+    --tier-Aplus:#d9a441; --tier-A:#c9b458; --tier-Bplus:#5cb37a;
+    --tier-B:#3fa564; --tier-C:#4f97c2; --tier-D:#7f8598; --tier-F:#7f8598;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #1a1b2a 0%, transparent 60%),
+      radial-gradient(900px 500px at -5% 0%, #1c1526 0%, transparent 55%),
+      var(--ink);
+    color:var(--text); font-family:Inter,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.45;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px}
+
+  /* header */
+  header.top{position:sticky; top:0; z-index:20;
+    background:linear-gradient(180deg, rgba(16,16,25,.96), rgba(16,16,25,.82));
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--line-soft)}
+  .top-inner{display:flex; align-items:center; gap:18px; padding:16px 20px; max-width:1180px; margin:0 auto; flex-wrap:wrap}
+  .brand{display:flex; flex-direction:column; gap:2px; margin-right:auto}
+  .brand h1{font-family:Fraunces,serif; font-weight:900; font-size:26px; letter-spacing:.2px; margin:0; line-height:1}
+  .brand .ember{color:var(--ember)}
+  .brand p{margin:0; color:var(--muted); font-size:12.5px; letter-spacing:.3px}
+  .src{display:flex; align-items:stretch; gap:14px; flex-wrap:wrap}
+  .hgroup{display:flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--line-soft); border-radius:10px; background:rgba(255,255,255,.015)}
+  .hlabel{font-size:9.5px; text-transform:uppercase; letter-spacing:.13em; color:var(--muted-2); font-weight:600; white-space:nowrap}
+  .datastate{font-size:11.5px; color:var(--muted-2); text-align:right; line-height:1.3}
+  .datastate b{color:var(--muted); font-weight:600}
+  button.refresh{
+    font:inherit; font-size:13px; font-weight:600; color:var(--ink);
+    background:linear-gradient(180deg,var(--ember-hot),var(--ember));
+    border:none; border-radius:9px; padding:9px 14px; cursor:pointer;
+    box-shadow:0 1px 0 rgba(255,255,255,.25) inset, 0 6px 16px -8px var(--ember-glow)}
+  button.refresh:disabled{opacity:.6; cursor:progress}
+  button.refresh:focus-visible{outline:2px solid var(--ember-hot); outline-offset:2px}
+  .databtn{font:inherit; font-size:12px; font-weight:500; color:var(--muted); background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 11px; cursor:pointer}
+  .databtn:hover{color:var(--text); border-color:var(--ember)}
+  .databtn:focus-visible{outline:2px solid var(--ember); outline-offset:1px}
+
+  /* meter */
+  .meterband{border-bottom:1px solid var(--line-soft); background:var(--ink-2)}
+  .meter{display:flex; align-items:center; gap:22px; padding:16px 20px; max-width:1180px; margin:0 auto; flex-wrap:wrap}
+  .bigcount{display:flex; align-items:baseline; gap:8px}
+  .bigcount .n{font-family:Fraunces,serif; font-weight:900; font-size:34px; color:var(--ember); line-height:1}
+  .bigcount .d{color:var(--muted); font-size:14px}
+  .bigcount .lbl{color:var(--muted-2); font-size:11px; text-transform:uppercase; letter-spacing:.14em; margin-left:6px}
+  .bar{flex:1 1 240px; height:9px; background:#242634; border-radius:99px; overflow:hidden; min-width:180px}
+  .bar > i{display:block; height:100%; width:0;
+    background:linear-gradient(90deg,var(--ember),var(--ember-hot)); border-radius:99px;
+    box-shadow:0 0 12px var(--ember-glow); transition:width .5s ease}
+  .pills{display:flex; gap:14px; flex-wrap:wrap}
+  .pill{font-size:12px; color:var(--muted)}
+  .pill b{color:var(--text); font-weight:600; font-variant-numeric:tabular-nums}
+
+  /* controls */
+  .viewtabs{display:flex; gap:2px; border-bottom:1px solid var(--line-soft); margin:16px 0 0}
+  .vtab{font-family:Fraunces,serif; font-size:15px; font-weight:600; color:var(--muted); background:none; border:none;
+    padding:10px 14px; cursor:pointer; position:relative; display:inline-flex; align-items:center; gap:7px}
+  .vtab[aria-pressed="true"]{color:var(--text)}
+  .vtab[aria-pressed="true"]::after{content:""; position:absolute; left:12px; right:12px; bottom:-1px; height:2px; background:var(--ember); border-radius:2px}
+  .vtab:hover{color:var(--text)}
+  .vtab:focus-visible{outline:2px solid var(--ember); outline-offset:2px; border-radius:6px}
+  .vtab.matrixtab svg{opacity:.6}
+  .letter.az{background:var(--panel-2); color:var(--muted)}
+  .rail .classlabel{font-family:Inter,sans-serif; font-weight:600; font-size:12.5px; padding:6px 10px; border-radius:8px; background:var(--panel-2); color:var(--text); white-space:nowrap; text-align:center}
+  .fdot{display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:6px; vertical-align:middle; border:1px solid rgba(255,255,255,.18)}
+  .controls{display:flex; gap:12px; align-items:center; padding:12px 0 4px; flex-wrap:wrap}
+  .seg{display:inline-flex; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:3px; gap:2px}
+  .seg button{font:inherit; font-size:12.5px; font-weight:500; color:var(--muted); background:none; border:none;
+    padding:7px 12px; border-radius:7px; cursor:pointer; white-space:nowrap}
+  .seg button[aria-pressed="true"]{background:var(--panel-2); color:var(--text); box-shadow:0 1px 0 rgba(255,255,255,.05) inset}
+  .seg button:focus-visible{outline:2px solid var(--ember); outline-offset:1px}
+  .search{flex:1 1 200px; min-width:160px; position:relative}
+  .search input{width:100%; font:inherit; font-size:13.5px; color:var(--text); background:var(--panel);
+    border:1px solid var(--line); border-radius:10px; padding:9px 12px 9px 32px}
+  .search input::placeholder{color:var(--muted-2)}
+  .search input:focus{outline:none; border-color:var(--ember); box-shadow:0 0 0 3px rgba(224,163,62,.12)}
+  .search svg{position:absolute; left:10px; top:50%; transform:translateY(-50%); opacity:.5}
+  .toggle{font:inherit; font-size:12.5px; color:var(--muted); background:var(--panel); border:1px solid var(--line);
+    border-radius:10px; padding:8px 12px; cursor:pointer; display:inline-flex; align-items:center; gap:7px}
+  .toggle[aria-pressed="true"]{color:var(--ink); background:linear-gradient(180deg,var(--ember-hot),var(--ember)); border-color:transparent; font-weight:600}
+  .toggle:focus-visible{outline:2px solid var(--ember); outline-offset:1px}
+
+  .filtergroups{display:flex; flex-direction:column; gap:7px; padding:8px 0 2px}
+  .fgroup{display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap}
+  .flabel{font-size:10.5px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted-2); min-width:54px; padding-top:6px}
+  .rarityfilter{display:flex; gap:6px; flex-wrap:wrap; flex:1}
+  .rchip{font:inherit; font-size:11.5px; font-weight:600; letter-spacing:.02em; color:var(--muted);
+    background:var(--panel); border:1px solid var(--line); border-radius:99px; padding:5px 11px; cursor:pointer}
+  .rchip[aria-pressed="true"]{color:var(--text); border-color:var(--ember); background:var(--panel-2)}
+  .rchip:focus-visible{outline:2px solid var(--ember); outline-offset:1px}
+
+  .listnote{color:var(--muted-2); font-size:12px; padding:4px 0 10px}
+
+  /* tier bands */
+  .band{display:grid; grid-template-columns:96px 1fr; gap:16px; border-top:1px solid var(--line-soft); padding:16px 0}
+  .band:first-of-type{border-top:none}
+  .rail{display:flex; flex-direction:column; gap:4px; align-items:flex-start; position:sticky; top:78px; align-self:start; height:min-content}
+  .rail .letter{font-family:Fraunces,serif; font-weight:900; font-size:30px; line-height:1;
+    padding:4px 12px; border-radius:9px; color:#0e0e15}
+  .rail .meta{font-size:11px; color:var(--muted-2)}
+  .rail .meta b{color:var(--muted); font-variant-numeric:tabular-nums; font-weight:600}
+  .rail .def{font-size:11px; color:var(--muted-2); line-height:1.35; max-width:170px}
+  .units{display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start}
+
+  .unit{position:relative; display:inline-flex; align-items:center; gap:8px;
+    background:var(--panel); border:1px solid var(--line); border-radius:99px;
+    padding:7px 13px 7px 11px; cursor:pointer; font:inherit; color:var(--text);
+    transition:border-color .12s, transform .06s, background .12s}
+  .unit:hover{border-color:#3a3d4f; transform:translateY(-1px)}
+  .unit:focus-visible{outline:2px solid var(--ember); outline-offset:2px}
+  .unit .dot{width:9px; height:9px; border-radius:99px; background:#3a3d4f; flex:none; transition:background .12s, box-shadow .12s}
+  .unit .nm{font-size:13px; font-weight:500; white-space:nowrap}
+  .unit .rar{font-size:9.5px; font-weight:700; letter-spacing:.05em; color:var(--muted-2);
+    border:1px solid var(--line); border-radius:5px; padding:1px 5px; white-space:nowrap}
+  .unit.owned{background:linear-gradient(180deg, rgba(224,163,62,.16), rgba(224,163,62,.06));
+    border-color:var(--ember)}
+  .unit.owned .dot{background:var(--ember-hot); box-shadow:0 0 0 3px var(--ember-glow)}
+  .unit.owned .nm{color:#fbeccb}
+  .unit.owned .rar{color:var(--ember); border-color:rgba(224,163,62,.5)}
+
+  .empty{color:var(--muted-2); font-size:13px; padding:8px 0}
+
+  /* tooltip */
+  .tip{position:fixed; z-index:60; max-width:320px; background:#0c0c14; border:1px solid var(--line);
+    border-radius:10px; padding:12px 14px; box-shadow:0 20px 50px -20px #000; pointer-events:none; opacity:0;
+    transition:opacity .12s; font-size:12.5px}
+  .tip.show{opacity:1}
+  .tiprow{display:flex; gap:12px; align-items:flex-start}
+  .tipimg{width:78px; height:96px; object-fit:cover; object-position:top center; border-radius:8px; flex:none; background:var(--panel-2)}
+  .tipbody{min-width:0}
+  .tip h4{margin:0 0 2px; font-family:Fraunces,serif; font-size:15px; font-weight:600}
+  .tip .sub{color:var(--ember); font-size:11px; margin-bottom:7px}
+  .tip .fac{color:var(--muted); font-size:11px; margin-bottom:7px}
+  .tip .sum{color:var(--muted); line-height:1.5}
+  .tip .none{color:var(--muted-2); font-style:italic}
+
+  footer{color:var(--muted-2); font-size:12px; border-top:1px solid var(--line-soft); margin-top:24px; padding:18px 0 40px}
+  footer a{color:var(--muted)}
+  footer .support{display:inline-flex; align-items:center; gap:5px; color:var(--ember); text-decoration:none; border:1px solid rgba(224,163,62,.4); border-radius:8px; padding:4px 10px; margin-right:6px}
+  footer .support:hover{background:rgba(224,163,62,.12); border-color:var(--ember)}
+  footer .foot-sep{margin:0 6px; color:var(--muted-2)}
+  .toast{position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px);
+    background:#0c0c14; border:1px solid var(--line); color:var(--text); padding:11px 16px; border-radius:10px;
+    font-size:13px; box-shadow:0 20px 50px -20px #000; opacity:0; transition:opacity .2s, transform .2s; z-index:80}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:640px){
+    .band{grid-template-columns:1fr; gap:8px}
+    .rail{position:static; flex-direction:row; align-items:center; gap:10px}
+    .rail .def{display:none}
+    .brand h1{font-size:22px}
+  }
+  /* invest flag */
+  :root{--invest:#a98cff; --invest-soft:rgba(169,140,255,.16)}
+  .unit .flag{margin-left:1px; width:20px; height:20px; border-radius:6px; border:1px solid var(--line);
+    background:transparent; color:var(--muted-2); display:inline-flex; align-items:center; justify-content:center;
+    cursor:pointer; flex:none}
+  .unit .flag:hover{border-color:var(--invest); color:var(--invest)}
+  .unit .flag:focus-visible{outline:2px solid var(--invest); outline-offset:1px}
+  .unit.invest{box-shadow:inset 3px 0 0 0 var(--invest)}
+  .unit.invest .flag{color:var(--invest); border-color:var(--invest); background:var(--invest-soft)}
+  .pill.invest b{color:var(--invest)}
+
+  /* analytics */
+  .analytics{display:none; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); padding:18px; margin:8px 0 12px}
+  .analytics.show{display:block}
+  .ahead{display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap; margin-bottom:12px}
+  .analytics h2{font-family:Fraunces,serif; font-size:18px; font-weight:600; margin:0}
+  .analytics .lead{color:var(--muted); font-size:12.5px; margin:2px 0 0}
+  .incl{display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:var(--muted); margin-left:auto; cursor:pointer; white-space:nowrap}
+  .incl input{accent-color:var(--invest); width:15px; height:15px}
+  .verdict{font-size:14px; margin:0 0 14px; padding:12px 14px; border-radius:10px; background:var(--panel-2); border:1px solid var(--line)}
+  .verdict b{color:var(--ember)}
+  .facgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; margin-bottom:16px}
+  .facrow{border:1px solid var(--line); border-radius:10px; padding:10px 12px; background:var(--ink-2)}
+  .facrow.ready{border-color:rgba(224,163,62,.45)}
+  .facrow .fn{font-size:13px; font-weight:600; display:flex; justify-content:space-between; align-items:center}
+  .facrow .fn .cnt{font-variant-numeric:tabular-nums; color:var(--ember)}
+  .roles{display:flex; gap:10px; margin-top:6px; font-size:11px; color:var(--muted)}
+  .roles b{font-weight:600}
+  .roles .ok{color:#5cb37a} .roles .no{color:var(--muted-2)}
+  .teamcard{border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-bottom:10px; background:var(--ink-2)}
+  .teamcard .th{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px}
+  .teamcard .th .tt{font-family:Fraunces,serif; font-size:15px; font-weight:600}
+  .teamcard .th .anchor{color:var(--ember); font-size:12px}
+  .teamcard .miss{color:#e05a3e; font-size:11.5px; margin-top:8px}
+  .lineup{display:flex; flex-wrap:wrap; gap:6px}
+  .slot{display:inline-flex; align-items:center; gap:6px; font-size:12px; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:4px 9px}
+  .slot .r{font-size:9px; letter-spacing:.05em; color:var(--muted-2); border:1px solid var(--line); border-radius:4px; padding:0 4px}
+  .slot.core{border-color:rgba(224,163,62,.5)}
+  .slot.flex{opacity:.82}
+  .contested{display:flex; flex-wrap:wrap; gap:6px; margin-top:2px}
+  .contested .cu{font-size:12px; background:var(--panel); border:1px dashed var(--invest); color:var(--text); border-radius:8px; padding:4px 9px}
+  .contested .cu span{color:var(--muted-2)}
+  .anote{color:var(--muted-2); font-size:11.5px; margin-top:12px}
+  .acontrols{display:flex; align-items:center; gap:10px; margin-left:auto; flex-wrap:wrap}
+  .asel{font-size:12px; color:var(--muted); display:inline-flex; align-items:center; gap:6px}
+  .asel select{font:inherit; font-size:12px; color:var(--text); background:var(--panel-2); border:1px solid var(--line); border-radius:8px; padding:6px 8px}
+  .toggle.small{padding:6px 10px; font-size:12px}
+  .matrixwrap{overflow-x:auto; padding-bottom:2px}
+  table.matrix{border-collapse:separate; border-spacing:3px; font-size:12px}
+  table.matrix th{color:var(--muted); font-weight:600; font-size:11px; padding:4px 6px; text-align:center; white-space:nowrap}
+  table.matrix tbody th{text-align:right; position:sticky; left:0; background:var(--panel); z-index:1}
+  table.matrix td{min-width:50px; height:38px; text-align:center; border-radius:7px; color:var(--text);
+    font-variant-numeric:tabular-nums; font-weight:600; border:1px solid var(--line-soft)}
+  table.matrix td.diag{outline:1.5px solid var(--ember); outline-offset:-2px}
+  table.matrix td.blank{background:transparent!important; border-color:transparent}
+  table.matrix td .pcts{font-size:9px; color:var(--muted-2); font-weight:400; margin-left:1px}
+  .combos{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:14px}
+  .combo h3{font-family:Fraunces,serif; font-size:14px; font-weight:600; margin:0 0 4px}
+  .combo ol{margin:0; padding:0; list-style:none; counter-reset:c}
+  .combo li{counter-increment:c; display:flex; align-items:baseline; gap:10px; padding:6px 0;
+    border-bottom:1px solid var(--line-soft); font-size:12.5px}
+  .combo li::before{content:counter(c); color:var(--muted-2); font-size:10px; width:12px; flex:none}
+  .combo li span{color:var(--text); flex:1}
+  .combo li b{color:var(--ember); font-variant-numeric:tabular-nums}
+  .pickable{cursor:pointer}
+  .combo li.pickable:hover{background:var(--panel-2); border-radius:6px}
+  .combo li.picked{background:rgba(224,163,62,.16); border-radius:6px}
+  table.matrix td.pickable:hover{filter:brightness(1.25)}
+  table.matrix td.picked{outline:2px solid #fff; outline-offset:-2px}
+  .comboHead{display:flex; align-items:center; gap:5px; flex-wrap:wrap; font-size:13.5px; color:var(--text); margin-top:16px; padding-top:14px; border-top:1px solid var(--line-soft)}
+  .comboCols{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px}
+  .comboCol h4{font-family:Fraunces,serif; font-size:13px; font-weight:600; margin:0 0 8px; color:var(--muted)}
+  .comboUnits{display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start}
+  @media (max-width:640px){ .comboCols{grid-template-columns:1fr} }
+  @media (max-width:640px){ .combos{grid-template-columns:1fr} }
+
+  /* teams */
+  .poolwrap{margin-top:14px}
+  .poolhead{display:flex; flex-direction:column; gap:8px; font-size:12px; color:var(--muted); margin-bottom:8px}
+  .teamactions{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+  .tbtn{font:inherit; font-size:11.5px; color:var(--muted); background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:6px 11px; cursor:pointer}
+  .tbtn:hover{border-color:var(--ember); color:var(--text)}
+  .savedteam{display:inline-flex; align-items:center; background:var(--panel-2); border:1px solid var(--line); border-radius:8px; overflow:hidden}
+  .savedteam:hover{border-color:var(--ember)}
+  .savedteam .snm{font:inherit; font-size:11.5px; color:var(--text); background:none; border:none; padding:6px 4px 6px 10px; cursor:pointer; white-space:nowrap}
+  .savedteam .del{font:inherit; color:var(--muted-2); background:none; border:none; font-size:14px; line-height:1; padding:5px 8px; cursor:pointer}
+  .savedteam .del:hover{color:#e05a3e}
+  .teampool{display:flex; flex-wrap:wrap; gap:6px; max-height:200px; overflow-y:auto; padding:8px; border:1px solid var(--line-soft); border-radius:10px; background:var(--ink-2)}
+  .poolchip{display:inline-flex; align-items:center; gap:6px; background:var(--panel); border:1px solid var(--line); border-radius:99px; padding:5px 11px; cursor:grab; font:inherit; color:var(--text)}
+  .poolchip:active{cursor:grabbing}
+  .poolchip.sel{outline:2px solid var(--ember); outline-offset:1px}
+  .poolchip.owned{border-color:var(--ember); background:linear-gradient(180deg, rgba(224,163,62,.16), rgba(224,163,62,.05))}
+  .poolchip.owned .nm{color:#fbeccb}
+  .poolchip.invest{box-shadow:inset 3px 0 0 0 var(--invest)}
+  .poolchip .iflag{display:inline-flex; color:var(--invest)}
+  .poolchip .iflag svg{width:11px; height:11px}
+  .poolchip .nm{font-size:12.5px; white-space:nowrap}
+  .poolchip .rar{font-size:9px; font-weight:700; color:var(--muted-2); border:1px solid var(--line); border-radius:4px; padding:0 4px}
+  .boards{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px}
+  .board{border:1px solid var(--line); border-radius:10px; padding:10px 11px; background:var(--panel)}
+  .boardhead{font-family:Fraunces,serif; font-weight:600; font-size:14px; margin-bottom:8px; display:flex; align-items:center}
+  .board3{display:grid; grid-template-columns:14px repeat(3,1fr); grid-template-rows:12px repeat(3,1fr); gap:4px}
+  .board3 .cl{font-size:8.5px; color:var(--muted-2); text-align:center; letter-spacing:.06em}
+  .board3 .rl{font-size:8.5px; color:var(--muted-2); display:flex; align-items:center; justify-content:center}
+  .cell{position:relative; border:1px dashed var(--line); border-radius:7px; min-height:46px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:2px; padding:3px; cursor:pointer}
+  .cell.over{border-color:var(--ember); background:rgba(224,163,62,.12)}
+  .cell.filled{border-style:solid; background:var(--panel-2)}
+  .cell.owned{border-style:solid; border-color:var(--ember); background:linear-gradient(180deg, rgba(224,163,62,.2), rgba(224,163,62,.06))}
+  .cell.owned .cu{color:#fbeccb}
+  .cell.invest{box-shadow:inset 3px 0 0 0 var(--invest)}
+  .cell .cflag{position:absolute; top:2px; right:3px; color:var(--invest); display:inline-flex; pointer-events:none}
+  .cell .cflag svg{width:10px; height:10px}
+  .cell.ok{border-color:var(--ember); background:rgba(224,163,62,.08)}
+  .cell.no{opacity:.32}
+  .cell.dno{opacity:.26}
+  .cell.picking{background:transparent!important; border-style:dashed!important; border-color:var(--line)!important; box-shadow:none!important}
+  .cell.picking>*{opacity:0}
+  .cell .cu{font-size:10.5px; line-height:1.15; color:var(--text); word-break:break-word}
+  .cicon{width:16px; height:16px; object-fit:contain; flex:none; pointer-events:none}
+  .unit .cicon{width:15px; height:15px; margin:0 1px}
+  .cell .cicon{width:15px; height:15px}
+  @media (max-width:900px){ .boards{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:560px){ .boards{grid-template-columns:1fr} }
+
+  /* info button + character modal */
+  .info{margin-left:1px; width:19px; height:19px; border-radius:6px; border:1px solid var(--line); background:transparent; color:var(--muted-2); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex:none}
+  .info:hover{border-color:var(--ember); color:var(--ember)}
+  .info:focus-visible{outline:2px solid var(--ember); outline-offset:1px}
+  .cmodal{position:fixed; inset:0; z-index:100; background:rgba(6,6,10,.72); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:20px}
+  .cmodal[hidden]{display:none}
+  .cmodal-card{position:relative; background:var(--ink-2); border:1px solid var(--line); border-radius:14px; max-width:660px; width:100%; max-height:88vh; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 30px 80px -20px #000}
+  .cmodal-x{position:absolute; top:10px; right:10px; z-index:2; width:32px; height:32px; border-radius:8px; border:none; background:rgba(6,6,10,.55); color:#fff; font-size:20px; line-height:1; cursor:pointer}
+  .cmodal-x:hover{background:rgba(6,6,10,.85)}
+  .cscene{position:relative; height:250px; background:var(--panel-2); flex:none}
+  .cscene-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center}
+  .cscene-head{position:absolute; left:0; right:0; bottom:0; padding:16px 18px; background:linear-gradient(transparent, rgba(8,8,12,.92))}
+  .cscene-head h2{margin:0; font-family:Fraunces,serif; font-size:24px; font-weight:900; color:#fff}
+  .cscene-head .ctitle{color:var(--ember); font-size:12.5px; margin-top:1px}
+  .cscene-head .cmeta{display:flex; align-items:center; gap:8px; margin-top:7px; font-size:12px; color:#d8d8de; flex-wrap:wrap}
+  .cbody{overflow-y:auto; padding:16px 18px 22px}
+  .ctiers{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+  .ctier{display:inline-flex; align-items:center; gap:6px; font-size:11px; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:3px 4px 3px 9px; color:var(--muted)}
+  .ctier .ctv{font-weight:700; color:#0e0e15; border-radius:5px; padding:1px 7px}
+  .csummary{color:var(--muted); font-size:13px; line-height:1.55; margin:0 0 14px}
+  .csec{margin-top:14px}
+  .csec h3{font-family:Fraunces,serif; font-size:15px; font-weight:600; margin:0 0 8px; border-bottom:1px solid var(--line-soft); padding-bottom:5px}
+  .skill,.dnode,.gearset,.tl{margin-bottom:9px; font-size:12.5px; color:var(--muted)}
+  .skill-h{display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:2px}
+  .skill-h b,.dchoice b{color:var(--text)}
+  .skill-d,.dchoice{line-height:1.5}
+  .dchoice{margin:3px 0 3px 4px; padding-left:8px; border-left:2px solid var(--line)}
+  .badge{font-size:9.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--muted); background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:1px 6px; white-space:nowrap}
+  .cbadges{display:flex; gap:6px; flex-wrap:wrap}
+
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+  /* effect links + popover */
+  .fx{color:var(--ember); border-bottom:1px dotted var(--ember); cursor:help}
+  .gearlink{display:inline-block; margin:2px 4px 2px 0; padding:2px 8px; font-size:11px; border:1px solid var(--line); border-radius:999px; color:var(--muted); cursor:help; background:var(--ink-2)}
+  .gearlink:hover{border-color:var(--ember); color:var(--text)}
+  .gearitems{margin-top:4px}
+  .fxpop{position:fixed; z-index:120; max-width:300px; background:#0c0c14; border:1px solid var(--line); border-radius:10px; padding:10px 12px; box-shadow:0 20px 50px -20px #000; opacity:0; pointer-events:none; transition:opacity .1s; font-size:12px; color:var(--muted)}
+  .fxpop.show{opacity:1}
+  .fxname{font-family:Fraunces,serif; font-weight:600; font-size:13.5px; color:var(--text)}
+  .fxtype{color:var(--ember); font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px}
+  .fxeffect{line-height:1.5}
+  .fxremark{margin-top:6px; padding-top:6px; border-top:1px solid var(--line-soft); color:var(--muted-2); line-height:1.5}
+  /* faction overview */
+  .fcard{border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:16px; background:var(--panel)}
+  .fhead{display:flex; align-items:center; gap:12px; border-left:4px solid var(--ember); padding-left:12px; margin-bottom:14px}
+  .fhead h2{margin:0; font-family:Fraunces,serif; font-size:20px; font-weight:700}
+  .fdot.big{width:15px; height:15px; border-radius:4px}
+  .fsig{font-size:12px; color:var(--muted); margin-top:3px}
+  .fown{margin-left:auto; font-size:12px; color:var(--muted); white-space:nowrap}
+  .fsigbox{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:12px}
+  .sigitem{flex:1 1 240px; border:1px solid var(--line-soft); border-radius:10px; padding:10px 12px; background:var(--ink-2)}
+  .signame{font-family:Fraunces,serif; font-weight:600; font-size:13.5px; color:var(--ember); margin-bottom:4px}
+  .sigtext{font-size:12px; color:var(--muted); line-height:1.5}
+  .sigremark{margin-top:6px; font-size:11.5px; color:var(--muted-2); line-height:1.5}
+  .sigk{display:inline-block; font-size:9px; text-transform:uppercase; letter-spacing:.06em; color:var(--ember); border:1px solid var(--line); border-radius:4px; padding:0 4px; margin-right:4px}
+  .provbox{margin-bottom:14px}
+  .provlabel{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted-2); margin-bottom:6px}
+  .provchips{display:flex; flex-wrap:wrap; gap:6px}
+  .provchip{font-size:12px; padding:4px 10px; border:1px solid var(--line); border-radius:999px; background:var(--ink-2); color:var(--muted); cursor:pointer}
+  .provchip:hover{border-color:var(--ember); color:var(--text)}
+  .provchip.on{background:rgba(224,163,62,.16); border-color:var(--ember); color:var(--text)}
+  .provchip .pvn{color:var(--muted-2); font-variant-numeric:tabular-nums}
+  .provresult{margin-top:10px; padding-top:10px; border-top:1px solid var(--line-soft)}
+  .provhead{font-size:12px; color:var(--muted); margin-bottom:8px}
+  .filtrow{display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:6px}
+  .filtlabel{font-size:10px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted-2); width:74px; flex:none}
+  .fchip{font-size:11px; padding:2px 9px; border:1px solid var(--line); border-radius:999px; background:var(--ink-2); color:var(--muted-2); cursor:pointer}
+  .fchip.on{background:rgba(224,163,62,.16); border-color:var(--ember); color:var(--text)}
+  .provunits{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+  .provunit{display:flex; flex-direction:column; gap:3px}
+  .provtags{display:flex; flex-wrap:wrap; gap:3px}
+  .ptag{font-size:9.5px; color:var(--muted-2); background:var(--ink-2); border:1px solid var(--line-soft); border-radius:4px; padding:0 4px; line-height:1.5}
+  .dragonline{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  .dstage{border:1px solid var(--line-soft); border-radius:10px; padding:10px; background:var(--ink-2)}
+  .dimg{width:100%; height:120px; object-fit:contain; background:var(--panel-2); border-radius:8px; margin-bottom:6px; display:block}
+  .dname{font-family:Fraunces,serif; font-weight:600; font-size:14px}
+  .dphase{font-size:10.5px; color:var(--muted-2); margin-bottom:6px}
+  .dskill{font-size:11.5px; color:var(--muted); line-height:1.5}
+  .dskill b{color:var(--ember); display:block; margin-bottom:2px; font-size:12px}
+  @media (max-width:680px){ .dragonline{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <h1>Dragon Traveler <span class="ember">Roster Helper</span></h1>
+      <p>Mark what you own · ranked across four community tier lists</p>
+    </div>
+    <div class="src">
+      <div class="hgroup" title="Your saved roster, invest flags and teams — kept in this browser. Independent of the game data.">
+        <span class="hlabel">Your data</span>
+        <button class="databtn" id="exportBtn">Export</button>
+        <button class="databtn" id="importBtn">Import</button>
+        <input type="file" id="importFile" accept=".json,.txt,application/json" style="display:none">
+      </div>
+      <div class="hgroup" title="Reload the game data (tier lists &amp; characters) from the source files.">
+        <span class="hlabel">Game data</span>
+        <div class="datastate" id="datastate">Loading&hellip;</div>
+        <button class="refresh" id="refresh">Refresh</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="meterband">
+  <div class="meter">
+    <div class="bigcount"><span class="n" id="ownN">0</span><span class="d" id="ownD">/ 0</span><span class="lbl">owned</span></div>
+    <div class="bar"><i id="barfill"></i></div>
+    <div class="pills" id="rarpills"></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <nav class="viewtabs" id="viewtabs" role="group" aria-label="View">
+    <button class="vtab" data-view="tiers" aria-pressed="true">Tiers</button>
+    <button class="vtab" data-view="az" aria-pressed="false">A&ndash;Z</button>
+    <button class="vtab" data-view="class" aria-pressed="false">By class</button>
+    <button class="vtab" data-view="factions" aria-pressed="false">Factions</button>
+    <button class="vtab matrixtab" data-view="matrix" aria-pressed="false">Coverage
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    </button>
+    <button class="vtab" data-view="teams" aria-pressed="false">Teams</button>
+  </nav>
+  <div class="controls">
+    <div class="seg" id="listseg" role="group" aria-label="Tier list"></div>
+    <label class="search" id="searchbox">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search" type="search" placeholder="Search a unit…" autocomplete="off">
+    </label>
+    <button class="toggle" id="ownedOnly" aria-pressed="false">Owned only</button>
+    <button class="toggle" id="investOnly" aria-pressed="false">Invest only</button>
+  </div>
+  <div class="filtergroups" id="filtergroups">
+    <div class="fgroup"><span class="flabel">Rarity</span><div class="rarityfilter" id="rarityfilter" role="group" aria-label="Filter by rarity"></div></div>
+    <div class="fgroup"><span class="flabel">Class</span><div class="rarityfilter" id="classfilter" role="group" aria-label="Filter by class"></div></div>
+    <div class="fgroup"><span class="flabel">Faction</span><div class="rarityfilter" id="factionfilter" role="group" aria-label="Filter by faction"></div></div>
+  </div>
+  <div class="listnote" id="listnote"></div>
+  <section class="analytics" id="analytics" aria-live="polite"></section>
+  <div id="bands"></div>
+  <footer>
+    <a class="support" href="https://buymeacoffee.com/nomaluki" target="_blank" rel="noopener">&#9749; Buy me a coffee</a>
+    <span class="foot-sep">&middot;</span>
+    Data from <a href="https://dtwiki.org/tier-list" target="_blank" rel="noopener">dtwiki.org</a>.
+  </footer>
+</main>
+
+<div class="tip" id="tip" role="tooltip"></div>
+<div class="cmodal" id="cmodal" hidden><div class="cmodal-card" id="cmodalCard"></div></div>
+<div class="fxpop" id="fxpop"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA = { tiers:"./tier-lists.json", chars:"./characters.json", wyrms:"./wyrms.json", effects:"./status-effects.json", gear:"./gear.json" };
+let WYRMS=[]; let EFFECTS={}; let EFFECTS_BY_NAME={}; let GEAR={}; let PROVIDERS={};
+
+const RARITY_SUFFIX = [["_ssr_ex","SSR EX"],["_ssr_plus","SSR+"],["_ssr","SSR"],["_sr","SR"],["_r","R"],["_n","N"]];
+const RARITY_ORDER = ["SSR EX","SSR+","SSR","SR","R","N"];
+const TIER_VAR = {"SS":"--tier-SS","S+":"--tier-Splus","S":"--tier-S","A+":"--tier-Aplus","A":"--tier-A","B+":"--tier-Bplus","B":"--tier-B","C":"--tier-C","D":"--tier-D","F":"--tier-F"};
+
+function titleCase(s){ return s.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()); }
+function parseSlug(slug){
+  for(const [suf,label] of RARITY_SUFFIX){ if(slug.endsWith(suf)) return {name:titleCase(slug.slice(0,-suf.length)), rarity:label}; }
+  return {name:titleCase(slug), rarity:""};
+}
+function rarityRank(r){ const i=RARITY_ORDER.indexOf(r); return i<0?99:i; }
+
+/* ---- storage: window.storage in Claude, localStorage standalone ---- */
+async function saveJSON(key,val){
+  const d=JSON.stringify(val);
+  if(window.storage){ try{ await window.storage.set(key,d,false); return; }catch(e){} }
+  try{ localStorage.setItem(key,d); }catch(e){}
+}
+async function loadJSON(key,fb){
+  if(window.storage){ try{ const r=await window.storage.get(key,false); if(r&&r.value) return JSON.parse(r.value); }catch(e){} }
+  try{ const v=localStorage.getItem(key); if(v) return JSON.parse(v); }catch(e){}
+  return fb;
+}
+const saveKey=(k,s)=>saveJSON(k,[...s]);
+async function loadKey(k){ return new Set(await loadJSON(k,[])); }
+function emptyTeams(){ const t={}; FACTIONS.forEach(f=>t[f]=Array(9).fill(null)); return t; }
+function saveTeams(){ saveJSON("dt_teams", teams); }
+const FLAG_SVG='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+const classIcon=u=>(u&&u.cls&&CLASS_ICON[u.cls])?`<img class="cicon" src="${CLASS_ICON[u.cls]}" alt="${u.cls}" title="${titleCase(u.cls)}">`:"";
+const R2="https://pub-1b97167ae6734e6989a0f73c79ef819b.r2.dev/";
+const INFO_SVG='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.6" fill="currentColor" stroke="none"/></svg>';
+function csec(title, inner){ return inner ? `<section class="csec"><h3>${title}</h3>${inner}</section>` : ""; }
+function badges(arr){ return arr.filter(x=>x!=null&&x!=="").map(x=>`<span class="badge">${x}</span>`).join(" "); }
+function skillsHTML(c){
+  const sk=c.skills; if(!Array.isArray(sk)||!sk.length) return "";
+  return csec("Skills", sk.map(s=>`<div class="skill"><div class="skill-h"><b>${s.name||""}</b>`+
+    badges([s.type, s.cooldown!=null?"CD "+s.cooldown:"", s.cost!=null?"Cost "+s.cost:""])+
+    `</div><div class="skill-d">${linkifyEffects(s.description)}</div></div>`).join(""));
+}
+function talentHTML(c){
+  const t=c.talent; if(!t) return "";
+  const lv=Array.isArray(t.talent_levels)?t.talent_levels:[];
+  const body=lv.length ? lv.map(l=>`<div class="tl"><span class="badge">Lv ${l.level}</span> ${linkifyEffects(l.effect)}</div>`).join("") : linkifyEffects(t.description);
+  return csec("Talent"+(t.name?" \u2014 "+t.name:""), body);
+}
+function divinityHTML(c){
+  const d=c.divinity; if(!Array.isArray(d)||!d.length) return "";
+  return csec("Divinity", d.map(n=>`<div class="dnode"><span class="badge">Lv ${n.level}</span>`+
+    (Array.isArray(n.choices)?n.choices.map(ch=>`<div class="dchoice"><b>${ch.name||""}</b> ${linkifyEffects(ch.description)}</div>`).join(""):"")+
+    `</div>`).join(""));
+}
+function gearName(slug){ const g=GEAR[slug]; return g?g.name:titleCase(String(slug).replace(/_/g," ")); }
+function gearHTML(c){
+  const g=c.recommended_gear; if(!Array.isArray(g)||!g.length) return "";
+  return csec("Recommended gear", g.map(gr=>{
+    const s=gr.slots||{};
+    const items=Object.keys(s).map(k=>s[k]).filter(Boolean)
+      .map(v=>`<span class="gearlink" data-gear="${v}">${gearName(v)}</span>`).join("");
+    return `<div class="gearset"><b>${gr.label||"Set"}</b><div class="gearitems">${items}</div></div>`;
+  }).join(""));
+}
+function openCharacter(u){
+  hideTip();
+  const c=u.raw||{}; const fn=titleCase;
+  const scene=`${R2}character/${u.slug}/skins/default/scene.png`;
+  const facs=u.factions.map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>${fn(f)}`).join("&nbsp;&nbsp;");
+  const tiers=MODEL.lists.map(l=>{ const t=l.tierOf[u.slug]; if(!t) return "";
+    const base=String(t).split(" ")[0]; const col=TIER_VAR[base]?`var(${TIER_VAR[base]})`:"var(--muted-2)";
+    return `<span class="ctier">${l.name}<span class="ctv" style="background:${col}">${t}</span></span>`; }).filter(Boolean).join("");
+  const facts=badges([c.origin, c.noble_phantasm?"NP: "+fn(String(c.noble_phantasm).replace(/_/g," ")):"", u.recs&&u.recs.length?("Subclass: "+u.recs.map(s=>fn(String(s).replace(/_/g," "))).join(", ")):""]);
+  const card=$("cmodalCard");
+  card.innerHTML=
+    `<button class="cmodal-x" aria-label="Close">\u00d7</button>`+
+    `<div class="cscene"><img class="cscene-img" alt="" src="${scene}">`+
+      `<div class="cscene-head"><h2>${u.name}</h2>`+(c.title?`<div class="ctitle">${c.title}</div>`:"")+
+      `<div class="cmeta"><b>${u.rarity}</b>${u.cls?" · "+fn(u.cls):""}${facs?" &nbsp;·&nbsp; "+facs:""}</div></div></div>`+
+    `<div class="cbody">`+
+      (tiers?`<div class="ctiers">${tiers}</div>`:"")+
+      (u.summary?`<p class="csummary">${u.summary}</p>`:"")+
+      (facts?`<div class="cbadges" style="margin-bottom:6px">${facts}</div>`:"")+
+      skillsHTML(c)+talentHTML(c)+divinityHTML(c)+gearHTML(c)+
+      (!u.raw?`<p class="csummary" style="margin-top:12px">Full kit (skills, talent, divinity, gear) loads once characters.json is in place.</p>`:"")+
+    `</div>`;
+  const img=card.querySelector(".cscene-img"); if(img) img.onerror=()=>img.remove();
+  card.querySelector(".cmodal-x").onclick=closeCharacter;
+  $("cmodal").hidden=false;
+}
+function closeCharacter(){ $("cmodal").hidden=true; $("cmodalCard").innerHTML=""; }
+const FACTIONS=["elemental_echo","wild_spirit","arcane_wisdom","sanctum_glory","otherworld_return","illusion_veil"];
+const FACTION_COLOR={elemental_echo:"#d64b3f", wild_spirit:"#1f7a45", arcane_wisdom:"#2f97d4", sanctum_glory:"#d9a441", otherworld_return:"#74c98a", illusion_veil:"#14141a"};
+const CLASSES=["guardian","priest","assassin","warrior","archer","mage"];
+const CLASS_ICON={"guardian": "data:image/webp;base64,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", "priest": "data:image/webp;base64,UklGRioGAABXRUJQVlA4WAoAAAAQAAAATwAASQAAQUxQSLsAAAABDzD/ERECbm1brZwzXl7KJqQUSplSHqVRCqFCL43lBphvKojo/wQw6/TY+nhtHf0o1rrWtpAF7OJ9sSDu0h6kBcl9uGLFh/8wgrTj6I9GkhzX4igdyP6oxY/kUXGVFIpdliwWr1lSxd0kfRSWJd2K5kgfLTef1HrtiWPsxgmtVQ+tRQfkKQyONQ/vtUPHHkJtB9QWwLUwgFAsCgpmkaeziXztKlmH73C1D+m1ljqitKsFaVFDopmt9cb4AFZQOCBIBQAAMBgAnQEqUABKAD5hKpBFpCKhlHtvGEAGBLKAYXfvAFriL+KdXbwz8K3oWRPSn/nfZT2F7Vu6ED6ZEysDHT6LWdd6m9HL0r/Y/+2fs0/sAhr9e+sKcBSNI12tYkWmKw/Y3P7pO6fZ6p5b7jMHr646V3KLPm1407lOAyAuHOlE/518ZGireUxMMqd2V5QCn7gpz01TVhV4NJ98YfvUegWN7xk1Tk3CJUjGLfisNbCGDzndQzkrC3XeFvDPYutsJc1xjnDa35sD5pjigAD+5EN2LhXJhyBog0SuLDqifwb8wbOO9Pe8stHb2sl74h6kXqwMtEr08FYVjmOgrona9KF0pGkhwGnaWKNcW141ATl8334vKHLr7bBVXI99JIHNcMo04lUuXNQ+ksoDxLFKp9o0U9g5RE3HllXcrdqCbU5Th2OGzCM8exoj+MrvG87A4l+5PhXfvFVG4uhL2GQsJI4YnjEcFnMkZzt6RAwRM/5PtZZ0t/Tagk9wqL/32v8mS8XlXx1nDhLSknT5OAYKtXwpc9kzeing12tJL+m73DEpwfMsrzaj9XfvmqSkA6UEVJxBHWnSEFtnnNiBpzBoYDTorz+4lEsMb2dSZOhZ6dElERds0kZuZWgqBNMBkFrkaNA8uFxRr36JuO11wIBZjr9HqNg0M0qx8R2ZfywW43LNqYt/lK2u5Bs9q41jnNYR0e4KZufDeFEKIE7cOCb2TVJJTvRHLkvLKXeKi3BPCvPknPZSkIRjRJuB1IfOLfiwB4AyBU751v4hZFaJrfge5T2IHQRpyjV15bQCdfhoyIc/rwzyAph0mEqIuypb2hue/f9q7jDO1FfU7M+P2tv+p73PHQkGFVtQW57cYbC9X0d48V4rXsWPdkNk4cktnW7ON91fFU/Qy4eVhcZ60pvbUKFbzsWMapNs8y4zU+VR+vVn4nelKk3ekQawKleL9WH2/hoVnVaqA4Z1RR0rrIzxWVTG3Arj+pDXzgA1GkNLvQUaSyO/yG1svliVwS96M0BFWu50pUZ7EWL3qv9gl77DZqUBQobk05PnBbYJ+7SOhk2GC2qnfozp88HMUJlKUtSm6Y7plbwX/W4K9Uyl4tEA7s6nt7Le0zbnzi0BrPSS3Mzd+jQUciLatOdLvIiV+qbYw8B1gUYYASfbxckicRjsGBhSMDiXSChvZkciM9f6sMWy/xJ0TFb9KNTQTxfEjPsKbelEujCgFygtWov8qZ0gZCiQgeQISsF9cb10m8CDLhUzEwuv8CoaFMB3ukve+I4FZ1oECMt9+yPhgwG5pxOJu7s//mhjTv8Zwdohsq3DKuOj7hZLuMCDFTcBoMes8y0ik0bdMR1gf+75MyajXJX11nzxTFAiDctNc6yUPLHrJWycUO1q5U986RVWmfqrNuk6kaMxXDtJuVnXFC42fg1a7FUepy1Jxwyhcdv54c33WCEnqK+K3Wq/zYSxukWXvvcY1OrkYowMLJzbB6BuehwHKSIptCBczC8wt9OdYsnjKZx0/NJvWQu4Oc7DaVZ8yP60/T+3l4DMioSGH8vMyA1JVYdZiZZBfhl/gQqa7O8NEDR4VPxzfGNKewMyF9tuE+n1ry/CDjIqWlP2l652wRBK3LytIv64g94CaKS6WI+qsuMdzKk2mD7xNCQ6JDLqvuP7V2S8Ndoyf1xti1/gI9028YZguho+9ASd6dWbVwHfy7S3aXwXjyNDfYpfuDw8dvMiM8xSN9m9gvgmRaFhnuv57cqqOhwIqESo6styP4xPZpnPByjYgDB2G/EeiGhfNOTkUrLC1dA8LAAAAAA=", "assassin": "data:image/webp;base64,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", "warrior": "data:image/webp;base64,UklGRsIFAABXRUJQVlA4WAoAAAAQAAAASgAASgAAQUxQSNQAAAABDzD/ERECUm3tcZvXUd0ZgiAEgiEUQmF0KTOzIRiCIHRuBkXfwp+Upggi+j8BXP/rtbWPLakxSXdu6QvureMoxcvOHZKSmS7QuMkb3QCruQP2JgBfZgD2HfVPdJ3pfyTAqecGqgtQ3NCxg+peYO9GWN0Mi0swOQG1o3TkjreOfUfpqCYB8jC5GZaO7EZ4cxGKG1jUypKqpBvepLRhM56lBHspFmk2w1GKrkjPJrxJwdx8SIN52ks3m0SW7hxKQNEMdQT2GmEfWzm0bNausSo2skLj2lZQOCDIBAAAEBYAnQEqSwBLAD5hKpFGpCIhoSU0DbCADAllAyQGeAPsAqAxKxLfyKLJ4a+Tbyl7YcrdnloZ7Adq/eAiIchRVANF8X31v7BH62emp7Cf2k9j79bHBWge+LZBs2dkDvg2w2ta0rjG2FkNIDjtm0bxwQjeP1a13c3SUrU0K2DWIckbVF8GKH9zAk8IrjTdLrCIePv5+AAmXUtGbAEio0MkAs3KJrDvR8IK01NDYL1jv7HLMK2xocGcuwAA/v4uczbf8ACWaNg5+3tSmLhOXy4bWmjiqT29403bGYIcKq0/1ysnP99A3S63hO2zlR7lNU1YyJ2/24GNiDEJhX00X44lzXtZHUrov7KLymmOViQb+/tBZJzmp0iOx3VYH3R/YwW/Po8QVEri6eKOhd7lDRsLhGHE7hrV42IVmSbW5QUWQADfM66F/8eGnNpES/SP9OIpm3LTPiufBn/4FXsZghdBQhDRy/siMJdDbK4bjP9bcf6VWKWDhD3djv6ae8/ByVlA2GQifMVxAgEqytihdzhZlS8MOTTpdOlgH5jdhqQtQtLyG5BRi5+pojsR8iTFDal6jgacbkCP/UO7B9h75d3GI7yf0Odr/hEG/7hireU3J+kBkmrRNlMU75Up0OiXXkPY8W0lOt1D9ya/+lPs7P3AzGfZPdpT4cBL2aStsI4CDKxErCpaW5OwG1b1xrZBqtfBqeh360N4n1wX1ylGoh3pGRRl+wi1LqTG3f3e0a9Wosc9irzxPMrGGi4Ql8LJtuTYMsyxeKct+3phlhtogyYTnyGrRMAnkqmCRqOrFt3JzxkbmuKFJoE9xVDj6uNSBo/xM8AXcbVEjes+Le4bwxsbTrx7hiyvRXK/PBGWeUdnlWoBxfwfPZjxyX5IncGznUMZraYfukbTlVsXeyaVR+MjnA3fTkEueh65S63m1XR0UfyR1vQqOXi0Q4ilMQJU8gloCNDsCAaCDZ/CXIlqk+GrgAOY1c6dsUeuq86MpAj1II5o1X6lZgLcEt4pu06kx6aoA9afzOhs1PqWjO/ggGbxfItM8kmrBc9XpRItYJ6l8L8vBafoB1qnfuO39fXV3kOAjDgUqkvlObBRKnRRdMb9hG8wntp1/pa3Cu82o1beowXzDgX5groh8umh0dWC+UcxpItMsvHTDDSoBhzpDT5rjv4xsMjwiXl2bL+Z3u2LPjG4Lcu7iVbOiifIGLupyTSjbP58kURqHB7d39jZI6cz/7bxaljyPVYq6CzuaOFbyHH8bMem1GtAcN8XkzWlbZ3lpU23Oam4H72Wo24NSOgoZX4lnrUPEnugfjnJrlBAU+ATfqClu9nNODGrt78WQjcCIbuTMzXYxvWTb/fl+ZVc17wGhS3PCjsGNsMotsRa+/lCkHnjrS/oAz8T88nOA/8CRBNE8kD4bL5yOF6UnGWBMDV52BFFXr0HKqT6SF0TB5TIBt6ZjpKZLVBhHsczoLI7kOepPFqda4EG+9eqQtLv4nO8W7jTFa/ebkN1gWNwbHXYjP/+CQGQjBXiaK+te5xD33BdAf54bmjOQhbLe+9HGJh2w8NHPa2gloQflTvS75/bGyr+YM2NDZ3x3XU29/lwgkPkAFAOiX4AXbqDTAxQqbGEvjqYAAAA", "archer": "data:image/webp;base64,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", "mage": "data:image/webp;base64,UklGRnQEAABXRUJQVlA4WAoAAAAQAAAASQAAQgAAQUxQSHwAAAABDzD/ERHCUW3tcfLKuCwOkBKcJU6wUglIQEKWjPk2//93FBDR/wlg4gJcDPUUdcBLoikDTdpLgiJ7z+CceTg91UmBHEiBHHptRA28nESdIAfSyp7OdWWD06+izHKGCfaxZnXz/QIvC6iBYpwBiqQzZlPGfunu0PbejSUCVlA4INIDAABwEQCdASpKAEMAPmEokUckIiGhJTQM8IAMCWcAyH3WNzPtb/xnRRJZ77e9uUsDuZFKqVHN6Lugv6g4EvoumQ13xW9OEERwa88c3qkT/NDC2bCqR6NDkMkqB+FMTpWJhwAwcTX1M0Qkw2s9cCTvAziEEpjFRkYsPHWrzr1GoRo1KU6CJ1jR+SRw3fB39uopiLktJSGAAP74V6mRdBS90KUU4irJG8eaQkKf2XO0kOzuUesSksbOcy/RSE5Xh0tz69TPRmAbKkzIjsOhDFHwuG3KPRMPloxZ21UpVEv1R2lK9P+PqUq6ef29DrkEN/lWMCsgeU3sY0+fxAAM3QnwRBby1yXyPnjW7EX8cHLJDUGTtyc1u7ey+6SoWrK+bsgCnVjVhehtLcDFDF7/or4OC2kyjNLRncJRlzskq1jMmxKflkhTGpDw+DYkTUguSYOW7xowynXbdcMCCmlqhD0wm/gIcEyoqXTqhhm8akfKTFKarKMn3l9FZFpHsou5F2DXBn9v9PAKDu9/8C7abVs/U7tKVxHbE080tDP6OKDkXrR+zbDIPwLi7IdyLzjz3mTL/WI0yqx/13N1IauHHYEFe8Vgg0+hAmTXw48yrQQo9mdF50Hx/b2He4lhk3EWCbJBG4eGBDvcBMLvWCs4bYMWBM+32LYUUZuVVDwpK64Jhwx4zTSPolXP1fOrz9DE0S9t4qWSCqqLl5Y+jevfYf3TzzLhiv8Yj215XfmchoKEEELWuBtMq99o97qb+LM0UBblnuIHDC4CJwlgNcwEE7NBAH7JgiacNVI5OWgQFhC/++jAo6K+4no5sXY5xH/mkVfVsA8ExEKKjIGfygPGiawt+p4zpXeeINd7wFZU8LvwWVma4kdfqJ5M4sUYyLcgFstRcR079/+EtWaFRtVkT7TGfAP/pYeDkzkpE9XkHT24N+K93NC11he5xnS/ySRR90kGxOXsHv2MGtgLlv4yZQ7I2+dropb6NHmlRWiGo92Wb/fm3qYZdwtl5FEngzLXBlGj8QIUa3r9wI6H/pclCgFWPZzRxKkDbqOe8gRR5dFf/mqZgjeDDZTYagqe9Ncrfc+fPWqx/Hi/jBDywrVSnmRIt2Itl48oYjZep6mQ/3Iz/+GliDM8auprVHXHNBEVD0yHAfYlcdV3iVT3ZFf68BffMAnWAn7HXhzXijZ91mPH96asGdplyb5OeYm8c5idCcwrPqCO1tuROgj31BaM5ptLq6xQhjZexPTu0E6fi8QBTHB04pIFORWlQWT/CU/u1m8//oGdLj6bgHLpP2oGyigYAAAAAAA="};
+
+/* ---- model built from either snapshot or live (same shape) ---- */
+function buildModel(tierLists, characters){
+  const charBySlug={}; characters.forEach(c=>charBySlug[c.slug]=c);
+  const lists=tierLists.map(tl=>({
+    name:tl.name, author:tl.author||"", content:tl.content_type||"", description:tl.description||"",
+    tierOrder:(tl.tiers||[]).map(t=>t.name),
+    tierNote:Object.fromEntries((tl.tiers||[]).map(t=>[t.name,t.note||""])),
+    tierOf:Object.fromEntries((tl.entries||[]).map(e=>[e.character_slug,e.tier])),
+    noteOf:Object.fromEntries((tl.entries||[]).filter(e=>e.note).map(e=>[e.character_slug,e.note])),
+  }));
+  const slugs=new Set();
+  lists.forEach(l=>Object.keys(l.tierOf).forEach(s=>slugs.add(s)));
+  characters.forEach(c=>slugs.add(c.slug));
+  const units=[...slugs].map(slug=>{
+    const c=charBySlug[slug]; const p=parseSlug(slug);
+    return { slug, name:(c&&c.name)||p.name, rarity:(c&&c.quality)||p.rarity,
+      cls:(c&&c.character_class)||"", factions:(c&&c.factions)||[],
+      recs:(c&&c.recommended_subclasses)||[], summary:(c&&c.summary)||"", raw:c||null };
+  });
+  return {lists, units, bySlug:Object.fromEntries(units.map(u=>[u.slug,u]))};
+}
+
+/* ---- state ---- */
+let MODEL=null;
+let owned=new Set();
+let invest=new Set();
+let view="tiers";
+let teams=null;
+let savedTeams=[];
+let selectedPoolSlug=null;
+let dragCls=null;
+let dragSrc=null;
+let dropOK=false;
+let selectedList=null;
+const filters={search:"", rarities:new Set(RARITY_ORDER), classes:new Set(CLASSES), factions:new Set(FACTIONS), ownedOnly:false, investOnly:false};
+
+/* ---- rendering ---- */
+const $=id=>document.getElementById(id);
+
+function currentList(){ return MODEL.lists.find(l=>l.name===selectedList)||MODEL.lists[0]; }
+
+function passesFilter(u){
+  if(!filters.rarities.has(u.rarity)) return false;
+  if(filters.classes.size<CLASSES.length && !(u.cls && filters.classes.has(u.cls))) return false;
+  if(filters.factions.size<FACTIONS.length && !u.factions.some(f=>filters.factions.has(f))) return false;
+  if(filters.ownedOnly && !owned.has(u.slug)) return false;
+  if(filters.investOnly && !invest.has(u.slug)) return false;
+  if(filters.search && !u.name.toLowerCase().includes(filters.search)) return false;
+  return true;
+}
+
+function renderListSeg(){
+  const seg=$("listseg"); seg.innerHTML="";
+  MODEL.lists.forEach(l=>{
+    const b=document.createElement("button");
+    b.textContent=l.name; b.setAttribute("aria-pressed", l.name===selectedList);
+    b.onclick=()=>{ selectedList=l.name; renderAll(); };
+    seg.appendChild(b);
+  });
+}
+function renderNote(){
+  const l=currentList();
+  $("listnote").textContent = [l.author&&("by "+l.author), l.content, l.description].filter(Boolean).join("  ·  ");
+}
+function renderRarityFilter(){
+  renderChips("rarityfilter", RARITY_ORDER, filters.rarities);
+  renderChips("classfilter", CLASSES, filters.classes, titleCase);
+  renderChips("factionfilter", FACTIONS, filters.factions, titleCase, FACTION_COLOR);
+}
+function renderChips(boxId, values, set, labelFn, colorMap){
+  const box=$(boxId); if(!box) return; box.innerHTML="";
+  values.forEach(v=>{
+    const b=document.createElement("button"); b.className="rchip";
+    const label=labelFn?labelFn(v):v;
+    b.innerHTML=(colorMap?`<span class="fdot" style="background:${colorMap[v]}"></span>`:"")+label;
+    b.title=label;
+    b.setAttribute("aria-pressed", set.has(v));
+    b.onclick=()=>{ set.has(v)?set.delete(v):set.add(v);
+      b.setAttribute("aria-pressed", set.has(v)); renderView(); renderStats(); };
+    box.appendChild(b);
+  });
+}
+
+function afterChange(){
+  renderStats();
+  if(view==="matrix"){ renderAnalytics(); return; }
+  if(view==="factions"){ renderFactions(); return; }
+  if(filters.ownedOnly||filters.investOnly) renderRoster(); else updateRailCounts();
+}
+function updateRailCounts(){
+  document.querySelectorAll(".band").forEach(band=>{
+    const total=band.querySelectorAll(".units .unit").length;
+    const own=band.querySelectorAll(".units .unit.owned").length;
+    const meta=band.querySelector(".rail .meta");
+    if(meta) meta.innerHTML=`<b>${own}</b> / ${total} owned`;
+  });
+}
+function unitEl(u){
+  const b=document.createElement("button");
+  b.className="unit"+(owned.has(u.slug)?" owned":"")+(invest.has(u.slug)?" invest":"");
+  b.innerHTML=`<span class="dot"></span>`+classIcon(u)+`<span class="nm"></span>`+(u.rarity?`<span class="rar"></span>`:"")+
+    `<span class="info" role="button" tabindex="0" title="Details" aria-label="${u.name} details">${INFO_SVG}</span>`+
+    `<span class="flag" role="button" tabindex="0" title="Flag to invest" aria-label="Flag ${u.name} to invest">${FLAG_SVG}</span>`;
+  b.querySelector(".nm").textContent=u.name;
+  if(u.rarity) b.querySelector(".rar").textContent=u.rarity;
+  b.setAttribute("aria-pressed", owned.has(u.slug));
+  b.setAttribute("aria-label", u.name+(owned.has(u.slug)?" (owned)":""));
+  b.onclick=()=>{ owned.has(u.slug)?owned.delete(u.slug):owned.add(u.slug);
+    b.classList.toggle("owned"); b.setAttribute("aria-pressed", owned.has(u.slug));
+    b.setAttribute("aria-label", u.name+(owned.has(u.slug)?" (owned)":""));
+    saveKey("dt_owned",owned); afterChange(); };
+  const info=b.querySelector(".info");
+  info.onclick=ev=>{ ev.stopPropagation(); openCharacter(u); };
+  info.onkeydown=ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); ev.stopPropagation(); openCharacter(u); } };
+  const flag=b.querySelector(".flag");
+  const toggleInvest=ev=>{ ev.stopPropagation();
+    invest.has(u.slug)?invest.delete(u.slug):invest.add(u.slug);
+    b.classList.toggle("invest"); flag.setAttribute("aria-pressed", invest.has(u.slug));
+    saveKey("dt_invest",invest); afterChange(); };
+  flag.setAttribute("aria-pressed", invest.has(u.slug));
+  flag.onclick=toggleInvest;
+  flag.onkeydown=ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); toggleInvest(ev); } };
+  b.onmouseenter=e=>showTip(e,u); b.onmousemove=moveTip; b.onmouseleave=hideTip;
+  b.onfocus=e=>showTip(e,u); b.onblur=hideTip;
+  return b;
+}
+
+function renderView(){ return view==="matrix"?renderAnalytics():view==="teams"?renderTeams():view==="factions"?renderFactions():renderRoster(); }
+function renderRoster(){ return view==="az" ? renderAZ() : view==="class" ? renderByClass() : renderTierBands(); }
+
+/* ---- faction overview + effect providers ---- */
+const PHASE_RANK={"Juvenile Phase":0,"Growth Phase":1,"Final Phase":2};
+let selFx=null;      /* {f, slug} currently expanded provider lookup */
+let fxFilter=null;   /* {count:Set, rel:Set} active filter values */
+function factionSignature(f){
+  const label=titleCase(f); const out=[];
+  Object.values(EFFECTS).forEach(e=>{ if(((e.effect||"")+" "+(e.remark||"")).includes("["+label+"] faction")) out.push(e.slug); });
+  return out.filter(s=>{ const nm=(EFFECTS[s]||{}).name; if(!nm) return true;
+    return !out.some(o=>o!==s && (((EFFECTS[o]||{}).effect||"")+" "+((EFFECTS[o]||{}).remark||"")).includes("["+nm+"]")); });
+}
+function factionEffects(f){
+  const set=new Set(factionSignature(f));
+  [...set].forEach(s=>{ const e=EFFECTS[s]; if(!e) return; const txt=(e.effect||"")+" "+(e.remark||"");
+    (txt.match(/\[([^\]]+)\]/g)||[]).forEach(m=>{ const ee=EFFECTS_BY_NAME[m.slice(1,-1).toLowerCase()]; if(ee) set.add(ee.slug); });
+    (txt.match(/\{([a-z0-9_]+)\}/g)||[]).forEach(m=>{ if(EFFECTS[m.slice(1,-1)]) set.add(m.slice(1,-1)); });
+  });
+  return [...set].filter(s=>EFFECTS[s]);
+}
+/* records for slug within faction f (optionally matching an active filter) */
+function facRecords(f, slug, filt){
+  const P=PROVIDERS[slug]||[];
+  return P.filter(r=>{ const u=MODEL.bySlug[r.u]; if(!u||!u.factions.includes(f)) return false;
+    if(filt){ if(!filt.count.has(r.count)) return false; if(!filt.rel.has(r.rel)) return false; }
+    return true; });
+}
+function facProviderCount(f, slug){ return new Set(facRecords(f,slug).map(r=>r.u)).size; }
+function factionChips(f){
+  const sig=new Set(factionSignature(f));
+  return factionEffects(f).filter(s=> !sig.has(s) && facRecords(f,s).length>0);
+}
+function resetFxFilter(slug){
+  const counts=isDebuffEffect(slug)?COUNTS_ENEMY:COUNTS_ALLY;
+  fxFilter={ count:new Set(counts), rel:new Set(RELS) };
+}
+function buildProviderResult(f){
+  const slug=selFx.slug, debuff=isDebuffEffect(slug), clabel=debuff?CLABEL_E:CLABEL;
+  const res=document.createElement("div"); res.className="provresult";
+  const head=document.createElement("div"); head.className="provhead";
+  head.innerHTML=`Who provides <span class="fx" data-fx="${slug}">${effName(slug)}</span>`;
+  res.appendChild(head);
+  const all=facRecords(f,slug);
+  const present={count:new Set(all.map(r=>r.count)), rel:new Set(all.map(r=>r.rel))};
+  const axis=(key,order,labels,title)=>{
+    const vals=order.filter(v=>present[key].has(v)); if(vals.length<=1) return null;
+    const row=document.createElement("div"); row.className="filtrow";
+    row.innerHTML=`<span class="filtlabel">${title}</span>`;
+    vals.forEach(v=>{ const b=document.createElement("button"); b.className="fchip"+(fxFilter[key].has(v)?" on":"");
+      b.textContent=labels[v]||v;
+      b.onclick=()=>{ if(fxFilter[key].has(v)){ if(fxFilter[key].size>1) fxFilter[key].delete(v); } else fxFilter[key].add(v); renderFactions(); };
+      row.appendChild(b); });
+    return row;
+  };
+  [axis("count",debuff?COUNTS_ENEMY:COUNTS_ALLY,clabel,"Targets"),
+   axis("rel",RELS,RLABEL,"Reliability")].forEach(r=>{ if(r) res.appendChild(r); });
+  const recs=facRecords(f,slug,fxFilter); const byUnit={};
+  recs.forEach(r=>{ (byUnit[r.u]=byUnit[r.u]||[]).push(r); });
+  const units=Object.keys(byUnit).map(s=>MODEL.bySlug[s]).filter(Boolean).sort(byRarityName);
+  const wrap=document.createElement("div"); wrap.className="provunits";
+  if(!units.length){ wrap.innerHTML=`<div class="empty">No units match these filters.</div>`; }
+  else units.forEach(u=>{
+    const cell=document.createElement("div"); cell.className="provunit";
+    cell.appendChild(unitEl(u));
+    const tags=document.createElement("div"); tags.className="provtags";
+    byUnit[u.slug].forEach(r=>{ const t=document.createElement("span"); t.className="ptag";
+      t.textContent=(clabel[r.count]||r.count)+(r.rel!=="guaranteed"?" \u00b7 "+(r.rel==="often"?"\u226550%":"<50%"):"");
+      tags.appendChild(t); });
+    cell.appendChild(tags); wrap.appendChild(cell);
+  });
+  res.appendChild(wrap);
+  return res;
+}
+function renderFactions(){
+  const host=$("bands"); host.innerHTML="";
+  if(!WYRMS.length && !Object.keys(EFFECTS).length){
+    host.innerHTML=`<div class="empty">Faction overview loads from <b>wyrms.json</b> and <b>status-effects.json</b> \u2014 add them to your repo (the update Action pulls them automatically).</div>`;
+    return;
+  }
+  FACTIONS.forEach(f=>{
+    const col=FACTION_COLOR[f];
+    const card=document.createElement("section"); card.className="fcard";
+    const total=MODEL?MODEL.units.filter(u=>u.factions.includes(f)).length:0;
+    const own=MODEL?MODEL.units.filter(u=>u.factions.includes(f)&&owned.has(u.slug)).length:0;
+    card.innerHTML=`<div class="fhead" style="border-color:${col}"><span class="fdot big" style="background:${col}"></span>`+
+      `<div><h2>${titleCase(f)}</h2></div>`+(total?`<div class="fown">${own}/${total} owned</div>`:"")+`</div>`;
+
+    /* signature effect(s) with trigger conditions */
+    const sig=factionSignature(f);
+    if(sig.length){
+      const sg=document.createElement("div"); sg.className="fsigbox";
+      sg.innerHTML=sig.map(s=>{ const e=EFFECTS[s]; if(!e) return "";
+        return `<div class="sigitem"><div class="signame">${e.name}</div>`+
+          `<div class="sigtext">${linkifyEffects(trimEffectText(e.effect))}</div>`+
+          (e.remark?`<div class="sigremark"><span class="sigk">Trigger</span> ${linkifyEffects(trimEffectText(e.remark))}</div>`:"")+`</div>`;
+      }).join("");
+      card.appendChild(sg);
+    }
+
+    /* effect-provider lookup */
+    const effs=MODEL?factionChips(f):[];
+    if(effs.length){
+      const pv=document.createElement("div"); pv.className="provbox";
+      const lbl=document.createElement("div"); lbl.className="provlabel"; lbl.textContent="Who provides these effects?";
+      pv.appendChild(lbl);
+      const chips=document.createElement("div"); chips.className="provchips";
+      effs.forEach(s=>{ const n=facProviderCount(f,s);
+        const b=document.createElement("button"); b.className="provchip"+(selFx&&selFx.f===f&&selFx.slug===s?" on":"");
+        b.innerHTML=`${effName(s)} <span class="pvn">${n}</span>`;
+        b.onclick=()=>{ if(selFx&&selFx.f===f&&selFx.slug===s){ selFx=null; fxFilter=null; } else { selFx={f,slug:s}; resetFxFilter(s); } renderFactions(); };
+        chips.appendChild(b);
+      });
+      pv.appendChild(chips);
+      if(selFx&&selFx.f===f){ pv.appendChild(buildProviderResult(f)); }
+      card.appendChild(pv);
+    }
+
+    /* dragon evolution line */
+    const line=WYRMS.filter(w=>w.faction===f).sort((a,b)=>(PHASE_RANK[a.phase]??9)-(PHASE_RANK[b.phase]??9));
+    if(line.length){
+      const dl=document.createElement("div"); dl.className="dragonline";
+      line.forEach(w=>{
+        const sk=(w.skills&&w.skills[0])||{};
+        const stage=document.createElement("div"); stage.className="dstage";
+        stage.innerHTML=`<img class="dimg" alt="" src="${R2}wyrm/${w.slug}/portrait.png">`+
+          `<div class="dname">${w.name}</div><div class="dphase">${[w.phase,w.quality].filter(Boolean).join(" \u00b7 ")}</div>`+
+          (sk.name?`<div class="dskill"><b>${sk.name}</b><div>${linkifyEffects(sk.description)}</div></div>`:"");
+        const img=stage.querySelector(".dimg"); if(img) img.onerror=()=>img.remove();
+        dl.appendChild(stage);
+      });
+      card.appendChild(dl);
+    }
+    host.appendChild(card);
+  });
+}
+function poolChip(u){
+  const b=document.createElement("button");
+  b.className="poolchip"+(selectedPoolSlug===u.slug?" sel":"")+(owned.has(u.slug)?" owned":"")+(invest.has(u.slug)?" invest":"");
+  b.draggable=true;
+  b.innerHTML=classIcon(u)+
+    u.factions.map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`).join("")+
+    `<span class="nm">${u.name}</span>`+
+    (u.rarity?`<span class="rar">${u.rarity}</span>`:"")+
+    (invest.has(u.slug)?`<span class="iflag">${FLAG_SVG}</span>`:"")+
+    `<span class="info" role="button" tabindex="0" title="Details">${INFO_SVG}</span>`;
+  b.ondragstart=e=>{ hideTip(); e.dataTransfer.setData("text/plain", JSON.stringify({from:"pool", slug:u.slug})); e.dataTransfer.effectAllowed="copy"; dragSrc=null; dropOK=false; dragCls=u.cls||""; markDrag(); };
+  b.ondragend=endDrag;
+  b.onclick=()=>{ selectedPoolSlug=(selectedPoolSlug===u.slug)?null:u.slug; renderTeams(); };
+  const info=b.querySelector(".info");
+  info.onclick=ev=>{ ev.stopPropagation(); openCharacter(u); };
+  info.onkeydown=ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); ev.stopPropagation(); openCharacter(u); } };
+  b.onmouseenter=e=>showTip(e,u); b.onmousemove=moveTip; b.onmouseleave=hideTip;
+  b.onfocus=e=>showTip(e,u); b.onblur=hideTip;
+  return b;
+}
+function saveCurrentTeam(){
+  if(!FACTIONS.some(f=>teams[f].some(s=>s))){ toast("Boards are empty \u2014 nothing to save."); return; }
+  if(savedTeams.length>=3){ toast("You can save up to 3 teams. Delete one first."); return; }
+  const name=(prompt("Name this team:","Team "+(savedTeams.length+1))||"").trim();
+  if(!name) return;
+  savedTeams.push({name:name.slice(0,24), boards:JSON.parse(JSON.stringify(teams))});
+  saveJSON("dt_saved_teams", savedTeams); renderTeams();
+  toast("Saved \u201c"+name.slice(0,24)+"\u201d.");
+}
+function loadSavedTeam(idx){
+  const s=savedTeams[idx]; if(!s) return;
+  teams=emptyTeams();
+  FACTIONS.forEach(f=>{ if(Array.isArray(s.boards[f])) for(let i=0;i<9;i++) teams[f][i]=s.boards[f][i]||null; });
+  saveTeams(); renderTeams(); toast("Loaded \u201c"+s.name+"\u201d.");
+}
+function deleteSavedTeam(idx){ savedTeams.splice(idx,1); saveJSON("dt_saved_teams", savedTeams); renderTeams(); }
+function cellAllowed(cls,idx){
+  const row=Math.floor(idx/3);              // 0 = front (top), 1 = middle, 2 = back (bottom)
+  if(cls==="guardian") return row===0;      // front only
+  if(cls==="assassin") return true;         // anywhere
+  if(cls==="warrior"||cls==="archer"||cls==="mage"||cls==="priest") return row>=1; // middle/back
+  return true;                              // unknown class: unrestricted
+}
+function placementMsg(cls){
+  return cls==="guardian" ? "Guardians can only go in the front row."
+    : titleCase(cls)+"s go in the middle or back row, not the front.";
+}
+function markDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.toggle("dno", !cellAllowed(dragCls, +c.dataset.i))); }
+function clearDrag(){ document.querySelectorAll(".board3 .cell").forEach(c=>c.classList.remove("dno","picking")); dragCls=null; }
+function endDrag(){
+  if(dragSrc && !dropOK){ teams[dragSrc.f][dragSrc.i]=null; saveTeams(); renderTeams(); }
+  clearDrag(); dragSrc=null; dropOK=false;
+}
+function placeUnit(f,i,slug){
+  if(!slug) return;
+  const u=MODEL.bySlug[slug]; const cls=u?u.cls:"";
+  if(!cellAllowed(cls,i)){ toast(placementMsg(cls)); return; }
+  const board=teams[f]; const at=board.indexOf(slug);
+  if(!board[i] && at<0 && board.filter(Boolean).length>=6){ toast("A board can hold up to 6 characters."); return; }
+  if(at>=0 && at!==i) board[at]=null;       // move within the same board
+  board[i]=slug; selectedPoolSlug=null; saveTeams(); renderTeams();
+}
+function moveOrSwap(sf,si,tf,ti){
+  if(sf===tf && si===ti) return;
+  const srcSlug=teams[sf][si]; if(!srcSlug) return;
+  if(sf!==tf){ placeUnit(tf,ti,srcSlug); return; }   // dragged to a different board: place a copy
+  const board=teams[tf]; const tgtSlug=board[ti];
+  const clsOf=s=>{ const u=MODEL.bySlug[s]; return u?u.cls:""; };
+  const srcCls=clsOf(srcSlug);
+  if(tgtSlug){                                        // swap the two units
+    const tgtCls=clsOf(tgtSlug);
+    if(!cellAllowed(srcCls,ti)){ toast(placementMsg(srcCls)); return; }
+    if(!cellAllowed(tgtCls,si)){ toast(placementMsg(tgtCls)); return; }
+    board[ti]=srcSlug; board[si]=tgtSlug;
+  } else {                                            // move to an empty slot
+    if(!cellAllowed(srcCls,ti)){ toast(placementMsg(srcCls)); return; }
+    board[ti]=srcSlug; board[si]=null;
+  }
+  selectedPoolSlug=null; saveTeams(); renderTeams();
+}
+function cellEl(f,i){
+  const cell=document.createElement("div"); cell.className="cell"; cell.dataset.i=i; const slug=teams[f][i];
+  if(selectedPoolSlug){
+    const su=MODEL.bySlug[selectedPoolSlug]; const scls=su?su.cls:""; const board=teams[f];
+    const capOk = board[i] || board.indexOf(selectedPoolSlug)>=0 || board.filter(Boolean).length<6;
+    cell.classList.add(cellAllowed(scls,i)&&capOk ? "ok" : "no");
+  }
+  cell.ondragover=e=>{ e.preventDefault(); cell.classList.add("over"); };
+  cell.ondragleave=()=>cell.classList.remove("over");
+  cell.ondrop=e=>{ e.preventDefault(); cell.classList.remove("over"); dropOK=true;
+    let d; try{ d=JSON.parse(e.dataTransfer.getData("text/plain")); }catch(_){ return; }
+    if(d.from==="cell") moveOrSwap(d.f,d.i,f,i); else if(d.slug) placeUnit(f,i,d.slug); };
+  cell.onclick=()=>{ if(selectedPoolSlug) placeUnit(f,i,selectedPoolSlug); };
+  if(slug){ const u=MODEL.bySlug[slug]; cell.classList.add("filled");
+    if(owned.has(slug)) cell.classList.add("owned");
+    if(invest.has(slug)) cell.classList.add("invest");
+    cell.draggable=true;
+    cell.ondragstart=e=>{ hideTip(); e.dataTransfer.setData("text/plain", JSON.stringify({from:"cell", f, i, slug})); e.dataTransfer.effectAllowed="move"; dragSrc={f,i}; dropOK=false; dragCls=(u&&u.cls)||""; markDrag(); const el=cell; setTimeout(()=>{ if(dragSrc) el.classList.add("picking"); },0); };
+    cell.ondragend=endDrag;
+    cell.innerHTML=classIcon(u)+
+      `<span class="cu">${u?u.name:parseSlug(slug).name}</span>`+
+      (invest.has(slug)?`<span class="cflag">${FLAG_SVG}</span>`:"");
+    if(u){ cell.onmouseenter=e=>showTip(e,u); cell.onmousemove=moveTip; cell.onmouseleave=hideTip; } }
+  return cell;
+}
+function boardEl(f){
+  const board=document.createElement("section"); board.className="board";
+  const head=document.createElement("div"); head.className="boardhead";
+  head.innerHTML=`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>${titleCase(f)}`;
+  board.appendChild(head);
+  const g=document.createElement("div"); g.className="board3";
+  g.appendChild(document.createElement("div"));                       // corner
+  ["L","C","R"].forEach(c=>{ const d=document.createElement("div"); d.className="cl"; d.textContent=c; g.appendChild(d); });
+  ["F","M","B"].forEach((r,ri)=>{ const rl=document.createElement("div"); rl.className="rl"; rl.textContent=r; g.appendChild(rl);
+    for(let ci=0;ci<3;ci++) g.appendChild(cellEl(f,ri*3+ci)); });
+  board.appendChild(g); return board;
+}
+function renderTeams(){
+  const host=$("bands"); host.innerHTML="";
+  const wrap=document.createElement("div"); wrap.className="poolwrap";
+  const head=document.createElement("div"); head.className="poolhead";
+  const actions=document.createElement("div"); actions.className="teamactions";
+  const clear=document.createElement("button"); clear.className="tbtn"; clear.textContent="Clear all boards";
+  clear.onclick=()=>{ if(confirm("Clear every board?")){ teams=emptyTeams(); saveTeams(); renderTeams(); } };
+  actions.appendChild(clear);
+  const save=document.createElement("button"); save.className="tbtn"; save.textContent="Save team";
+  save.onclick=saveCurrentTeam; actions.appendChild(save);
+  savedTeams.forEach((s,idx)=>{
+    const st=document.createElement("div"); st.className="savedteam";
+    const nm=document.createElement("button"); nm.className="snm"; nm.textContent=s.name; nm.title="Load "+s.name;
+    nm.onclick=()=>loadSavedTeam(idx);
+    const del=document.createElement("button"); del.className="del"; del.textContent="\u00d7"; del.title="Delete "+s.name;
+    del.onclick=e=>{ e.stopPropagation(); deleteSavedTeam(idx); };
+    st.appendChild(nm); st.appendChild(del); actions.appendChild(st);
+  });
+  head.appendChild(actions); wrap.appendChild(head);
+  const pool=document.createElement("div"); pool.className="teampool";
+  pool.ondragover=e=>{ e.preventDefault(); e.dataTransfer.dropEffect="move"; };
+  pool.ondrop=e=>{ e.preventDefault(); dropOK=true;
+    let d; try{ d=JSON.parse(e.dataTransfer.getData("text/plain")); }catch(_){ return; }
+    if(d.from==="cell"){ teams[d.f][d.i]=null; saveTeams(); renderTeams(); } };
+  const shown=MODEL.units.filter(passesFilter).sort(byRarityName);
+  if(!shown.length){ pool.innerHTML=`<div class="empty">No units match these filters.</div>`; }
+  else shown.forEach(u=>pool.appendChild(poolChip(u)));
+  wrap.appendChild(pool); host.appendChild(wrap);
+  const boards=document.createElement("div"); boards.className="boards";
+  FACTIONS.forEach(f=>boards.appendChild(boardEl(f)));
+  host.appendChild(boards);
+}
+function noMatch(host){ const d=document.createElement("div"); d.className="empty"; d.textContent="No units match these filters."; host.appendChild(d); }
+function makeBand(host, labelHTML, arr, extraHTML){
+  const own=arr.filter(u=>owned.has(u.slug)).length;
+  const band=document.createElement("section"); band.className="band";
+  const rail=document.createElement("div"); rail.className="rail";
+  rail.innerHTML=labelHTML+`<span class="meta"><b>${own}</b> / ${arr.length} owned</span>`+(extraHTML||"");
+  const units=document.createElement("div"); units.className="units";
+  arr.forEach(u=>units.appendChild(unitEl(u)));
+  band.appendChild(rail); band.appendChild(units); host.appendChild(band);
+}
+const byRarityName=(a,b)=>rarityRank(a.rarity)-rarityRank(b.rarity)||a.name.localeCompare(b.name);
+function renderByClass(){
+  const host=$("bands"); host.innerHTML="";
+  const shown=MODEL.units.filter(passesFilter);
+  if(!shown.length){ noMatch(host); return; }
+  const order=[...CLASSES,"unknown"];
+  const groups={}; order.forEach(c=>groups[c]=[]);
+  shown.forEach(u=>{ const c=(u.cls&&CLASSES.includes(u.cls))?u.cls:"unknown"; groups[c].push(u); });
+  order.forEach(c=>{
+    const arr=groups[c]; if(!arr.length) return;
+    arr.sort(byRarityName);
+    makeBand(host, `<span class="classlabel">${c==="unknown"?"\u2014":titleCase(c)}</span>`, arr,
+      c==="unknown"?`<span class="def">Class not in data yet</span>`:"");
+  });
+}
+function renderAZ(){
+  const host=$("bands"); host.innerHTML="";
+  const shown=MODEL.units.filter(passesFilter).sort((a,b)=>a.name.localeCompare(b.name));
+  if(!shown.length){ noMatch(host); return; }
+  const groups={};
+  shown.forEach(u=>{ let c=(u.name[0]||"#").toUpperCase(); if(!/[A-Z]/.test(c)) c="#"; (groups[c]=groups[c]||[]).push(u); });
+  Object.keys(groups).sort().forEach(letter=>
+    makeBand(host, `<span class="letter az">${letter}</span>`, groups[letter]));
+}
+function renderTierBands(){
+  const l=currentList(); const host=$("bands"); host.innerHTML="";
+  const shown=MODEL.units.filter(passesFilter);
+  const groups={}; l.tierOrder.forEach(t=>groups[t]=[]); const unranked=[];
+  shown.forEach(u=>{ const t=l.tierOf[u.slug]; if(t&&groups[t]) groups[t].push(u); else unranked.push(u); });
+  const order=[...l.tierOrder]; if(unranked.length) order.push("\u2014");
+  let any=false;
+  order.forEach(t=>{
+    const arr = t==="\u2014"?unranked:groups[t];
+    if(!arr.length) return; any=true;
+    arr.sort(byRarityName);
+    const col = t==="\u2014" ? "var(--muted-2)" : `var(${TIER_VAR[t]||"--tier-D"})`;
+    const extra = t!=="\u2014"&&l.tierNote[t] ? `<span class="def">${l.tierNote[t]}</span>`
+      : (t==="\u2014" ? `<span class="def">Not ranked in this list</span>` : "");
+    makeBand(host, `<span class="letter" style="background:${col}">${t==="\u2014"?"?":t}</span>`, arr, extra);
+  });
+  if(!any) noMatch(host);
+}
+
+function renderStats(){
+  if(!MODEL) return;
+  const list=currentList();
+  const shown=MODEL.units.filter(u=>passesFilter(u) && !!(list && list.tierOf[u.slug]));
+  const total=shown.length;
+  const ownShown=shown.filter(u=>owned.has(u.slug)).length;
+  $("ownN").textContent=ownShown; $("ownD").textContent="/ "+total;
+  $("barfill").style.width=(total?Math.round(ownShown/total*100):0)+"%";
+  const counts={}; RARITY_ORDER.forEach(r=>counts[r]=[0,0]);
+  let invShown=0;
+  shown.forEach(u=>{ if(invest.has(u.slug)) invShown++;
+    if(counts[u.rarity]){ counts[u.rarity][1]++; if(owned.has(u.slug)) counts[u.rarity][0]++; } });
+  const pills=$("rarpills"); pills.innerHTML="";
+  if(invShown){ const s=document.createElement("span"); s.className="pill invest";
+    s.innerHTML=`To invest <b>${invShown}</b>`; pills.appendChild(s); }
+  ["SSR EX","SSR+","SSR"].forEach(r=>{ if(!counts[r][1]) return;
+    const s=document.createElement("span"); s.className="pill";
+    s.innerHTML=`${r} <b>${counts[r][0]}/${counts[r][1]}</b>`; pills.appendChild(s); });
+}
+
+/* ---- faction coverage matrix ---- */
+const ABBR={sanctum_glory:"SG", wild_spirit:"WS", arcane_wisdom:"AW", otherworld_return:"OR", elemental_echo:"EE", illusion_veil:"IV"};
+let selectedCombo=null;
+function coverColor(p){ return "rgba(224,163,62,"+(0.06+0.55*p/100).toFixed(3)+")"; }
+function analyze(){
+  const pool=MODEL.units.filter(passesFilter);
+  const H=pool.filter(u=>u.factions.length>0);
+  const total=H.length;
+  const matrix=FACTIONS.map(a=>FACTIONS.map(b=>{
+    let n=0; H.forEach(u=>{ if(u.factions.includes(a)||u.factions.includes(b)) n++; }); return n;
+  }));
+  const singles=FACTIONS.map(f=>({facs:[f], n:H.filter(u=>u.factions.includes(f)).length}));
+  singles.sort((x,y)=>y.n-x.n);
+  const pairs=[];
+  for(let i=0;i<FACTIONS.length;i++) for(let j=i+1;j<FACTIONS.length;j++)
+    pairs.push({facs:[FACTIONS[i],FACTIONS[j]], n:matrix[i][j]});
+  pairs.sort((x,y)=>y.n-x.n);
+  const triples=[];
+  for(let i=0;i<FACTIONS.length;i++) for(let j=i+1;j<FACTIONS.length;j++) for(let k=j+1;k<FACTIONS.length;k++){
+    const a=FACTIONS[i],b=FACTIONS[j],c=FACTIONS[k]; let n=0;
+    H.forEach(u=>{ if(u.factions.includes(a)||u.factions.includes(b)||u.factions.includes(c)) n++; });
+    triples.push({facs:[a,b,c], n});
+  }
+  triples.sort((x,y)=>y.n-x.n);
+  return {H, poolCount:pool.length, total, matrix, singles, pairs, triples};
+}
+function renderAnalytics(){
+  const el=$("analytics"); const A=analyze(); const fn=titleCase;
+  const pct=n=>A.total?Math.round(n/A.total*100):0;
+  const dot=f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`;
+  const facLabel=f=>dot(f)+fn(f);
+  let h=`<div class="ahead"><div><h2>Faction coverage</h2></div></div>`;
+  if(A.total===0){
+    h+=`<p class="anote">No units with known faction data match the filters. `+
+       (A.poolCount>0?`Faction data comes from characters.json — add it to your repo to analyze the whole roster.`:``)+`</p>`;
+    el.innerHTML=h; return;
+  }
+  const key=selectedCombo?selectedCombo.join(","):"";
+  h+=`<div class="matrixwrap"><table class="matrix"><thead><tr><th></th>`;
+  FACTIONS.forEach(f=>{ h+=`<th title="${fn(f)}">${dot(f)}${ABBR[f]}</th>`; });
+  h+=`</tr></thead><tbody>`;
+  FACTIONS.forEach((a,i)=>{
+    h+=`<tr><th title="${fn(a)}">${dot(a)}${ABBR[a]}</th>`;
+    FACTIONS.forEach((b,j)=>{
+      if(j>i){ h+=`<td class="blank"></td>`; return; }
+      const n=A.matrix[i][j], p=pct(n), diag=i===j; const fk=(diag?[a]:[a,b]).join(",");
+      h+=`<td class="pickable${diag?" diag":""}${fk===key?" picked":""}" data-facs="${fk}" style="background:${coverColor(p)}" `+
+         `title="${diag?fn(a):fn(a)+" + "+fn(b)}: ${n} of ${A.total} (${p}%)">${p}<span class="pcts">%</span></td>`;
+    });
+    h+=`</tr>`;
+  });
+  h+=`</tbody></table></div>`;
+  const li=c=>`<li class="pickable${c.facs.join(",")===key?" picked":""}" data-facs="${c.facs.join(",")}"><span>${c.facs.map(facLabel).join(" + ")}</span><b>${pct(c.n)}%</b></li>`;
+  h+=`<div class="combos">`+
+     `<div class="combo"><h3>Single factions</h3><ol>`+A.singles.map(li).join("")+`</ol></div>`+
+     `<div class="combo"><h3>All pairs (${A.pairs.length})</h3><ol>`+A.pairs.map(li).join("")+`</ol></div>`+
+     `<div class="combo"><h3>All trios (${A.triples.length})</h3><ol>`+A.triples.map(li).join("")+`</ol></div>`+
+     `</div><div id="comboResult"></div>`;
+  el.innerHTML=h;
+  el.querySelectorAll(".pickable").forEach(node=>{
+    node.onclick=()=>{ const k=node.dataset.facs; selectedCombo=(key===k)?null:k.split(","); renderAnalytics(); };
+  });
+  renderComboResult(A);
+}
+function renderComboResult(A){
+  const box=$("comboResult"); if(!box) return; box.innerHTML="";
+  if(!selectedCombo||!selectedCombo.length) return;
+  const fn=titleCase;
+  const has=u=>u.factions.some(f=>selectedCombo.includes(f));
+  const head=document.createElement("div"); head.className="comboHead";
+  head.innerHTML=`Building around ${selectedCombo.map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`+fn(f)).join(" + ")}`;
+  box.appendChild(head);
+  const cols=document.createElement("div"); cols.className="comboCols";
+  [["Fits these factions", A.H.filter(has)],["Outside — won't fit", A.H.filter(u=>!has(u))]].forEach(([label,arr])=>{
+    arr.sort(byRarityName);
+    const col=document.createElement("div"); col.className="comboCol";
+    const hd=document.createElement("h4"); hd.textContent=`${label} (${arr.length})`; col.appendChild(hd);
+    const wrap=document.createElement("div"); wrap.className="comboUnits";
+    if(!arr.length){ wrap.innerHTML=`<div class="empty">None.</div>`; }
+    else arr.forEach(u=>wrap.appendChild(unitEl(u)));
+    col.appendChild(wrap); cols.appendChild(col);
+  });
+  box.appendChild(cols);
+}
+
+/* ---- tooltip ---- */
+const tip=$("tip");
+function showTip(e,u){
+  if(!u) return;
+  const facs=(u.factions||[]).map(f=>`<span class="fdot" style="background:${FACTION_COLOR[f]}"></span>`+titleCase(f)).join(" &nbsp; ");
+  tip.innerHTML=`<div class="tiprow"><img class="tipimg" alt="" src="${R2}character/${u.slug}/skins/default/portrait.png"><div class="tipbody">`+
+    `<h4>${u.name}</h4><div class="sub">${u.rarity}${u.cls?" · "+titleCase(u.cls):""}</div>`+
+    (facs?`<div class="fac">${facs}</div>`:"")+
+    (u.summary?`<div class="sum">${u.summary}</div>`:`<div class="sum none">No details loaded for this unit yet.</div>`)+
+    `</div></div>`;
+  const img=tip.querySelector(".tipimg"); if(img) img.onerror=()=>img.remove();
+  tip.classList.add("show"); moveTip(e);
+}
+function moveTip(e){
+  const pad=14, w=tip.offsetWidth, h=tip.offsetHeight;
+  let x=e.clientX+pad, y=e.clientY+pad;
+  if(x+w>innerWidth-8) x=e.clientX-w-pad;
+  if(y+h>innerHeight-8) y=e.clientY-h-pad;
+  tip.style.left=Math.max(8,x)+"px"; tip.style.top=Math.max(8,y)+"px";
+}
+function hideTip(){ tip.classList.remove("show"); }
+
+/* ---- effect links + secondary popover ---- */
+function effName(slug){ const e=EFFECTS[slug]; return e?e.name:titleCase(slug.replace(/_/g," ")); }
+function linkifyEffects(text){
+  if(!text) return "";
+  let s=String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  s=s.replace(/\{([a-z0-9_]+)\}/g,(m,slug)=> EFFECTS[slug]
+      ? `<span class="fx" data-fx="${slug}">${effName(slug)}</span>` : effName(slug));
+  s=s.replace(/\[([^\]]+)\]/g,(m,name)=>{ const e=EFFECTS_BY_NAME[name.toLowerCase()];
+      return e?`<span class="fx" data-fx="${e.slug}">${name}</span>`:name; });
+  return s.replace(/\n/g,"<br>");
+}
+function plainEffects(text){
+  return String(text||"").replace(/\{([a-z0-9_]+)\}/g,(m,s)=>effName(s)).replace(/\[([^\]]+)\]/g,"$1");
+}
+/* drops paragraphs that just restate a referenced effect's own detail (available on hover) */
+function trimEffectText(text){
+  if(!text) return text;
+  return String(text).split(/\n\s*\n/).filter(p=>{
+    const m=p.match(/^\s*\[([^\]]+)\]/);
+    return !(m && EFFECTS_BY_NAME[m[1].toLowerCase()]);
+  }).join("\n");
+}
+const fxpop=$("fxpop");
+function showFx(term){
+  let html="";
+  if(term.dataset.fx){ const e=EFFECTS[term.dataset.fx]; if(!e) return;
+    html=`<div class="fxname">${e.name}</div>`+(e.type?`<div class="fxtype">${e.type}</div>`:"")+
+      `<div class="fxeffect">${plainEffects(e.effect).replace(/\n/g,"<br>")}</div>`+
+      (e.remark?`<div class="fxremark">${plainEffects(e.remark).replace(/\n/g,"<br>")}</div>`:"");
+  } else if(term.dataset.gear){ const g=GEAR[term.dataset.gear]; if(!g) return;
+    const st=g.stats?Object.entries(g.stats).map(([k,v])=>k+" "+v).join(" \u00b7 "):"";
+    html=`<div class="fxname">${g.name}</div><div class="fxtype">${[g.type,g.quality].filter(Boolean).join(" \u00b7 ")}${g.set?" \u00b7 "+titleCase(g.set)+" set":""}</div>`+
+      (st?`<div class="fxeffect">${st}</div>`:"")+(g.lore?`<div class="fxremark">${g.lore}</div>`:"");
+  } else return;
+  fxpop.innerHTML=html; fxpop.classList.add("show");
+  const r=term.getBoundingClientRect(); const pw=Math.min(300, innerWidth-20);
+  fxpop.style.width=pw+"px";
+  let left=Math.min(r.left, innerWidth-10-pw); fxpop.style.left=Math.max(10,left)+"px";
+  fxpop.style.top=(r.bottom+6)+"px";
+  const ph=fxpop.offsetHeight;
+  if(r.bottom+6+ph>innerHeight-8) fxpop.style.top=Math.max(8,r.top-ph-6)+"px";
+}
+function hideFx(){ fxpop.classList.remove("show"); }
+document.addEventListener("mouseover",e=>{ const t=e.target.closest&&e.target.closest(".fx,.gearlink"); if(t) showFx(t); });
+document.addEventListener("mouseout",e=>{ const t=e.target.closest&&e.target.closest(".fx,.gearlink"); if(t) hideFx(); });
+
+/* ---- toast ---- */
+let toastT;
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show");
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),3200); }
+
+/* ---- live refresh ---- */
+async function loadData(){
+  const tl = await fetch(DATA.tiers,{cache:"no-store"})
+    .then(r=>{ if(!r.ok) throw new Error("tier-lists.json ("+r.status+")"); return r.json(); });
+  const opt=async u=>{ try{ return await fetch(u,{cache:"no-store"}).then(r=>{ if(!r.ok) throw 0; return r.json(); }); }catch(e){ return null; } };
+  const [ch,wy,fx,gr]=await Promise.all([opt(DATA.chars), opt(DATA.wyrms), opt(DATA.effects), opt(DATA.gear)]);
+  MODEL=buildModel(tl, ch||[]);
+  WYRMS = Array.isArray(wy)?wy:[];
+  EFFECTS={}; EFFECTS_BY_NAME={};
+  (Array.isArray(fx)?fx:[]).forEach(e=>{ EFFECTS[e.slug]=e; EFFECTS_BY_NAME[(e.name||"").toLowerCase()]=e; });
+  GEAR={}; (Array.isArray(gr)?gr:[]).forEach(g=>{ GEAR[g.slug]=g; });
+  PROVIDERS=buildProviders();
+  if(!MODEL.lists.find(l=>l.name===selectedList)) selectedList=(MODEL.lists[0]||{}).name;
+}
+function esc(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
+function isDebuffEffect(slug){ const e=EFFECTS[slug]; return !!(e && ["Control","Stat Debuff","Damage","Elemental"].includes(e.type)); }
+/* per-unit overrides take precedence over the heuristic: SCOPE_OVERRIDES[unitSlug][effectSlug] = [{count,rel}] */
+const SCOPE_OVERRIDES={
+  chiron_ssr:{ morale:[{count:"small",rel:"guaranteed"}] },   // Morale goes to the one selected ally; "all allies" is only the heal
+};
+function countAlly(s){
+  if((/\ball allies\b|all [a-z' ]*allies|entire team|whole team|all party\b|all units\b|all allied luminaries|to the team\b/.test(s)) && !/row/.test(s)) return "all";
+  if(/\brows?\b|back.?row|front.?row|middle.?row|circular area|straight line|\bin a line\b|\bcone\b|surrounding all|nearby all|allies within|allies in a|extra-large|large circular area|allies behind|allies in front|self and ([2-9]|two|three)|([3-9]|\d\d) (other |random |nearest )?all/.test(s)) return "group";
+  if(/an ally|one ally|a single ally|another ally|the nearest ally|\btarget\b|to self and (the|a|an|one|1)\b|\b[12] (other |random |nearest )?all(y|ies)|the [12] nearest|two all|self and (a|an|one)/.test(s)) return "small";
+  return null;
+}
+function countEnemy(s){ if(/all enemies|every enemy|all enemy luminaries/.test(s))return"all"; if(/circular area|cone[- ]?shaped|straight line|\d+ ?paths?|\bpaths?\b|random enem|enemies (it|they|within|in|along|around)|surrounding enemies|nearby enemies|area around|multiple enem/.test(s))return"few"; if(/single (target|enemy)|a single|one enemy|target enemy|highest[a-z ]*enemy|(nearest|farthest|lowest|highest) enemy|an enemy luminary\b|the enemy\b|the target\b/.test(s))return"single"; return null; }
+function classifyEffect(text, ctx, slug){
+  const debuff=isDebuffEffect(slug); const out=[]; const t=String(text),low=t.toLowerCase(),lctx=String(ctx).toLowerCase();
+  const re=new RegExp("\\{"+esc(slug)+"\\}","g"); let m;
+  while((m=re.exec(t))){
+    const ss=Math.max(low.lastIndexOf(".",m.index-1)+1, low.lastIndexOf("\n",m.index-1)+1);
+    let se=low.indexOf(".",m.index); const nl=low.indexOf("\n",m.index); if(se<0)se=low.length; if(nl>=0&&nl<se)se=nl;
+    const sentence=low.slice(ss,se); const tp=m.index-ss;
+    const preSent=sentence.slice(0,tp), pre=sentence.slice(Math.max(0,tp-28),tp), postAfter=sentence.slice(tp+m[0].length,Math.min(sentence.length,tp+m[0].length+60)), region=pre+" "+postAfter;
+    if(/\b(whenever|when|each time|upon|every time|while|after|if)\b[^,]*$/.test(preSent)) continue;   // leading trigger clause -> not a grant
+    if(/^\s*(is (gained|consumed|removed|active|applied|triggered)|stacks?\b|is at|are (active|present))/.test(postAfter)) continue;
+    const granted=/\b(grant|grants|granting|appl\w+|inflicts?|bestows?|gives?|restores?|summons?)\b/.test(pre)||/\bgains?\b|\bgaining\b/.test(pre);
+    if(/possess|multiplied by|number of|per stack|consume[sd]?|expend/.test(sentence)&&!granted) continue;
+    if(!/\b(grant|appl|inflict|bestow|gain|give|restore|summon)/.test(sentence)) continue;
+    const cm=sentence.match(/(\d+)(?:\s*-\s*(\d+))?%\s*chance/);
+    let rel="guaranteed"; if(cm){ const mx=Math.max(+cm[1],cm[2]?+cm[2]:+cm[1]); rel=mx>=50?"often":"sometimes"; }
+    let count;
+    const selfHit=/\bto self\b|\bitself\b|\bto itself\b|grants? self|gives? self|for self\b/.test(region)||(/\bgains?\b|\bgaining\b/.test(pre)&&!/all|allies|luminaries|team|\bally\b/.test(pre));
+    const selfAndAlly=/self and (the |a |an |one |\d|nearest)/.test(region);
+    if(debuff){ count=countEnemy(sentence)||countEnemy(lctx)||"few"; }
+    else if(selfHit&&!selfAndAlly){ count="self"; }
+    else { count=countAlly(sentence)||countAlly(lctx)||"small"; }
+    out.push({count,rel});
+  }
+  return out;
+}
+function buildProviders(){
+  const P={};
+  const add=(slug,rec,unit)=>{ P[slug]=P[slug]||[]; if(!P[slug].some(x=>x.u===unit&&x.count===rec.count&&x.rel===rec.rel)) P[slug].push({u:unit,count:rec.count,rel:rec.rel}); };
+  MODEL.units.forEach(u=>{ const c=u.raw; if(!c) return;
+    const ov=SCOPE_OVERRIDES[u.slug];
+    const skillMap={}; (c.skills||[]).forEach(s=>{ if(s.name) skillMap[s.name.toLowerCase()]=s.description||""; });
+    const abilities=[];
+    (c.skills||[]).forEach(s=>abilities.push(s.description));
+    if(c.talent){ (c.talent.talent_levels||[]).forEach(l=>abilities.push(l.effect)); abilities.push(c.talent.description); }
+    (c.divinity||[]).forEach(n=>(n.choices||[]).forEach(ch=>abilities.push(ch.description)));
+    const bySlug={};
+    abilities.forEach(txt=>{ if(!txt) return;
+      let ctx=txt;
+      (txt.match(/\[([^\]]+)\]/g)||[]).forEach(r=>{ const nm=r.slice(1,-1).toLowerCase(); if(skillMap[nm]) ctx+=" "+skillMap[nm]; });
+      const seen=new Set(); let m; const tok=/\{([a-z0-9_]+)\}/g; while((m=tok.exec(txt))) seen.add(m[1]);
+      seen.forEach(slug=>{ (bySlug[slug]=bySlug[slug]||[]).push(...classifyEffect(txt, ctx, slug)); });
+    });
+    Object.keys(bySlug).forEach(slug=>{
+      const recs=(ov&&ov[slug]) ? ov[slug] : bySlug[slug];   // override wins
+      recs.forEach(r=>add(slug,r,u.slug));
+    });
+  });
+  return P;
+}
+const COUNTS_ALLY=["all","group","small","self"], COUNTS_ENEMY=["all","few","single"];
+const RELS=["guaranteed","often","sometimes"];
+const CLABEL={all:"Whole team",group:"A group (3+)",small:"A few (\u22642)",self:"Self",single:"Single"};   // ally counts
+const CLABEL_E={all:"All enemies",few:"A few",single:"Single"};                  // enemy counts
+const RLABEL={guaranteed:"Guaranteed",often:"Often \u226550%",sometimes:"Sometimes <50%"};
+async function refresh(){
+  const btn=$("refresh"); btn.disabled=true; btn.textContent="Checking\u2026";
+  const hadModel=!!MODEL;
+  const before=hadModel ? new Set(MODEL.units.map(u=>u.slug)) : new Set();
+  try{
+    await loadData();
+    const added=MODEL.units.filter(u=>!before.has(u.slug));
+    renderAll();
+    const t=new Date().toLocaleTimeString();
+    if(!hadModel){
+      $("datastate").innerHTML="Loaded "+MODEL.units.length+" units<br>"+t;
+      toast("Loaded "+MODEL.units.length+" units.");
+    } else if(added.length){
+      const names=added.slice(0,4).map(u=>u.name).join(", ");
+      $("datastate").innerHTML="Updated \u2014 "+added.length+" new<br>"+t;
+      toast("Refresh complete \u2014 "+added.length+" new unit"+(added.length>1?"s":"")+": "+names+(added.length>4?"\u2026":""));
+    } else {
+      $("datastate").innerHTML="Up to date<br>"+t;
+      toast("Refresh complete \u2014 no new units ("+MODEL.units.length+" total).");
+    }
+  }catch(e){
+    if(hadModel){ $("datastate").innerHTML="<b style='color:#e05a3e'>Refresh failed</b><br>"+new Date().toLocaleTimeString();
+      toast("Refresh failed \u2014 couldn't reach the data files. Showing what was already loaded."); }
+    else showDataError(e);
+  }
+  btn.disabled=false; btn.textContent="Refresh";
+}
+function showDataError(e){
+  $("datastate").innerHTML="<b style='color:#e05a3e'>Data not loaded</b>";
+  const host=$("bands");
+  if(host) host.innerHTML=`<div class="empty">Couldn't load ${String(e.message||e)}. `+
+    `This page reads <b>tier-lists.json</b> and <b>characters.json</b> from its own folder \u2014 they need to sit next to it. `+
+    `That's the case when it's hosted; a file opened on its own or a plain preview won't have them.</div>`;
+}
+
+function applyViewVisibility(){
+  $("bands").style.display = view==="matrix"?"none":"";
+  $("analytics").classList.toggle("show", view==="matrix");
+  $("listnote").style.display = view==="tiers"?"":"none";
+  const hideFilters = view==="factions";
+  $("searchbox").style.display = hideFilters?"none":"";
+  $("ownedOnly").style.display = hideFilters?"none":"";
+  $("investOnly").style.display = hideFilters?"none":"";
+  $("filtergroups").style.display = hideFilters?"none":"";
+  $("listseg").style.display = view==="tiers"?"":"none";
+  document.querySelectorAll(".vtab").forEach(t=>t.setAttribute("aria-pressed", t.dataset.view===view));
+}
+function renderAll(){
+  renderListSeg(); renderNote(); applyViewVisibility();
+  renderView();
+  renderStats();
+}
+
+/* ---- export / import (simple, forward-compatible, slug-keyed) ---- */
+function exportData(){
+  const units={};
+  const rec=s=>units[s]=units[s]||{};
+  owned.forEach(s=>{ rec(s).o=1; });
+  invest.forEach(s=>{ rec(s).i=1; });
+  FACTIONS.forEach(f=>teams[f].forEach((slug,pos)=>{ if(slug){ const u=rec(slug); (u.t=u.t||[]).push([f,pos]); } }));
+  const data={format:"dtroster", version:1, exported:new Date().toISOString(), units};
+  const blob=new Blob([JSON.stringify(data,null,1)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download="dt-roster-backup.json"; document.body.appendChild(a); a.click();
+  a.remove(); URL.revokeObjectURL(a.href);
+  toast("Exported "+Object.keys(units).length+" units.");
+}
+function importData(file){
+  const reader=new FileReader();
+  reader.onload=()=>{
+    let data; try{ data=JSON.parse(reader.result); }catch(e){ toast("Couldn't read that file \u2014 is it a dt-roster backup?"); return; }
+    const units=data&&data.units; if(!units||typeof units!=="object"){ toast("That file has no roster data."); return; }
+    owned=new Set(); invest=new Set(); teams=emptyTeams();
+    let n=0;
+    Object.keys(units).forEach(slug=>{        // unknown slugs are kept harmlessly; they render if the character returns
+      const r=units[slug]||{}; n++;
+      if(r.o) owned.add(slug);
+      if(r.i) invest.add(slug);
+      (r.t||[]).forEach(p=>{ const f=p&&p[0], pos=p&&p[1]; if(teams[f] && pos>=0 && pos<9) teams[f][pos]=slug; });
+    });
+    saveKey("dt_owned",owned); saveKey("dt_invest",invest); saveTeams();
+    renderAll();
+    toast("Imported "+n+" units.");
+  };
+  reader.readAsText(file);
+}
+
+/* ---- boot ---- */
+(async function(){
+  owned=await loadKey("dt_owned");
+  invest=await loadKey("dt_invest");
+  const savedBoards=await loadJSON("dt_teams", null);
+  teams=emptyTeams();
+  if(savedBoards) FACTIONS.forEach(f=>{ if(Array.isArray(savedBoards[f])) for(let i=0;i<9;i++) teams[f][i]=savedBoards[f][i]||null; });
+  savedTeams=await loadJSON("dt_saved_teams", []);
+  if(!Array.isArray(savedTeams)) savedTeams=[];
+  renderRarityFilter();
+  $("search").oninput=e=>{ filters.search=e.target.value.trim().toLowerCase(); renderView(); };
+  $("ownedOnly").onclick=e=>{ filters.ownedOnly=!filters.ownedOnly; e.currentTarget.setAttribute("aria-pressed",filters.ownedOnly); renderView(); };
+  $("investOnly").onclick=e=>{ filters.investOnly=!filters.investOnly; e.currentTarget.setAttribute("aria-pressed",filters.investOnly); renderView(); };
+  document.querySelectorAll(".vtab").forEach(tab=>{ tab.onclick=()=>{ view=tab.dataset.view; renderAll(); }; });
+  $("refresh").onclick=refresh;
+  $("cmodal").onclick=e=>{ if(e.target===$("cmodal")) closeCharacter(); };
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && !$("cmodal").hidden) closeCharacter(); });
+  $("exportBtn").onclick=exportData;
+  $("importBtn").onclick=()=>$("importFile").click();
+  $("importFile").onchange=e=>{ if(e.target.files[0]) importData(e.target.files[0]); e.target.value=""; };
+  try{
+    await loadData(); renderAll();
+    $("datastate").innerHTML="Loaded "+MODEL.units.length+" units<br>"+new Date().toLocaleTimeString();
+  }catch(e){ showDataError(e); }
+})();
+</script>
+</body>
+</html>
