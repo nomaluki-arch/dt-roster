@@ -1202,8 +1202,15 @@ async function loadData(){
 function esc(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
 function isDebuffEffect(slug){ const e=EFFECTS[slug]; return !!(e && ["Control","Stat Debuff","Damage","Elemental"].includes(e.type)); }
 /* per-unit overrides take precedence over the heuristic: SCOPE_OVERRIDES[unitSlug][effectSlug] = [{count,rel}] */
-const SCOPE_OVERRIDES={};
-function countAlly(s){ if(/all allies|all [a-z' ]*allies|all allied|allies gain|entire team|whole team|all party|all units|all [a-z' ]*luminaries|to the team/.test(s))return"all"; if(/an ally|one ally|another ally|two allies|allies (within|in|behind|of|in front)|allied (unit|luminary|wyrm)|\brandom (ally|allies|allied|luminar)|\btarget\b|chosen|lowest hp|highest attack|nearest all|\d+ (nearest|random) all/.test(s))return"few"; return null; }
+const SCOPE_OVERRIDES={
+  chiron_ssr:{ morale:[{count:"small",rel:"guaranteed"}] },   // Morale goes to the one selected ally; "all allies" is only the heal
+};
+function countAlly(s){
+  if((/\ball allies\b|all [a-z' ]*allies|entire team|whole team|all party\b|all units\b|all allied luminaries|to the team\b/.test(s)) && !/row/.test(s)) return "all";
+  if(/\brows?\b|back.?row|front.?row|middle.?row|circular area|straight line|\bin a line\b|\bcone\b|surrounding all|nearby all|allies within|allies in a|extra-large|large circular area|allies behind|allies in front|self and ([2-9]|two|three)|([3-9]|\d\d) (other |random |nearest )?all/.test(s)) return "group";
+  if(/an ally|one ally|a single ally|another ally|the nearest ally|\btarget\b|to self and (the|a|an|one|1)\b|\b[12] (other |random |nearest )?all(y|ies)|the [12] nearest|two all|self and (a|an|one)/.test(s)) return "small";
+  return null;
+}
 function countEnemy(s){ if(/all enemies|every enemy|all enemy luminaries/.test(s))return"all"; if(/circular area|cone[- ]?shaped|straight line|\d+ ?paths?|\bpaths?\b|random enem|enemies (it|they|within|in|along|around)|surrounding enemies|nearby enemies|area around|multiple enem/.test(s))return"few"; if(/single (target|enemy)|a single|one enemy|target enemy|highest[a-z ]*enemy|(nearest|farthest|lowest|highest) enemy|an enemy luminary\b|the enemy\b|the target\b/.test(s))return"single"; return null; }
 function classifyEffect(text, ctx, slug){
   const debuff=isDebuffEffect(slug); const out=[]; const t=String(text),low=t.toLowerCase(),lctx=String(ctx).toLowerCase();
@@ -1225,7 +1232,7 @@ function classifyEffect(text, ctx, slug){
     const selfAndAlly=/self and (the |a |an |one |\d|nearest)/.test(region);
     if(debuff){ count=countEnemy(sentence)||countEnemy(lctx)||"few"; }
     else if(selfHit&&!selfAndAlly){ count="self"; }
-    else { count=countAlly(sentence)||countAlly(lctx)||"few"; }
+    else { count=countAlly(sentence)||countAlly(lctx)||"small"; }
     out.push({count,rel});
   }
   return out;
@@ -1254,9 +1261,9 @@ function buildProviders(){
   });
   return P;
 }
-const COUNTS_ALLY=["all","few","self"], COUNTS_ENEMY=["all","few","single"];
+const COUNTS_ALLY=["all","group","small","self"], COUNTS_ENEMY=["all","few","single"];
 const RELS=["guaranteed","often","sometimes"];
-const CLABEL={all:"Whole team",few:"A few",self:"Self",single:"Single"};        // ally counts
+const CLABEL={all:"Whole team",group:"A group (3+)",small:"A few (\u22642)",self:"Self",single:"Single"};   // ally counts
 const CLABEL_E={all:"All enemies",few:"A few",single:"Single"};                  // enemy counts
 const RLABEL={guaranteed:"Guaranteed",often:"Often \u226550%",sometimes:"Sometimes <50%"};
 async function refresh(){

@@ -1,4 +1,4 @@
-# Dragon Traveler Roster Codex
+# Dragon Traveler Roster Helper
 
 A static site. It reads two data files sitting next to it: tier-lists.json and
 characters.json. Nothing is baked into the page.
@@ -9,20 +9,15 @@ characters.json. Nothing is baked into the page.
 - .github/workflows/update-data.yml   -> OPTIONAL: refreshes the data daily
 - README.md                           -> this file
 
-characters.json is NOT included. It's a large file (every unit's factions + classes)
-and has to come from dtwiki directly. Two ways to get it in, below.
+characters.json is NOT included (it's large). The Factions tab and effect popovers also use
+wyrms.json and status-effects.json. All three come from dtwiki - fetched automatically by the
+Action, or added manually as below.
 
-## Fastest way to a fully working site (5 min, no Action)
-The site needs three files in the repo: index.html, tier-lists.json, characters.json.
-This package has the first two; you add the third once:
-
-1. Open  https://dtwiki.org/data/enUS/characters.json  in your browser.
-2. Save it (Cmd+S / Ctrl+S) as exactly  characters.json  (raw JSON - if the dialog
-   wants .txt or .html, change it back to .json).
-3. In your repo: "Add file" -> "Upload files" -> drag in index.html, tier-lists.json,
-   and characters.json -> "Commit changes".
-4. Settings -> Pages -> Source "Deploy from a branch" -> main -> / (root) -> Save.
-5. Open your Pages URL (hard-refresh: Cmd+Shift+R). Full roster, factions, classes, matrix.
+## Manual data files (if not using the Action)
+Open each URL in your browser, save it with the exact filename, and upload it to the repo:
+- https://dtwiki.org/data/enUS/characters.json      -> characters.json   (roster, factions, classes, kits)
+- https://dtwiki.org/data/enUS/wyrms.json            -> wyrms.json        (faction dragons + evolutions)
+- https://dtwiki.org/data/enUS/status-effects.json   -> status-effects.json (effect glossary)
 
 ## Optional: make it auto-update daily (the Action)
 The web uploader hides dot-folders, so DON'T rely on dragging .github in - add the
