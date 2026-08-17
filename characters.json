@@ -4889,7 +4889,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1786285329
+    "last_updated": 1786547248
   },
   {
     "name": "Morgana",
@@ -9116,7 +9116,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1786285329
+    "last_updated": 1786547248
   },
   {
     "name": "Rin",
@@ -9388,7 +9388,7 @@
         "name": "Undercover Maid"
       }
     ],
-    "last_updated": 1786285329
+    "last_updated": 1786547248
   },
   {
     "name": "White Tiger",
@@ -13439,12 +13439,12 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1786285329
+    "last_updated": 1786547248
   },
   {
     "name": "Hitomi",
     "slug": "hitomi_ssr_plus",
-    "is_global": false,
+    "is_global": true,
     "summary": "A synergistic Warrior who forms a {link} with her highest-attack ally, granting mutual stat boosts and accumulating {nether_sight} stacks when they deal active skill damage. She unleashes devastating dash slashes with [Demonbane Flurry] and significantly empowers her linked ally's attack and defense once her {nether_sight} reaches maximum stacks.",
     "recommended_noble_phantasm": [
       "elven_greatshield",
@@ -13671,7 +13671,7 @@
         "name": "Neon Mirage"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1786937698
   },
   {
     "name": "Marylis",
@@ -16829,7 +16829,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1786285329
+    "last_updated": 1786547248
   },
   {
     "name": "Himiko",
@@ -17792,7 +17792,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1786285329
+    "last_updated": 1786547248
   },
   {
     "name": "Medusa",
@@ -20736,7 +20736,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1786285329
+    "last_updated": 1786547248
   },
   {
     "name": "Cleopatra",
