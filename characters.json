@@ -276,7 +276,7 @@
       "guardian",
       "avenger"
     ],
-    "release_date": null,
+    "release_date": "2026-09-03",
     "attack_range": "melee",
     "attack_type": "magical",
     "combat_tags": [
@@ -453,7 +453,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785978112
+    "last_updated": 1787145091
   },
   {
     "name": "Anubis",
@@ -897,7 +897,7 @@
         "name": "Master Chef"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Dvalin",
@@ -1354,7 +1354,7 @@
         "name": "One Drop Into Wine"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Helveil",
@@ -1647,7 +1647,7 @@
       "\"Seriously?! Those drunkards must have crud for brains?! Make peace with the barbarians? Hah!\" She tore the emperor's order to retreat into shreds and had the royal messenger executed on the spot.\n\"The emperor has fallen under the sway of traitors. Soldiers of the empire—our target is the capital! March! Purge the throne!\""
     ],
     "quote": "They'll regret crossing me!",
-    "ssr_quote": "Niflgaard above all.",
+    "ssr_quote": "Nibelgardabove all.",
     "talent": {
       "name": "Intimidation - Commanding Presence",
       "talent_levels": [
@@ -1810,7 +1810,7 @@
         "name": "Slam Dunk Master"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145091
   },
   {
     "name": "Salome",
@@ -1851,7 +1851,7 @@
       "templar",
       "lionheart_knight"
     ],
-    "release_date": null,
+    "release_date": "2026-09-24",
     "attack_range": "melee",
     "attack_type": "magical",
     "combat_tags": [
@@ -2024,7 +2024,7 @@
         "name": "Gaming Ace"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145091
   },
   {
     "name": "Xuanwu",
@@ -2886,7 +2886,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Herman",
@@ -2942,7 +2942,7 @@
       "This barbarian leader, the daughter of the Fenris tribe's chieftain, was sent to the Nibelgard Empire as a hostage after their rebellion failed. Recognized for her exceptional prowess, she was later recruited into the imperial army.\n\n\"To forget is to betray... Fenris will never be enslaved!\"",
       "Herman showed the unwavering obedience of a devoted servant to the Empire, stepping onto the battlefield for the first time already bearing the rank of Centurion. She did not disappoint—rising to prominence across numerous campaigns, and eventually earning both Imperial citizenship and a noble title.\n\n\"Oh, absolutely! I'm deeply honored to serve the Empire. It's just glorious!\"",
       "However, in reality, Herman never forgot that she was a descendant of the Beast Spirits, a member of the Fenris known as the \"Barbarians,\" always waiting for a chance to avenge the Empire. She secretly contacted various Barbarian tribes and prepared a Raid against the Empire. \n\n\"By the Beast Spirits! My bravest warriors—stand as one! Let the shameless Empire answer for its years of tyranny and conquest!\"",
-      "Once all was in place, Herman exploited the Empire’s trust in her to lure the stationed Imperial Legion into the encirclement of the barbarian coalition. Amid dense forests and treacherous, mud-choked paths, the once-invincible legion was harried without end—until, under Herman’s command, it was utterly destroyed.\n\n\"Some fled. Others gathered in a last, desperate stand. At the edge of the bones lay shattered javelins... and the torn limbs of horses.\" — Chronicles of the Nilfgaard Empire",
+      "Once all was in place, Herman exploited the Empire’s trust in her to lure the stationed Imperial Legion into the encirclement of the barbarian coalition. Amid dense forests and treacherous, mud-choked paths, the once-invincible legion was harried without end—until, under Herman’s command, it was utterly destroyed.\n\n\"Some fled. Others gathered in a last, desperate stand. At the edge of the bones lay shattered javelins... and the torn limbs of horses.\" — Chronicles of the Nibelgard Empire",
       "The Empire's frenzied counterattack exceeded even the worst expectations. Despite having Herman, who is well-versed in Imperial tactics, at the helm, the barbarian coalition continued to suffer defeat after defeat. Just when all seemed lost, an unexpected figure extended an olive branch for cooperation. \n\n\"Listen up, Imperial scum, we're only teaming up temporarily. We'll settle the score with your bastard emperor father later.\""
     ],
     "quote": "Spirit of the Beast, fight by my side!",
@@ -3101,7 +3101,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145091
   },
   {
     "name": "Oberonnie",
@@ -3316,7 +3316,7 @@
         "name": "Love in the Starlight"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Eurytion",
@@ -3503,7 +3503,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Oberonnie",
@@ -4048,7 +4048,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Rock Slime",
@@ -4201,7 +4201,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Hela",
@@ -4269,7 +4269,7 @@
         },
         {
           "level": 2,
-          "effect": "[Soul Hook Scythe] On hit, applies {damage_reduction_down}, and additionally causes the nearest ally ranged Luminary, excluding self, to also target the enemy."
+          "effect": "[Soul Hook Scythe] On hit, inflicts {damage_reduction_down} and additionally causes the nearest allied Ranged Luminary, excluding self, to also target this enemy."
         },
         {
           "level": 3,
@@ -4300,7 +4300,7 @@
       {
         "name": "Soul Hook Scythe",
         "type": "Ultimate Skill",
-        "description": "Throws a scythe at the farthest enemy Luminary in a straight line, dealing magic damage equal to 600% of own Attack and applying {stun} for 2-3.2s. After this, drags the target twice to the front and deals magic damage equal to 600% of own Attack. Afterward, the caster and the nearest ally melee Luminary target the enemy. If the target dies, resets this skill's cooldown.\nCasts this skill once at the start of battle.",
+        "description": "Throws a scythe at the farthest enemy Luminary or Wyrm in a straight line (prioritizing Luminaries), dealing magic damage equal to 600% of own Attack and inflicting {stun} for 2-3.2s. After this, drags the target twice to the front of this unit and deals magic damage equal to 600% of own Attack. Afterward, the caster and the nearest ally Melee Luminary target the enemy. If the target dies, resets this skill's cooldown.\nCasts this skill once at the start of battle.",
         "cooldown": 90
       },
       {
@@ -4418,7 +4418,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145091
   },
   {
     "name": "Venus",
@@ -4866,30 +4866,180 @@
     "recommended_noble_phantasm": [],
     "recommended_gear": [],
     "recommended_subclasses": [],
-    "title": "Master of Delight",
+    "title": "Gourmet Monarch",
     "quality": "SSR+",
     "character_class": "priest",
     "factions": [
       "wild_spirit",
       "otherworld_return"
     ],
-    "subclasses": [],
-    "origin": "",
-    "height": "",
-    "weight": "",
-    "lore": "",
-    "quote": "",
-    "ssr_quote": "",
-    "talent": null,
-    "skills": [],
-    "divinity": [],
+    "subclasses": [
+      "medic",
+      "cleric",
+      "preacher",
+      "high_priest",
+      "executor",
+      "divine_officer"
+    ],
+    "release_date": null,
+    "attack_range": "ranged",
+    "attack_type": "magical",
+    "combat_tags": [
+      "Arcane Arts",
+      "Healing Buff"
+    ],
+    "origin": "Modern Fantasy Literature",
+    "height": "156 cm",
+    "weight": "72kg",
+    "lore": [
+      "In an Ogre tribe that worships brute strength, follows the gluttonous doctrine of the Great Devourer, and treats eating as the highest honor, Caligula is a complete outlier. She lacks the bulky, rough build of her kin. Instead, she has fair skin, an elegant bearing, and a mind far sharper than anyone in the tribe. With a rugged boar-hide hood on her head and an endless curiosity for the world's flavors, she is a bright, energetic girl who loves seeking out both fine food and knowledge.",
+      "Caligula knew from a young age that she did not belong among her own kind. Though she inherited the Ogre race's enormous appetite, she looked almost human, with fair skin and a clever, cunning mind far beyond the tribe members who knew only brute force and bloodshed. She often sat by the campfire, wondering where she had truly come from, faintly sensing that a power lay dormant within her, waiting to be awakened by faith and magic.",
+      "She sought out the tribe's priest herself and pressed him about her origins. At first, he dodged her questions with excuses and lies, but her sharp mind saw through every one. Cornered at last, the priest revealed the truth: at the close of the Great Devourer's sacrificial rite, a burning meteor streaked across the sky and crashed to earth. At the point of impact, the young Caligula lay sleeping peacefully.",
+      "Because her intellect far surpassed the rest of her kind, the tribe's priests made an exception and taught her the secret arts and magic passed down through their people for generations.\nPerhaps blessed by the Great Devourer, the power hidden deep in her bloodline fully awakened. Her magic and body grew stronger by the day, and a following of Ogres and Goblins gradually gathered around her.",
+      "When the Ogre tribe could no longer satisfy her hunger for knowledge and fine food, Caligula set out without hesitation to travel the world. Now she has crossed countless lands, tasted flavors from every corner of the world, and studied the secret arts of many peoples. Yet she has never forgotten where she came from. One day, she will return to her tribal homeland with all she has seen and learned."
+    ],
+    "quote": "I can share half my food with you!",
+    "ssr_quote": "You just don't understand fine food.",
+    "talent": {
+      "name": "Unique Constitution",
+      "talent_levels": [
+        {
+          "level": 1,
+          "effect": "When casting healing effects, heals for an additional 6-14% of the target's lost HP."
+        },
+        {
+          "level": 2,
+          "effect": "Whenever an ally is defeated, gains 1 stack of {deathrattle}. For each stack of {deathrattle}, Healing Increase by 2%."
+        },
+        {
+          "level": 3,
+          "effect": "Boosts Physical Defense by 23%."
+        },
+        {
+          "level": 4,
+          "effect": "[Sacred Blessing] Additionally grants the target a {physical_defense_up}."
+        },
+        {
+          "level": 7,
+          "effect": "While active, all allied Luminaries in the {wild} state have Damage Reduction increased by 20% when attacked by melee characters."
+        }
+      ]
+    },
+    "skills": [
+      {
+        "name": "Arcane Arts",
+        "type": "Overdrive",
+        "description": "Summons a magic circle, granting allies within a large circular area {excitement} and healing them for 1400-7000 + 20-36% of the caster's Max HP. Heals targets in the {wild} state for an additional 50%. Grants 1 stack of {deathrattle} when this skill's duration ends.",
+        "cooldown": 20,
+        "cost": 5
+      },
+      {
+        "name": "Sacred Blessing",
+        "type": "Ultimate Skill",
+        "description": "Dispels two debuffs from the allied Luminary with the lowest HP and grants a shield equal to 22-30% of own Max HP for 6s.\nWhen each allied Luminary first enters the {wild} state, this skill is immediately cast on them.",
+        "cooldown": 12
+      },
+      {
+        "name": "Unstable Amplification",
+        "type": "Secret Skill",
+        "description": "Increases Damage Reduction by 33-57% when attacked by melee characters.",
+        "cooldown": 0
+      },
+      {
+        "name": "Ancestral Glory",
+        "type": "Special Skill",
+        "description": "Summons 1 Totem. The totem heals the two allies with the lowest HP percentage for 7.5-11.5% of the caster's Max HP every 2.5s. The Totem inherits 50% of the caster's HP and is destroyed after healing 3 times.",
+        "cooldown": 15
+      }
+    ],
+    "divinity": [
+      {
+        "level": 1,
+        "choices": [
+          {
+            "name": "Health Enhancement",
+            "description": "Boosts HP by 5%.",
+            "cooldown": 0,
+            "icon": "green_shengming"
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "choices": [
+          {
+            "name": "Wild Magic Defense",
+            "description": "Boosts Magic Defense by 16% for 8 seconds when entering {wild}.",
+            "cooldown": 0,
+            "icon": "purple_mofang"
+          },
+          {
+            "name": "Wild Haste",
+            "description": "Grants 12 Haste for 8 seconds when entering {wild}.",
+            "cooldown": 0,
+            "icon": "purple_jisu"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "choices": [
+          {
+            "name": "Health Enhancement",
+            "description": "Boosts HP by 7%.",
+            "cooldown": 0,
+            "icon": "blue_shengming"
+          },
+          {
+            "name": "Anti-Crit Enhancement",
+            "description": "Grants 150 Critical Resistance.",
+            "cooldown": 0,
+            "icon": "blue_kangbao"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "choices": [
+          {
+            "name": "Wild Attack",
+            "description": "Grants 12% Attack for 4s when an ally enters the {wild} state.",
+            "cooldown": 0,
+            "icon": "purple_gongji"
+          },
+          {
+            "name": "Wild Haste",
+            "description": "Grants 12 Haste for 4s when an ally enters the {wild} state.",
+            "cooldown": 0,
+            "icon": "purple_jisu"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "choices": [
+          {
+            "name": "Physical Defense Enhancement",
+            "description": "Boosts Physical Defense by 10%.",
+            "cooldown": 0,
+            "icon": "blue_wufang"
+          },
+          {
+            "name": "Health Enhancement",
+            "description": "Boosts HP by 7%.",
+            "cooldown": 0,
+            "icon": "blue_shengming"
+          }
+        ]
+      }
+    ],
     "skins": [
       {
         "slug": "default",
         "name": "Default"
       }
     ],
-    "last_updated": 1786547248
+    "last_updated": 1787145091
   },
   {
     "name": "Morgana",
@@ -5325,7 +5475,7 @@
         "name": "Black Swan"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Scheherazade",
@@ -5546,7 +5696,7 @@
         "name": "Pure At Heart"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Spimo",
@@ -5979,7 +6129,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Vivienne",
@@ -6204,7 +6354,7 @@
         "name": "BUFFet Girls"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Atanith",
@@ -6424,7 +6574,7 @@
         "name": "Archery Club Captain"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Caligula",
@@ -6856,7 +7006,7 @@
         "name": "Hero Mentor"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Flora",
@@ -7739,7 +7889,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Hades",
@@ -8192,7 +8342,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Jormungandr",
@@ -8416,7 +8566,7 @@
         "name": "Spring Lantern Dream"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Lilith",
@@ -8456,7 +8606,7 @@
       "shadow_dancer",
       "outlaw"
     ],
-    "release_date": null,
+    "release_date": "2026-09-10",
     "attack_range": "melee",
     "attack_type": "magical",
     "combat_tags": [
@@ -8629,7 +8779,7 @@
         "name": "Peachblossom Blessing"
       }
     ],
-    "last_updated": 1785979272
+    "last_updated": 1787145091
   },
   {
     "name": "Mordred",
@@ -8977,7 +9127,7 @@
       {
         "name": "Flowing Fist",
         "type": "Special Skill",
-        "description": "Gains Rage when HP decreases. When Rage is at the limit, enters the {wild} state.\nWhile in the {wild} state, lifesteal increases by 15-18%, and basic attacks are replaced with 5 Flowing Fist moves that no longer consume HP. Each move deals physical damage equal to 100-164% of Attack.",
+        "description": "Gains Rage when HP decreases. When Rage is at the limit, enters the {wild} state.\nWhile in the {wild} state, lifesteal increases by 15-21%, and basic attacks are replaced with 5 Flowing Fist moves that no longer consume HP. Each move deals physical damage equal to 100-148% of Attack.",
         "cooldown": 0
       }
     ],
@@ -9079,7 +9229,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145091
   },
   {
     "name": "Pinocchio",
@@ -9116,7 +9266,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1786547248
+    "last_updated": 1787145091
   },
   {
     "name": "Rin",
@@ -9347,33 +9497,195 @@
         "name": "Snowland Strike Force"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
-    "name": "Sigurd",
-    "slug": "sigurd_ssr_plus",
+    "name": "Siegrid",
+    "slug": "siegrid_ssr_plus",
+    "legacy_slug": "sigurd_ssr_plus",
     "is_global": false,
     "summary": "",
     "recommended_noble_phantasm": [],
     "recommended_gear": [],
     "recommended_subclasses": [],
-    "title": "Eagle Warrior",
+    "title": "Eagle Brave",
     "quality": "SSR+",
     "character_class": "assassin",
     "factions": [
       "sanctum_glory",
       "arcane_wisdom"
     ],
-    "subclasses": [],
-    "origin": "",
-    "height": "",
-    "weight": "",
-    "lore": "",
-    "quote": "",
-    "ssr_quote": "",
-    "talent": null,
-    "skills": [],
-    "divinity": [],
+    "subclasses": [
+      "rogue",
+      "nightblade",
+      "spy",
+      "masked_thief",
+      "forest_bandit",
+      "executioner"
+    ],
+    "release_date": null,
+    "attack_range": "melee",
+    "attack_type": "physical",
+    "combat_tags": [
+      "Grace bestowed",
+      "the swift eagle strikes"
+    ],
+    "origin": "Norse Mythology",
+    "height": "171cm",
+    "weight": "54kg",
+    "lore": [
+      "Siegrid is the inheritor of the Eagle Warrior bloodline, the founding monarch of Midham, and commander of the Silver Eagle Knights.\nEven in her youth, she refused to live beneath anyone else. Building a kingdom of her own became her lifelong obsession, and to pursue it, she formed the Silver Eagle Knights with her own hands. After helping Caesar secure his fief, she gained a foothold in Midham and began the legend of a generation's conqueror.",
+      "Siegrid's zeal for founding a kingdom bordered on obsession, a fact known to everyone in the Silver Eagle Knights. When Caesar promised her the fief of Midham in exchange for her support, she did not hesitate to stake the lives of the entire order on an almost impossible surprise attack against a rebel fortress. That obsession inspired countless followers to swear their lives to her, but it also planted the root of every tragedy to come.",
+      "Mystic Dragon Ladon once shared a fated confrontation with the young Siegrid. Ladon gave her a prophecy: \"You will commit an unforgivable sin for the sake of your ideals.\" Enraged, Siegrid drew her sword and grievously wounded Ladon, earning its hatred.\nYears later, after losing everything, she looked back on that prophecy and realized it had already run through her entire life. At the same time, Ladon returned from its wounds and attacked the kingdom of Midham, leading to Siegmund's sacrifice.\n\n\"Gaze too long into the abyss, and the abyss will gaze back at you.\"",
+      "Later, during her travels, Siegrid became close friends with Fafnir of the dragon race, and the two fought side by side.\nBut Ladon's prophecy came true in the end. For the sake of her ideals, Siegrid severed her bond with Fafnir by her own hand, sealing Fafnir in an unknown underground cavern and building the kingdom of Midham above it. This became the cornerstone of her empire's rise, and the beginning of the nightmare into which she would sink forever.",
+      "The Siegrid of today is no longer the leader of the Silver Eagle Knights, nor does she still bear the title of Midham's monarch. No one knows where she ultimately went. Some say she fell into the underground cavern where Fafnir was sealed and decayed in the dark beside her old friend. Others say the Madwyrm Plague consumed her completely, turning her into a vile dragon that flew to the end of the world. Still others say she cast off her armor and hid among refugees, vanishing into the years like a speck of dust. And so her name gradually became a taboo no one in Midham dared speak."
+    ],
+    "quote": "I will build my kingdom!",
+    "ssr_quote": "Eagle soaring high!",
+    "talent": {
+      "name": "Phantom Eagle Hunt",
+      "talent_levels": [
+        {
+          "level": 1,
+          "effect": "When an enemy Luminary uses an Overdrive, Siegrid summons 3 phantoms to deal physical damage equal to 500-860% of her Attack and applies 1 stack of [Hawk Hunt Seal], which can stack up to 10 times. Each stack reduces the target's Attack by 5-8% and Healing Received by 4.5-6%."
+        },
+        {
+          "level": 2,
+          "effect": "[Chainblade Breach] Additionally inflicts {healing_down} when dealing damage."
+        },
+        {
+          "level": 3,
+          "effect": "Boosts Attack by 10% and Skill Haste by 5."
+        },
+        {
+          "level": 4,
+          "effect": "When the target's [Hawk Hunt Seal] reaches 5 stacks, inflicts {silence} on the target for 8s."
+        },
+        {
+          "level": 7,
+          "effect": "When in the {grace} state, the Energy Cost of [Triple Shadow Pierce] is reduced by 1. After [Triple Shadow Pierce] ends, if the target's [Hawk Hunt Seal] has reached 5 stacks or more, gains {morale} and {fervor} immediately."
+        }
+      ]
+    },
+    "skills": [
+      {
+        "name": "Triple Shadow Pierce",
+        "type": "Overdrive",
+        "description": "Selects a single target and blinks to the target's location, dealing physical damage equal to 1000-1900% of Attack, applying 2 stacks of [Hawk Hunt Seal] to the target, and summoning three phantoms to inflict true damage on the target equal to 5% of their Max HP per stack of [Hawk Hunt Seal] (capped at 75% of Attack per stack of the target's [Hawk Hunt Seal]).\nWhen possessing both {morale} and {fervor}, enters the {grace} state.\nIf [Triple Shadow Pierce] is cast while in the {grace} state, applies 3 stacks of [Hawk Hunt Seal] instead, increases phantom damage to 8% of the target's Max HP per stack of [Hawk Hunt Seal] (capped at 120% of Attack per stack of the target's [Hawk Hunt Seal]), and exits the {grace} state after [Triple Shadow Pierce] ends.",
+        "cooldown": 18,
+        "cost": 3
+      },
+      {
+        "name": "Chainblade Breach",
+        "type": "Ultimate Skill",
+        "description": "Launches a flurry of thrusts at the current target, each dealing physical damage equal to 200-350% of own Attack. Each time an allied Luminary unleashes an Overdrive, gains 1 stack of {awakening}. When using [Chainblade Breach], consumes 3 stacks of {awakening} to enhance it, instead dealing physical damage equal to 800-1340% of own Attack to enemies in a rectangular area ahead. During the skill, the Luminary is immune to damage and control effects, and recovers HP equal to 300-510% of own Attack for each stack of [Hawk Hunt Seal] on targets hit.",
+        "cooldown": 11
+      },
+      {
+        "name": "Razor Talon",
+        "type": "Secret Skill",
+        "description": "Increases own Attack by 20-38% during combat. Upon entering the {grace} state, reduces the cooldown of [Triple Shadow Pierce] by 3s.",
+        "cooldown": 0
+      },
+      {
+        "name": "Eagle Strike",
+        "type": "Special Skill",
+        "description": "Becomes Untargetable for 3s, randomly gains one {blessing_buff} (prioritizing one not already possessed), teleports in front of the enemy with the lowest HP, and performs 4 consecutive stabs, dealing total physical damage equal to 900-1380% of own Attack.",
+        "cooldown": 10
+      }
+    ],
+    "divinity": [
+      {
+        "level": 1,
+        "choices": [
+          {
+            "name": "Attack Enhancement",
+            "description": "Boosts Attack by 5%.",
+            "cooldown": 0,
+            "icon": "green_gongji"
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "choices": [
+          {
+            "name": "Sanctum Attack",
+            "description": "Grants 12% Attack for 4s upon receiving a {blessing_buff}.",
+            "cooldown": 0,
+            "icon": "purple_gongji"
+          },
+          {
+            "name": "Sanctum Crit Damage",
+            "description": "Grants 16% Crit Damage for 4s upon receiving a {blessing_buff}.",
+            "cooldown": 0,
+            "icon": "purple_baoshang"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "choices": [
+          {
+            "name": "Crit Enhancement",
+            "description": "Grants 150 Critical Hit.",
+            "cooldown": 0,
+            "icon": "blue_baoji"
+          },
+          {
+            "name": "Attack Enhancement",
+            "description": "Boosts Attack by 7%.",
+            "cooldown": 0,
+            "icon": "blue_gongji"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "choices": [
+          {
+            "name": "Sanctum Crit Damage",
+            "description": "Grants 16% Crit Damage for 6s when an ally enters {grace}.",
+            "cooldown": 0,
+            "icon": "purple_baoshang"
+          },
+          {
+            "name": "Sanctum Attack",
+            "description": "Grants 12% Attack for 6s when an ally enters {grace}.",
+            "cooldown": 0,
+            "icon": "purple_gongji"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "choices": [
+          {
+            "name": "Attack Enhancement",
+            "description": "Boosts Attack by 7%.",
+            "cooldown": 0,
+            "icon": "blue_gongji"
+          },
+          {
+            "name": "Health Enhancement",
+            "description": "Boosts HP by 7%.",
+            "cooldown": 0,
+            "icon": "blue_shengming"
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "choices": [
+          {
+            "name": "Phantom Eagle Hunt",
+            "description": "[Phantom Eagle Hunt] When talent's phantom deals damage, reduces own [Overdrive] cooldown by 1s.",
+            "cooldown": 0,
+            "icon": "yellow_geren"
+          }
+        ]
+      }
+    ],
     "skins": [
       {
         "slug": "default",
@@ -9388,7 +9700,7 @@
         "name": "Undercover Maid"
       }
     ],
-    "last_updated": 1786547248
+    "last_updated": 1787145397
   },
   {
     "name": "White Tiger",
@@ -9620,7 +9932,7 @@
         "name": "Track and Field Team Captain"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Zagreus",
@@ -9841,7 +10153,7 @@
         "name": "Frostblade Dancer"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Fenrir",
@@ -10283,7 +10595,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Nemesis",
@@ -10499,7 +10811,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Bladeheart",
@@ -10686,7 +10998,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Fenrir",
@@ -11396,7 +11708,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Ares",
@@ -12762,7 +13074,7 @@
         "name": "Baseball Hero"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Asteros",
@@ -13402,7 +13714,7 @@
         "name": "Badge of Valor"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Executioner",
@@ -13439,7 +13751,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1786547248
+    "last_updated": 1787145091
   },
   {
     "name": "Hitomi",
@@ -13903,7 +14215,7 @@
         "name": "Psionic Warrior"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Siegfried",
@@ -14575,7 +14887,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Beowulf",
@@ -15224,7 +15536,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Grimnir",
@@ -15411,7 +15723,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Murphy",
@@ -15598,7 +15910,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Siegfried",
@@ -15974,7 +16286,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Siegfried",
@@ -16320,7 +16632,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Apollo",
@@ -16556,7 +16868,7 @@
         "name": "Winter Gunslinger"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Artemis",
@@ -16829,7 +17141,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1786547248
+    "last_updated": 1787145091
   },
   {
     "name": "Himiko",
@@ -16949,7 +17261,7 @@
       {
         "name": "Amaterasu's Divine Arrow",
         "type": "Special Skill",
-        "description": "Basic Attack has a 70% chance to shoot an additional arrow at the current target. If an extra arrow is shot and there are enemy units marked with {binding} on the field, it also shoots an arrow at the enemies marked with {binding}. Each arrow deals physical damage equal to 300-480% of Attack.\nWhen current HP percentage is above 80%, sacrifices 30% of current HP. For the next 10 seconds, Basic Attacks or active skills ignore 30% of the target's Physical Defense when dealing damage. (Can trigger no more than once every 15 seconds.)",
+        "description": "Grants a 70% chance for basic attacks to fire an additional arrow at the current target. If an additional arrow is fired and there are enemies on the battlefield with {binding}, an arrow is also fired at {binding} enemies. Each arrow deals physical damage equal to 300-480% of Attack.\nWhen current HP percentage is above 80%, consumes 30% of current HP to gain an effect for the next 10s, allowing basic attacks and active skills to ignore 30% of the target's Physical Defense. (Can only trigger once every 15s. This defense-ignoring effect can stack up to 40%.)",
         "cooldown": 0
       }
     ],
@@ -17055,7 +17367,7 @@
         "name": "Exorcist High"
       }
     ],
-    "last_updated": 1785978112
+    "last_updated": 1787145091
   },
   {
     "name": "Huginn & Muninn",
@@ -17287,7 +17599,7 @@
         "name": "Ultimate Showdown"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Ifrit",
@@ -17759,7 +18071,7 @@
         "name": "Fortunebringer"
       }
     ],
-    "last_updated": 1785979272
+    "last_updated": 1787145110
   },
   {
     "name": "Lupin",
@@ -17792,7 +18104,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1786547248
+    "last_updated": 1787145091
   },
   {
     "name": "Medusa",
@@ -18278,7 +18590,7 @@
       "sharpshooter",
       "sniper"
     ],
-    "release_date": null,
+    "release_date": "2026-09-03",
     "attack_range": "ranged",
     "attack_type": "physical",
     "combat_tags": [
@@ -18455,7 +18767,7 @@
         "name": "Flower House Maiden"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145091
   },
   {
     "name": "Orion",
@@ -18675,7 +18987,7 @@
         "name": "Sweetheart Nurse"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Lorilin",
@@ -19349,7 +19661,7 @@
         "name": "Demon Hunter"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Nessus",
@@ -19536,7 +19848,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Polyphemus",
@@ -20230,7 +20542,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Loki",
@@ -20699,7 +21011,7 @@
         "name": "Track Team Captain"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Zeus",
@@ -20709,23 +21021,188 @@
     "recommended_noble_phantasm": [],
     "recommended_gear": [],
     "recommended_subclasses": [],
-    "title": "King of the Gods",
+    "title": "Ruler of the Gods",
     "quality": "SSR EX",
     "character_class": "mage",
     "factions": [
       "sanctum_glory",
       "elemental_echo"
     ],
-    "subclasses": [],
-    "origin": "",
-    "height": "",
-    "weight": "",
-    "lore": "",
-    "quote": "",
-    "ssr_quote": "",
-    "talent": null,
-    "skills": [],
-    "divinity": [],
+    "subclasses": [
+      "fortune_teller",
+      "elemental_mage",
+      "sorcerer",
+      "elementalist",
+      "rune_mage",
+      "potion_master"
+    ],
+    "release_date": null,
+    "attack_range": "ranged",
+    "attack_type": "magical",
+    "combat_tags": [
+      "Thunder descends",
+      "weakening all foes"
+    ],
+    "origin": "Greek Mythology",
+    "height": "179cm",
+    "weight": "57kg",
+    "lore": [
+      "Zeus stands at the head of the Twelve Olympians, ruling the sky and thunder with supreme authority. In ancient Greek myth, she governs law, order, fate, and kingship, and serves as both Ruler of the Gods and guardian of mortal kings. As the highest judge across heaven and earth, she symbolizes justice and sacred oaths.\n\n\"I will sing of Zeus, greatest and highest among the gods, all-seeing ruler who brings all things to completion... Grant us your favor, all-seeing son of Cronus, greatest and highest god!\" - Homeric Hymn",
+      "Zeus is decisive and composed by nature, and she despises meaningless disputes. Once, Poseidon and Athena fought fiercely over the right to name a new city. The gods split into two factions, nearly causing civil strife. Zeus ordered each of them to offer a gift for mortals to judge: Poseidon gave them the warhorse, while Athena offered the olive tree. In the end, the olive branch won mortal favor, and the city was named Athens. By making a judgment that favored neither her own kin nor slighted anyone's dignity, Zeus convinced the gods that she stood above them not through force, but through unimpeachable fairness.",
+      "For Zeus, no event in her divine life was more important than overthrowing her father Cronus and ending the age of the Titans.\nSheltered underground by the Curetes, she came of age and devised a plan that forced Cronus to disgorge the siblings he had swallowed. She then led the gods of Mount Olympus into the Titanomachy, casting the old gods into the abyss of Tartarus with thunder and lightning. This war established her absolute authority as the third-generation Sovereign of Olympus and ushered in a new order for Mount Olympus.\n\n\"After Zeus overthrew his father Cronus by force, when Cronus still ruled the heavens, he himself held lightning and thunderbolts, fairly divided wealth among the gods, and proclaimed their honors.\" - Theogony",
+      "Another duty that ran through Zeus's life was preserving justice and oaths between heaven and earth. She harshly punished Prometheus for stealing fire through deceit, and she once washed away the fallen humans of the Bronze Age with a merciless flood. Whether arbitrating conflicts among the gods or bringing judgment upon usurpers and oathbreakers, Zeus always sat high among the clouds with scepter in hand, using lightning to reveal the boundaries no one could cross. This tireless guardianship of order defined her entire reign.",
+      "After arriving at Phantasia Mountain, Zeus found a land where divine powers from many origins mingled without covenant or shared understanding. She did not rush to impose the old order of Mount Olympus. Instead, she invited every deity and every wanderer to swear an oath before the stone: when conflict arose, they could seek arbitration, and oathbreakers would face heavenly punishment. She wanted every living being in Phantasia Mountain to know that here, there were laws to rely on, eyes to witness their vows, and thunder that would never remain silent."
+    ],
+    "quote": "The rule of Mount Olympus is unshakable!",
+    "ssr_quote": "I am the King of Olympus!",
+    "talent": {
+      "name": "Divine Thunderflame",
+      "talent_levels": [
+        {
+          "level": 1,
+          "effect": "While Zeus is deployed, whenever an enemy is inflicted with {shock}, it is additionally inflicted with 1 stack of [Electric Spark]. Each stack of [Electric Spark] reduces the target's Physical Defense and Magic Defense by 3.7-5.5%, stacking up to 10 times.\nFor every 10 applications of [Electric Spark], randomly gains 1 {blessing_buff}."
+        },
+        {
+          "level": 2,
+          "effect": "At the start of battle, gains {morale} and {fervor}"
+        },
+        {
+          "level": 3,
+          "effect": "When [Thunder Feast] deals damage, if the target has more than 3 stacks of [Electric Spark], randomly inflicts 3 {stat_debuff} effects on them."
+        },
+        {
+          "level": 4,
+          "effect": "When dealing damage, ignores 5% of the target's Magic Defense per [Electric Spark] stack. (Zeus's defense-ignoring effect can exceed the stacking limit, up to 60%.)"
+        },
+        {
+          "level": 5,
+          "effect": "Boosts Attack by 10% and Skill Haste by 10."
+        },
+        {
+          "level": 7,
+          "effect": "Boosts Attack by 20%."
+        }
+      ]
+    },
+    "skills": [
+      {
+        "name": "Thunder Feast",
+        "type": "Overdrive",
+        "description": "Selects a massive circular area to call forth lightning, dealing magic damage equal to 1470-2070% of Attack to each enemy within the area.\nWhen possessing both {morale} and {fervor}, enters the {grace} state. While in the {grace} state, [Thunder Feast] deals damage twice and additionally inflicts {paralysis} for 2s. Exits the {grace} state when [Thunder Feast] ends.",
+        "cooldown": 20,
+        "cost": 4
+      },
+      {
+        "name": "Lightning Blitz",
+        "type": "Ultimate Skill",
+        "description": "Launches a powerful lightning bolt at the current target, which ricochets 5 additional times upon hitting the target (prioritizing Luminaries). Each ricochet deals magic damage twice equal to 120-228% of Attack. Lightning damage increases by 10% with each ricochet. Deals double damage to targets afflicted with {paralysis}.",
+        "cooldown": 12
+      },
+      {
+        "name": "Thundercloud Veil",
+        "type": "Secret Skill",
+        "description": "Creates 1 thundercloud to follow a random enemy (prioritizing Luminaries). The thundercloud lasts for 8s, dealing magic damage equal to 200-350% of Attack to the followed target every 0.5s. When the thundercloud lands a critical hit, it has a 30% chance to additionally inflict {paralysis} for 1.5s.\nEach time an allied Luminary in the {grace} state gains a {blessing_buff}, it reduces this skill's cooldown by 2s.",
+        "cooldown": 16
+      },
+      {
+        "name": "Charged Rhythm",
+        "type": "Special Skill",
+        "description": "In battle, increases Bonus Damage by 25-43%. For every 10 applications of [Electric Spark], gains an additional 10% Bonus Damage (up to an additional 400% Bonus Damage).\nWhen dealing damage with basic attacks or active skills, has a 30% chance to inflict {shock}.",
+        "cooldown": 0
+      }
+    ],
+    "divinity": [
+      {
+        "level": 1,
+        "choices": [
+          {
+            "name": "Attack Enhancement",
+            "description": "Boosts Attack by 5%.",
+            "cooldown": 0,
+            "icon": "green_gongji"
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "choices": [
+          {
+            "name": "Sanctum Attack",
+            "description": "Grants 12% Attack for 4s upon receiving a {blessing_buff}.",
+            "cooldown": 0,
+            "icon": "purple_gongji"
+          },
+          {
+            "name": "Sanctum Crit",
+            "description": "Grants 250 Crit for 4s upon receiving a {blessing_buff}.",
+            "cooldown": 0,
+            "icon": "purple_baoji"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "choices": [
+          {
+            "name": "Physical Defense Enhancement",
+            "description": "Boosts Physical Defense by 10%.",
+            "cooldown": 0,
+            "icon": "blue_wufang"
+          },
+          {
+            "name": "Attack Enhancement",
+            "description": "Boosts Attack by 7%.",
+            "cooldown": 0,
+            "icon": "blue_gongji"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "choices": [
+          {
+            "name": "Sanctum Attack",
+            "description": "Grants 12% Attack for 6s when an ally enters {grace}.",
+            "cooldown": 0,
+            "icon": "purple_gongji"
+          },
+          {
+            "name": "Sanctum Haste",
+            "description": "Grants 12 Haste for 6s when an ally enters {grace}.",
+            "cooldown": 0,
+            "icon": "purple_jisu"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "choices": [
+          {
+            "name": "Haste Enhancement",
+            "description": "Grants 7 Haste.",
+            "cooldown": 0,
+            "icon": "blue_jisu"
+          },
+          {
+            "name": "Crit Enhancement",
+            "description": "Grants 150 Critical Hit.",
+            "cooldown": 0,
+            "icon": "blue_baoji"
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "choices": [
+          {
+            "name": "Divine Thunderflame",
+            "description": "[Divine Thunderflame] When dealing damage to enemies with [Electric Spark], additionally ignores 10% of their Magic Defense.",
+            "cooldown": 0,
+            "icon": "yellow_geren"
+          }
+        ]
+      }
+    ],
     "skins": [
       {
         "slug": "default",
@@ -20736,7 +21213,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1786547248
+    "last_updated": 1787145091
   },
   {
     "name": "Cleopatra",
@@ -20934,7 +21411,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Crassus",
@@ -21212,7 +21689,7 @@
       "Perhaps it was Krul's indulgence that led to her spoiled and willful personality. She looks down on the \"fools\" she meets on the road, and her arrogance has caused more than a few incidents. Krul, ever weary, tries to rein her in—but like a child in rebellion, she pushes back harder. In her eyes, the world exists to serve her. \n\n\"Hmph... I wouldn't say it's satisfying, but at least it's mildly amusing.\"",
       "During her travels, she witnessed countless human dramas unfold while uncovering the world's deepest secrets. Yet her hunger for more remained endless. Krul waited patiently for her prey to ripen, knowing full well she would never find true satisfaction... \n\n\"When I reach the summit, only then will I whisper... 'Time, stand still, for you are beautiful.'\""
     ],
-    "quote": "Kururu will always protect me.",
+    "quote": "Krul will always protect me.",
     "ssr_quote": "Do you want to play too?",
     "talent": {
       "name": "Soulbond",
@@ -21372,7 +21849,7 @@
         "name": "Shining Music"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145091
   },
   {
     "name": "Gabriele",
@@ -21596,7 +22073,7 @@
         "name": "Maid Mission"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Gullveig",
@@ -22054,7 +22531,7 @@
         "name": "Nutcracker"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Tamamo-no-Mae",
@@ -22282,7 +22759,7 @@
         "name": "BUFFet Girls"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Vermilion Bird",
@@ -22514,7 +22991,7 @@
         "name": "Tennis Club Captain"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Yekaterina",
@@ -23156,7 +23633,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Melina",
@@ -23607,7 +24084,7 @@
         "name": "Winter Deer Bell"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Telperion",
@@ -23822,7 +24299,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Buck",
@@ -24009,7 +24486,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Kleina",
@@ -24373,7 +24850,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Pharaoh",
@@ -24550,7 +25027,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   },
   {
     "name": "Ice Slime",
@@ -24703,6 +25180,6 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787145110
   }
 ]
