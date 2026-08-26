@@ -9266,7 +9266,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1787145091
+    "last_updated": 1787711933
   },
   {
     "name": "Rin",
@@ -13751,7 +13751,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1787145091
+    "last_updated": 1787711933
   },
   {
     "name": "Hitomi",
@@ -17141,7 +17141,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1787145091
+    "last_updated": 1787711933
   },
   {
     "name": "Himiko",
@@ -17363,11 +17363,11 @@
         "name": "Default"
       },
       {
-        "slug": "exorcist_high",
-        "name": "Exorcist High"
+        "slug": "high_school_exorcist",
+        "name": "High School Exorcist"
       }
     ],
-    "last_updated": 1787145091
+    "last_updated": 1787711933
   },
   {
     "name": "Huginn & Muninn",
@@ -18104,7 +18104,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1787145091
+    "last_updated": 1787711933
   },
   {
     "name": "Medusa",
@@ -21452,7 +21452,7 @@
       "grand_archmage",
       "potion_master"
     ],
-    "release_date": null,
+    "release_date": "2026-10-29",
     "attack_range": "ranged",
     "attack_type": "magical",
     "combat_tags": [
@@ -21629,7 +21629,7 @@
         "name": "Courtroom Ace"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1787711933
   },
   {
     "name": "Faust",
