@@ -1129,7 +1129,7 @@
         "name": "Windchaser"
       }
     ],
-    "last_updated": 1785730683
+    "last_updated": 1789954291
   },
   {
     "name": "Heidrun",
@@ -8566,12 +8566,12 @@
         "name": "Spring Lantern Dream"
       }
     ],
-    "last_updated": 1787145110
+    "last_updated": 1789954291
   },
   {
     "name": "Lilith",
     "slug": "lilith_ssr_plus",
-    "is_global": false,
+    "is_global": true,
     "summary": "A debuff-focused Assassin who marks enemies with Echo of Pain, causing allied attacks against them to trigger additional area damage. [Nightmare Plunder] steals Attack from marked targets, [Song of Extinction] silences them, and [Shadowblade Dance] increases their next Overdrive cost while repositioning Lilith into the enemy formation. She also applies Healing Reduction and rewards allies who steal enemy stats with additional Lifesteal.",
     "recommended_noble_phantasm": [
       "star_crystal_greatsword"
@@ -8779,7 +8779,7 @@
         "name": "Peachblossom Blessing"
       }
     ],
-    "last_updated": 1788491236
+    "last_updated": 1789954278
   },
   {
     "name": "Mordred",
@@ -9266,7 +9266,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1788491236
+    "last_updated": 1789954278
   },
   {
     "name": "Rin",
@@ -13751,7 +13751,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1788491236
+    "last_updated": 1789954278
   },
   {
     "name": "Hitomi",
@@ -17141,7 +17141,7 @@
         "name": "Affection Gift"
       }
     ],
-    "last_updated": 1788491236
+    "last_updated": 1789954278
   },
   {
     "name": "Himiko",
@@ -17367,7 +17367,7 @@
         "name": "High School Exorcist"
       }
     ],
-    "last_updated": 1788491250
+    "last_updated": 1789954291
   },
   {
     "name": "Huginn & Muninn",
@@ -18104,7 +18104,7 @@
         "name": "Default"
       }
     ],
-    "last_updated": 1788491236
+    "last_updated": 1789954278
   },
   {
     "name": "Medusa",
